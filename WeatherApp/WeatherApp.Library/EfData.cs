@@ -26,5 +26,13 @@ namespace WeatherApp.Library
 
             return false;
         }
+
+        public void AddUsertoDB(User usr)
+        { 
+            dbContext.Add(usr);
+           
+            dbContext.SaveChanges();
+        }
+
     }
 }
