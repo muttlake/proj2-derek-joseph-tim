@@ -2,15 +2,15 @@
 # readme
 
 ## about
-this is my project
+This is Project 2
 
 ## installation
 + download `git`
 
 ## repo owner
-+ tim shepard 
+Tim Shepard
 
 ## documentation
-you can find the documentation [here](https://github.com/1803-mar12-net/tim-code).
+you can find the documentation [here](https://github.com/1803-mar12-net/proj2-derek-joseph-tim)
  
  
