@@ -11,9 +11,10 @@ using WeatherApp.Library;
 namespace WeatherApp.Client.Migrations
 {
     [DbContext(typeof(WeatherAppContext))]
-    partial class WeatherAppContextModelSnapshot : ModelSnapshot
+    [Migration("20180409192954_WeatherAppMig4")]
+    partial class WeatherAppMig4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
