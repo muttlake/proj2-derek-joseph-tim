@@ -15,6 +15,6 @@ Derek White
 ## documentation
 you can find the documentation [here](https://github.com/1803-mar12-net/proj2-derek-joseph-tim)\
 
-Trying to trigger jenkins
+Trigger jenkins
  
  
