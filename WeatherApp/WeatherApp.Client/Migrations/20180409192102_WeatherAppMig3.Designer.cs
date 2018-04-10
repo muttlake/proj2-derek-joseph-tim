@@ -11,9 +11,10 @@ using WeatherApp.Library;
 namespace WeatherApp.Client.Migrations
 {
     [DbContext(typeof(WeatherAppContext))]
-    partial class WeatherAppContextModelSnapshot : ModelSnapshot
+    [Migration("20180409192102_WeatherAppMig3")]
+    partial class WeatherAppMig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +36,7 @@ namespace WeatherApp.Client.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("WeatherApp.Library.User", b =>

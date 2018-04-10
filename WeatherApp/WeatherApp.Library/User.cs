@@ -37,5 +37,8 @@ namespace WeatherApp.Library
             Password = pw;
         }
 
+	//Navigation property for Posts
+	public List<Post> Posts { get; set; }
+
     }
 }

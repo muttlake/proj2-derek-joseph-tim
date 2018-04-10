@@ -17,19 +17,15 @@ namespace WeatherApp.Client
     
                 while (!stop.Equals("Stop"))
                 {
-                    Console.WriteLine("Enter Firstname: ");
-                    var fn = Console.ReadLine();
-                    Console.WriteLine("Enter Lastname: ");
-                    var ln = Console.ReadLine();
-                    Console.WriteLine("Enter Email: ");
-                    var em = Console.ReadLine();
-                    Console.WriteLine("Enter Username: ");
-                    var un = Console.ReadLine();
-                    Console.WriteLine("Enter Password: ");
-                    var pw = Console.ReadLine();
+                    Console.WriteLine("Enter UserID: ");
+                    var uid = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter BlogPost: ");
+                    var blog = Console.ReadLine();
+                    Console.WriteLine("Enter ImageFile: ");
+                    var image = Console.ReadLine();
  
-                    var user = new User(fn, ln, em, un, pw);
-                    db.Users.Add(user); 
+                    var post = new Post(uid, blog, image);
+                    db.Posts.Add(post); 
                     db.SaveChanges(); 
                                     
                     Console.Write("Enter Stop to Stop: "); 
