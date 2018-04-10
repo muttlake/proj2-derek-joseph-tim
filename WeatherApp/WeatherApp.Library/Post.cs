@@ -9,17 +9,26 @@ namespace WeatherApp.Library
         [Key]
         public int PostID {get; set; }
 
-	public string BlogPost { get; set; }
-	public string ImageFile { get; set; }
+	    public string BlogPost { get; set; }
+	    public string ImageFile { get; set; }
 
         public Post()
         {
+            BlogPost = "";
+            ImageFile = "";
+        }
+
+        public Post(int uid, string blog, string image)
+        {
+            UserID = uid;
+            BlogPost = blog;
+            ImageFile = image;
         }
 
 
-	//Foreign Key for User
-	public int UserID { get; set; }
-	public User User { get; set; }
+        //Foreign Key for User
+        public int UserID { get; set; }
+	    public User User { get; set; }
 
     }
 }
