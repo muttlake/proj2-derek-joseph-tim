@@ -1,10 +1,13 @@
-﻿@using System.Web
-
-@{
-    ViewData["Title"] = "Weather Page";
+﻿@{
+    ViewData["Title"] = "Weather Map Page";
 }
 
 @model WeatherApp.MVC.Models.OpenWeatherMap
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+</div>
+
 <style>
     #apiDiv {
         padding-left: 20px;
@@ -38,16 +41,17 @@
     <h4>Select the City for Weather Report</h4>
     @using (Html.BeginForm())
     {
-        foreach (var city in Model.cities)
+        foreach (var city in Model.Cities)
         {
             <span>
-                @Html.RadioButtonFor(m => m.cities, city.Value) @city.Key
+                @Html.RadioButtonFor(m => m.Cities, city.Value) @city.Key
             </span>
         }
 
         <button name="submit">Submit</button>
     }
-    <div id="message">@(Model.apiResponse)</div>
+    <div id="message">@(Model.ApiResponse)</div>
+    <div id="message">Test Message</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
