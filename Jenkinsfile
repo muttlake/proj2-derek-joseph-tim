@@ -25,9 +25,9 @@ node
     {
         dir ('WeatherApp/')
         {
-            bat 'dotnet c:\\tools\\sonarqube\\SonarScanner.MSBuild.dll begin /k:dd-key-44'
-            bat 'dotnet build' //this build is a half build, not a full normal build
-            bat 'dotnet c:\\tools\\sonarqube\\SonarScanner.MSBuild.dll end'
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:dd-key-2'
+		bat 'dotnet build'
+		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
     }
 
