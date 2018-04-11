@@ -10,10 +10,17 @@ namespace WeatherApp.MVC.Models
     {
         public User User { get; set; }
 
+        public RootObject HomeZipRootObject { get; set; }
+
         public LandingViewModel(User u)
         {
             User = u;
+            
+            var jr = new JsonReader(User.HomeZipCode);
+            HomeZipRootObject = jr.GetRootObjectForZipCode();
 
         }
+
+
     }
 }
