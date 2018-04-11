@@ -1,4 +1,4 @@
-node 
+node
 {
     stage ('IMPORT')
     {
@@ -21,15 +21,15 @@ node
     //     }
     // }
 
-    stage ('ANALYZE')
-    {
-        dir ('WeatherApp/')
-        {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:dd-key-2'
-		bat 'dotnet build'
-		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
-        }
-    }
+    // stage ('ANALYZE')
+    // {
+    //     dir ('WeatherApp/')
+    //     {
+    //  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:dd-key-2'
+	// 	bat 'dotnet build'
+	// 	bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+    //     }
+    // }
 
 
     stage ('PACKAGE')

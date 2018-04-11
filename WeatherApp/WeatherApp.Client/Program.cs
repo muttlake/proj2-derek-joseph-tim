@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using WeatherApp.Library;
 
 namespace WeatherApp.Client
@@ -7,30 +9,34 @@ namespace WeatherApp.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Console.WriteLine("Hello World!");
 
-            using (var db = new WeatherAppContext()) 
-            { 
-                // Create and save a new Blog 
-                Console.Write("Enter Stop to Stop: "); 
-                var stop = Console.ReadLine(); 
+            //ReadFromOpenWeatherMap();
+
+            ReadFromOpenWeatherMapZips();
+
+            // using (var db = new WeatherAppContext()) 
+            // { 
+            //     // Create and save a new Blog 
+            //     Console.Write("Enter Stop to Stop: "); 
+            //     var stop = Console.ReadLine(); 
     
-                while (!stop.Equals("Stop"))
-                {
-                    Console.WriteLine("Enter UserID: ");
-                    var uid = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Enter BlogPost: ");
-                    var blog = Console.ReadLine();
-                    Console.WriteLine("Enter ImageFile: ");
-                    var image = Console.ReadLine();
+            //     while (!stop.Equals("Stop"))
+            //     {
+            //         Console.WriteLine("Enter UserID: ");
+            //         var uid = Convert.ToInt32(Console.ReadLine());
+            //         Console.WriteLine("Enter BlogPost: ");
+            //         var blog = Console.ReadLine();
+            //         Console.WriteLine("Enter ImageFile: ");
+            //         var image = Console.ReadLine();
  
-                    var post = new Post(uid, blog, image);
-                    db.Posts.Add(post); 
-                    db.SaveChanges(); 
+            //         var post = new Post(uid, blog, image);
+            //         db.Posts.Add(post); 
+            //         db.SaveChanges(); 
                                     
-                    Console.Write("Enter Stop to Stop: "); 
-                    stop = Console.ReadLine(); 
-                }
+            //         Console.Write("Enter Stop to Stop: "); 
+            //         stop = Console.ReadLine(); 
+            //     }
                 
                 // // Display all Blogs from the database 
                 // var query = from b in db.Users 
@@ -44,7 +50,50 @@ namespace WeatherApp.Client
     
                 // Console.WriteLine("Press any key to exit..."); 
                 // Console.ReadKey(); 
-            }
+            //}
         }
+
+        static void ReadFromOpenWeatherMap()
+        {
+
+            string apiKey = "a6acab0d579d6ac71c21659ff3de726d";
+            //api.openweathermap.org/data/2.5/weather?q={city name}
+            //api.openweathermap.org/data/2.5/weather?zip=94040,us
+            HttpWebRequest apiRequest = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?zip=28215,us&appid=" + apiKey ) as HttpWebRequest;
+
+            string apiResponse = "";
+            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+            {
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                apiResponse = reader.ReadToEnd();
+            }
+            Console.WriteLine(apiResponse);
+        }
+
+        static void ReadFromOpenWeatherMapZips()
+        {
+            var jr = new JsonReader();
+
+            Console.Write("Enter Stop to Stop: "); 
+            var stop = Console.ReadLine(); 
+
+            while (!stop.Equals("Stop"))
+            {
+                Console.WriteLine("Enter ZipCode: ");
+                int zip = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("\n\nPrinting weather for zip code: ");
+                jr.InputZipCode = zip;
+                // jr.PrintWeatherForZip();
+                var rootObject = jr.GetRootObjectForZipCode();
+
+                Console.WriteLine(rootObject.name + " " + rootObject.weather[0].description);
+                                
+                Console.Write("Enter Stop to Stop: "); 
+                stop = Console.ReadLine(); 
+            }
+
+        }
+
     }
 }
