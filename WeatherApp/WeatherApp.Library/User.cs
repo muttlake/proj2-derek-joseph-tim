@@ -19,6 +19,8 @@ namespace WeatherApp.Library
 
         public string Password { get; set; }
 
+	    public int HomeZipCode { get; set; }
+
         public User()
         {
             FirstName = "";
@@ -26,19 +28,21 @@ namespace WeatherApp.Library
             Email = "";
             Username = "";
             Password = "";
+	        HomeZipCode = 75762;
         }
 
-        public User(string fn, string ln, string em, string un, string pw)
+        public User(string fn, string ln, string em, string un, string pw, int zip)
         {
             FirstName = fn;
             LastName = ln;
             Email = em;
             Username = un;
             Password = pw;
+	        HomeZipCode = zip;
         }
 
-	//Navigation property for Posts
-	public List<Post> Posts { get; set; }
+        //Navigation property for Posts
+        public List<Post> Posts { get; set; }
 
     }
 }

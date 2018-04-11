@@ -12,6 +12,8 @@ namespace WeatherApp.MVC.Models
         
          public User usr { get; set; }
 
+         public string InputZipCode { get; set; }
+
          public bool ValidateUserFirstName()
          {
              return usr.FirstName != null && usr.FirstName != "";
@@ -40,9 +42,18 @@ namespace WeatherApp.MVC.Models
              return usr.Password != null && usr.Password != "";
          }
 
+        public bool ValidateZipCode()
+         {
+             int testZip = 0;
+             return InputZipCode.Length == 5 && Int32.TryParse(InputZipCode, out testZip);
+         }
+
+
          public bool ValidUserInput()
          {
-             return ValidateUserFirstName() && ValidateUserLastName() && ValidateUserEmail() && ValidateUserName() && ValidatePassword(); 
+             return ValidateUserFirstName() && ValidateUserLastName() && 
+                    ValidateUserEmail() && ValidateUserName() &&
+                    ValidatePassword() && ValidateZipCode(); 
 
          }
       
@@ -51,7 +62,7 @@ namespace WeatherApp.MVC.Models
         {
             if(ValidUserInput())
             {
-
+                usr.HomeZipCode = Convert.ToInt32(InputZipCode);
                 EfData ef = new EfData();
                 ef.AddUsertoDB(usr);
                 return true;
