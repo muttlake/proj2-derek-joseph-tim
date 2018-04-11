@@ -21,13 +21,15 @@ namespace WeatherApp.MVC.Controllers
         public IActionResult Index(RegisterViewModel model)
         {
 
-            Console.WriteLine("post worked");
-            model.AddUser();
-            HttpContext.Session.Set<User>("User", model.usr);
-
-            return RedirectToAction("Index", "Landing");
-
-           
+            if (model.AddUser())
+            {
+                HttpContext.Session.Set<User>("User", model.usr);
+                return RedirectToAction("Index", "Landing");
+                
+            }
+            return View(new RegisterViewModel());
         }
+
+
     } 
 }

@@ -47,15 +47,17 @@ namespace WeatherApp.MVC.Models
          }
       
 
-        public void AddUser()
+        public bool AddUser()
         {
-            if(ValidUserInput()){
+            if(ValidUserInput())
+            {
 
-            EfData ef = new EfData();
-           ef.AddUsertoDB(usr);
+                EfData ef = new EfData();
+                ef.AddUsertoDB(usr);
+                return true;
             }
-            else Console.WriteLine("Invalid user input.");
-           
+           Console.WriteLine("Invalid user input.");
+            return false;
            
         }
 
