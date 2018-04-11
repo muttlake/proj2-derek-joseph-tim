@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace WeatherApp.Library
 {
@@ -13,35 +14,57 @@ namespace WeatherApp.Library
 
         //api.openweathermap.org/data/2.5/weather?q={city name}
         //api.openweathermap.org/data/2.5/weather?zip=94040,us
-        public int ZipCode { get; set; }
+        public int InputZipCode { get; set; }
         public string WeatherApiResponse { get; set; }
+
+        public RootObject RootObject { get; set; }
 
         public JsonReader()
         {
             WeatherApiResponse = "";
-            ZipCode = 0;
+            InputZipCode = 0;
         }
 
         public JsonReader(int zip)
         {
             WeatherApiResponse = "";
-            ZipCode = zip;
+            InputZipCode = zip;
         }
 
 
         public void PrintWeatherForZip()
         {
-            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + ZipCode.ToString() + ",us&appid=" + _apiKey;
+            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + InputZipCode.ToString() + ",us&appid=" + _apiKey;
 
             HttpWebRequest apiRequest = WebRequest.Create(requestString) as HttpWebRequest;
 
-            string apiResponse = "";
             using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
             {
                 StreamReader reader = new StreamReader(response.GetResponseStream());
-                apiResponse = reader.ReadToEnd();
+                WeatherApiResponse = reader.ReadToEnd();
             }
-            Console.WriteLine(apiResponse);
+            Console.WriteLine(WeatherApiResponse);
+        }
+
+        public void MakeRootObject()
+        {
+            RootObject = JsonConvert.DeserializeObject<RootObject>(WeatherApiResponse);
+        }
+
+        public RootObject GetRootObjectForZipCode()
+        {
+            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + InputZipCode.ToString() + ",us&appid=" + _apiKey;
+
+            HttpWebRequest apiRequest = WebRequest.Create(requestString) as HttpWebRequest;
+
+            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+            {
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                WeatherApiResponse = reader.ReadToEnd();
+            }
+            Console.WriteLine(WeatherApiResponse);
+
+            return JsonConvert.DeserializeObject<RootObject>(WeatherApiResponse);
         }
 
     }

@@ -83,8 +83,11 @@ namespace WeatherApp.Client
                 int zip = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("\n\nPrinting weather for zip code: ");
-                jr.ZipCode = zip;
-                jr.PrintWeatherForZip();
+                jr.InputZipCode = zip;
+                // jr.PrintWeatherForZip();
+                var rootObject = jr.GetRootObjectForZipCode();
+
+                Console.WriteLine(rootObject.name + " " + rootObject.weather[0].description);
                                 
                 Console.Write("Enter Stop to Stop: "); 
                 stop = Console.ReadLine(); 
