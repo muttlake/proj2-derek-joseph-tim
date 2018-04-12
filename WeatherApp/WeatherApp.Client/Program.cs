@@ -13,30 +13,31 @@ namespace WeatherApp.Client
 
             //ReadFromOpenWeatherMap();
 
-            ReadFromOpenWeatherMapZips();
+            //ReadFromOpenWeatherMapZips();
 
-            // using (var db = new WeatherAppContext()) 
-            // { 
-            //     // Create and save a new Blog 
-            //     Console.Write("Enter Stop to Stop: "); 
-            //     var stop = Console.ReadLine(); 
-    
-            //     while (!stop.Equals("Stop"))
-            //     {
-            //         Console.WriteLine("Enter UserID: ");
-            //         var uid = Convert.ToInt32(Console.ReadLine());
-            //         Console.WriteLine("Enter BlogPost: ");
-            //         var blog = Console.ReadLine();
-            //         Console.WriteLine("Enter ImageFile: ");
-            //         var image = Console.ReadLine();
+            using (var db = new WeatherAppContext()) 
+            { 
+                // Create and save a new Blog 
+                Console.Write("Enter Stop to Stop: "); 
+                var stop = Console.ReadLine(); 
+   
+                while (!stop.Equals("Stop"))
+                {
+                    Console.WriteLine("Enter UserID: ");
+                    var uid = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter BlogPost: ");
+                    var blog = Console.ReadLine();
+                    Console.WriteLine("Enter ImageFile: ");
+                    var image = Console.ReadLine();
  
-            //         var post = new Post(uid, blog, image);
-            //         db.Posts.Add(post); 
-            //         db.SaveChanges(); 
+                    var post = new Post(uid, blog, image);
+                    db.Posts.Add(post); 
+                    db.SaveChanges(); 
                                     
-            //         Console.Write("Enter Stop to Stop: "); 
-            //         stop = Console.ReadLine(); 
-            //     }
+                    Console.Write("Enter Stop to Stop: "); 
+                    stop = Console.ReadLine(); 
+                }
+	   }
                 
                 // // Display all Blogs from the database 
                 // var query = from b in db.Users 
