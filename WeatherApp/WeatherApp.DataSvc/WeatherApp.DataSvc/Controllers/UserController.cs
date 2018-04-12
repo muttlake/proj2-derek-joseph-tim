@@ -40,5 +40,16 @@ namespace WeatherApp.DataSvc.Controllers
             return await Task.Run(() => { return context.Users.ToList().FirstOrDefault(); });
         }
 
+
+        // POST api/user
+        //[HttpPost]
+        //public IHttpActionResult Post(User user)
+        //{
+        //    context.Users.Add(user);
+        //    context.SaveChanges();
+        //    return Ok();
+        //}
+
+
     }
 }
