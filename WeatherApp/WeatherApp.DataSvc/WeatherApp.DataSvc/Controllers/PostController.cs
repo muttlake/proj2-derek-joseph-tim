@@ -24,5 +24,17 @@ namespace WeatherApp.DataSvc.Controllers
         {
             return await Task.Run(() => { return context.Posts.ToList(); });
         }
+
+        [HttpGet("{id}")] // here must put in /<idvalue> to get user
+        public async Task<Post> Get(string id)
+        {
+            int postID = 1;
+            if (Int32.TryParse(id, out postID))
+                return await Task.Run(() =>
+                {
+                    return context.Posts.Where(p => p.PostID == postID).FirstOrDefault();
+                });
+            return await Task.Run(() => { return context.Posts.ToList().FirstOrDefault(); });
+        }
     }
 }
