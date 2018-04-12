@@ -22,17 +22,8 @@ namespace WeatherApp.Library
 
         public User GetUserFromDataSvc()
         {
-            HttpWebRequest apiRequest = WebRequest.Create(_requestString) as HttpWebRequest;
-
-            string jsonResponse = "";
-            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
-            {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                jsonResponse = reader.ReadToEnd();
-            }
-            Console.WriteLine(jsonResponse);
-
-            return JsonConvert.DeserializeObject<User>(jsonResponse);
+            var drh = new DataSvcRequestHandler();
+            return JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString));
         }
     }
 }
