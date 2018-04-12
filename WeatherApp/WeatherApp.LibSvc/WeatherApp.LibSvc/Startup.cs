@@ -8,9 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WeatherApp.DataSvc.WeatherApp.DB;
 
-namespace WeatherApp.DataSvc
+namespace WeatherApp.LibSvc
 {
     public class Startup
     {
@@ -24,7 +23,6 @@ namespace WeatherApp.DataSvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WeatherAppContext>();
             services.AddMvc();
 
             // Do Cors this way, and then use relevant policy for each controller

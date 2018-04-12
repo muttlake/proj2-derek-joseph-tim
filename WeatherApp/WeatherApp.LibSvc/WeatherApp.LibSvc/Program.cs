@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace WeatherApp.DataSvc
+namespace WeatherApp.LibSvc
 {
     public class Program
     {
@@ -20,7 +20,7 @@ namespace WeatherApp.DataSvc
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:9000;")
+                .UseUrls("http://*:8000;")
                 .Build();
     }
 }
