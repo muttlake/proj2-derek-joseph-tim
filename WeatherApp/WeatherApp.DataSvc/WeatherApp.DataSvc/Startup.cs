@@ -26,6 +26,12 @@ namespace WeatherApp.DataSvc
         {
             services.AddDbContext<WeatherAppContext>();
             services.AddMvc();
+
+            // Do Cors this way, and then use relevant policy for each controller
+            //This only works with one controller right now
+            services.AddCors(p => p.AddPolicy("allowAll", c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+            services.AddCors(p => p.AddPolicy("allowHeaders", c => c.AllowAnyHeader()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
