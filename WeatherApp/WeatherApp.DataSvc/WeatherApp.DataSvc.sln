@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.DataSvc", "WeatherApp.DataSvc\WeatherApp.DataSvc.csproj", "{EA69BB40-D803-44DB-8385-C20A91833E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp.DataSvc", "WeatherApp.DataSvc\WeatherApp.DataSvc.csproj", "{EA69BB40-D803-44DB-8385-C20A91833E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.DB", "WeatherApp.DB\WeatherApp.DB.csproj", "{45CB2F72-0611-4B92-90BE-3481993EB0E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp.DB", "WeatherApp.DB\WeatherApp.DB.csproj", "{45CB2F72-0611-4B92-90BE-3481993EB0E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
