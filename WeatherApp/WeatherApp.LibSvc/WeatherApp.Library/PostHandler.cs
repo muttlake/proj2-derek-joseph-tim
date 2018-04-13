@@ -14,6 +14,10 @@ namespace WeatherApp.Library
 
         public int PostID { get; set; }
 
+        public PostHandler()
+        {
+
+        }
 
         public PostHandler(int id)
         {
@@ -21,12 +25,18 @@ namespace WeatherApp.Library
             _requestString += "/" + PostID.ToString();
         }
 
-        public Post GetPostFromDataSvc()
+        public List<Post> GetPostFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString));
+            return new List<Post>() { JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString)) };
         }
 
+        public List<Post> GetAllPostsFromDataSvc()
+        {
+            _requestString = "http://localhost:9000/api/post";
+            var drh = new DataSvcRequestHandler();
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString));
+        }
 
     }
 }

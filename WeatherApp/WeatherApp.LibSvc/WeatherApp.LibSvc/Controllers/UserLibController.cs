@@ -14,7 +14,7 @@ namespace WeatherApp.LibSvc.Controllers
     public class UserLibController : Controller
     {
         [HttpGet]
-        public async Task<User> Get(string uid = "default")
+        public async Task<List<User>> Get(string uid = "default")
         {
             int userID = 0;
             if (Int32.TryParse(uid, out userID))
@@ -28,8 +28,8 @@ namespace WeatherApp.LibSvc.Controllers
             else
                 return await Task.Run(() =>
                 {
-                    var uh = new UserHandler(1); //Need to change this later
-                    return uh.GetUserFromDataSvc();
+                    var uh = new UserHandler(); //Return all users by default
+                    return uh.GetAllUsersFromDataSvc();
                 });
         }
     }

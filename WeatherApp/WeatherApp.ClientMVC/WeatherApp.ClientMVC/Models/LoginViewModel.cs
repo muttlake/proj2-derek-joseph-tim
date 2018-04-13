@@ -19,17 +19,14 @@ namespace WeatherApp.ClientMVC.Models
 
         public bool IsUserValid()
         {
-            //var ef = new EfData();
-            //return ef.ValidateUser(Email, Password);
-            return true;
+            var uh = new UserHandler();
+            return uh.ValidateUser(Email, Password);
         }
 
         public User GetUser()
         {
-            //var ef = new EfData();
-            //return ef.ReadUsers().Where(p => p.Email == Email).FirstOrDefault();
-            var uh = new UserHandler(2);
-            return uh.GetUserFromLibSvc();
+            var uh = new UserHandler();
+            return uh.GetCurrentUser(Email);
         }
     }
 }
