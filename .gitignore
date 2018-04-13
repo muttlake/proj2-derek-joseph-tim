@@ -315,3 +315,5 @@ __pycache__/
 # End of https://www.gitignore.io/api/visualstudiocode
 
 appsettings.dev.json
+WeatherApp/WeatherApp.Library/awsconfig.cs
+*/*/*.config.cs
