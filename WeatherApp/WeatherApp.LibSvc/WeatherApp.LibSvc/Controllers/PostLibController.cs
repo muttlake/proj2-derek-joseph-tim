@@ -14,7 +14,7 @@ namespace WeatherApp.LibSvc.Controllers
     public class PostLibController : Controller
     {
         [HttpGet]
-        public async Task<Post> Get(string pid = "default")
+        public async Task<List<Post>> Get(string pid = "default")
         {
             int postID = 1;
             if (Int32.TryParse(pid, out postID))
@@ -28,8 +28,8 @@ namespace WeatherApp.LibSvc.Controllers
             else
                 return await Task.Run(() =>
                 {
-                    var ph = new PostHandler(1); // Change this later
-                    return ph.GetPostFromDataSvc();
+                    var ph = new PostHandler(); // Change this later
+                    return ph.GetAllPostsFromDataSvc();
                 });
         }
     }

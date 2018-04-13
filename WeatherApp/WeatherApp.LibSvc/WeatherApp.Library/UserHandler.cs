@@ -13,6 +13,10 @@ namespace WeatherApp.Library
 
         public int UserID { get; set; }
 
+        public UserHandler()
+        {
+
+        }
 
         public UserHandler(int id)
         {
@@ -20,10 +24,17 @@ namespace WeatherApp.Library
             _requestString += "/" + UserID.ToString();
         }
 
-        public User GetUserFromDataSvc()
+        public List<User> GetUserFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString));
+            return new List<User>() { JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString)) };
+        }
+
+        public List<User> GetAllUsersFromDataSvc()
+        {
+            _requestString = "http://localhost:9000/api/user";
+            var drh = new DataSvcRequestHandler();
+            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString));
         }
     }
 }
