@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using WeatherApp.DataSvc.WeatherApp.DB;
 
 namespace WeatherApp.DataSvc.Controllers
@@ -40,6 +42,25 @@ namespace WeatherApp.DataSvc.Controllers
             return await Task.Run(() => { return context.Users.ToList().FirstOrDefault(); });
         }
 
+        [HttpPost]
+        public void ReceiveNewUserAndPutInDatabase()
+        {
+            Console.WriteLine("\n\n\nReceiveNewUserAndPutInDatabase");
+
+
+            //Receive from ClientMVC
+            Console.WriteLine("From LibSvc's Post:\n");
+            var request_Body = new StreamReader(Request.Body).ReadToEnd();
+            Console.WriteLine("request_Body: {0}", request_Body);
+
+            //Add New User to Database
+            var user = JsonConvert.DeserializeObject<List<User>>(request_Body)[0];
+            using (var dbContext = new WeatherAppContext())
+            {
+                dbContext.Users.Add(user);
+                dbContext.SaveChanges();
+            }
+        }
 
         // POST api/user
         //[HttpPost]
