@@ -1,13 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.3.21.20" />
-    <PackageReference Include="AWSSDK.S3" Version="3.3.18" />
     <PackageReference Include="microsoft.entityframeworkcore.design" Version="2.0.2" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.0.2" />
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.0.2" />
@@ -21,10 +13,3 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <ProjectReference Include="..\WeatherApp.Library\WeatherApp.Library.csproj" />
-  </ItemGroup>
-
-
-</Project>
