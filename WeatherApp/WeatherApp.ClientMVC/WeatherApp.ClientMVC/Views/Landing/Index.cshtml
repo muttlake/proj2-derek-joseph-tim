@@ -4,6 +4,15 @@
 @model WeatherApp.ClientMVC.Models.LandingViewModel
 
 
+@*@{
+    // variables for use in post section
+    var db = new WeatherApp.Library.WeatherAppContext();
+    var uEmail = db.Users.Where(p => p.Email == Model.User.Email).FirstOrDefault();
+}*@
+
+
+
+
 <div>
     <h3> @ViewData["Title"] </h3>
     <h4> User Information: </h4>
@@ -16,7 +25,7 @@
         <h5>UserName: @Model.User.Username</h5>
         <h5>Password: @Model.User.Password</h5>
         <br>
-        <br>    
+        <br>
         <h5>RootObject</h5>
         <h5>visibility: @Model.HomeZipRootObject.visibility</h5>
         <h5>dt: @Model.HomeZipRootObject.dt</h5>
@@ -55,6 +64,19 @@
         <h5>country: @Model.HomeZipRootObject.sys.country</h5>
         <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
         <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
-        <br>    
+        <br>
+        <h5>Posts</h5>
+        @*@foreach (var blog in db.Posts)
+        {
+            @if (Model.User.UserID == blog.UserID)
+            {
+                <h5>id: @blog.PostID</h5>
+                <h5>userId: @blog.UserID</h5>
+                <h5>blogPost: @blog.BlogPost</h5>
+                <h5>url: @blog.ImageFile</h5>
+                @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />
+                <br>
+            }
+        }*@
     </div>
 </div>
