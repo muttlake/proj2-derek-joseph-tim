@@ -11,6 +11,6 @@ select * from [dbo].Posts;
 
 --delete
 --from [dbo].Users
---where UserID = 5;
+--where UserID = 14;
 
 

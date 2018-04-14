@@ -3,14 +3,6 @@
 }
 @model WeatherApp.ClientMVC.Models.LandingViewModel
 
-@*@{
-        // variables for use in post section
-        var db = new WeatherApp.Library.WeatherAppContext();
-        var uEmail = db.Users.Where(p => p.Email == Model.User.Email).FirstOrDefault();
-    }*@
-
-
-
 
 <div>
     <h3> @ViewData["Title"] </h3>
@@ -67,7 +59,6 @@
         <h5>Posts</h5>
         @foreach (var blog in Model.Posts)
         {
-
             <h5>id: @blog.PostID</h5>
             <h5>userId: @blog.UserID</h5>
             <h5>blogPost: @blog.BlogPost</h5>
@@ -75,5 +66,10 @@
             @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
             <br>
         }
+        <br>
+        <br>
+        <form asp-controller="MakeAPost" method="get">
+            <button type="submit" class="btn btn-success">Make A New Post</button>
+        </form>
     </div>
 </div>
