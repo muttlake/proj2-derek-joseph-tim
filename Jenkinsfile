@@ -7,7 +7,18 @@ node
 
     stage ('BUILD')
     {
-        dir ('WeatherApp/')
+
+        dir ('WeatherApp/WeatherApp.DataSvc')
+        {
+            bat 'dotnet build'
+        }
+
+        dir ('WeatherApp/WeatherApp.LibSvc')
+        {
+            bat 'dotnet build'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC')
         {
             bat 'dotnet build'
         }
@@ -34,18 +45,29 @@ node
 
     stage ('PACKAGE')
     {
-        dir ('WeatherApp/WeatherApp.MVC/')
+
+        dir ('WeatherApp/WeatherApp.DataSvc')
         {
-            bat 'dotnet publish --output ../Publish'
+            bat 'dotnet publish --output Publish'
+        }
+
+        dir ('WeatherApp/WeatherApp.LibSvc')
+        {
+            bat 'dotnet publish --output Publish'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC')
+        {
+            bat 'dotnet publish --output Publish'
         }
     }
 
-    stage ('DEPLOY')
-    {
-        dir ('WeatherApp/')
-        {
-            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\Publish" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline'
-        }
-    }
+    //stage ('DEPLOY')
+    //{
+    //    dir ('WeatherApp/')
+    //    {
+    //        bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\Publish" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline'
+    //    }
+    //}
 
 }
