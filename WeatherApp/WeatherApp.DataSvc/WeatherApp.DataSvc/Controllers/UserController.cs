@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WeatherApp.DataSvc.WeatherApp.DB;
 
+
 namespace WeatherApp.DataSvc.Controllers
 {
     [EnableCors("allowAll")] //Enable Cross Origin Resource Sharing
