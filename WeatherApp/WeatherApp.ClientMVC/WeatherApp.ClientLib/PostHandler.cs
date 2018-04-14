@@ -14,6 +14,7 @@ namespace WeatherApp.ClientLib
 
         public int PostID { get; set; }
 
+        public PostHandler() { }
 
         public PostHandler(int id)
         {
@@ -27,6 +28,13 @@ namespace WeatherApp.ClientLib
             return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString));
         }
 
-
+        public List<Post> GetAllPosts()
+        {
+            var drh = new LibSvcRequestHandler();
+            _requestString = "http://localhost:8000/api/postlib";
+            Console.WriteLine("Here is GetAllPosts()...");
+            Console.WriteLine(drh.GetJsonResponse(_requestString));
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString));
+        }
     }
 }

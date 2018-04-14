@@ -3,12 +3,11 @@
 }
 @model WeatherApp.ClientMVC.Models.LandingViewModel
 
-
 @*@{
-    // variables for use in post section
-    var db = new WeatherApp.Library.WeatherAppContext();
-    var uEmail = db.Users.Where(p => p.Email == Model.User.Email).FirstOrDefault();
-}*@
+        // variables for use in post section
+        var db = new WeatherApp.Library.WeatherAppContext();
+        var uEmail = db.Users.Where(p => p.Email == Model.User.Email).FirstOrDefault();
+    }*@
 
 
 
@@ -66,17 +65,15 @@
         <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
         <br>
         <h5>Posts</h5>
-        @*@foreach (var blog in db.Posts)
+        @foreach (var blog in Model.Posts)
         {
-            @if (Model.User.UserID == blog.UserID)
-            {
-                <h5>id: @blog.PostID</h5>
-                <h5>userId: @blog.UserID</h5>
-                <h5>blogPost: @blog.BlogPost</h5>
-                <h5>url: @blog.ImageFile</h5>
-                @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />
-                <br>
-            }
-        }*@
+
+            <h5>id: @blog.PostID</h5>
+            <h5>userId: @blog.UserID</h5>
+            <h5>blogPost: @blog.BlogPost</h5>
+            <h5>url: @blog.ImageFile</h5>
+            @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
+            <br>
+        }
     </div>
 </div>
