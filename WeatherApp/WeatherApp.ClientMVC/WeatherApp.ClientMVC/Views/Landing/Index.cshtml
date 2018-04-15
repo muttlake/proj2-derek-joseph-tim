@@ -2,7 +2,6 @@
     ViewData["Title"] = "Landing Page";
 }
 @model WeatherApp.ClientMVC.Models.LandingViewModel
-
 @*@{
         // variables for use in post section
         var db = new WeatherApp.Library.WeatherAppContext();
@@ -16,55 +15,118 @@
     <h3> @ViewData["Title"] </h3>
     <h4> User Information: </h4>
 
-    <div>
-        <h5>FirstName: @Model.User.FirstName</h5>
-        <h5>LastName: @Model.User.LastName</h5>
-        <h5>Email: @Model.User.Email</h5>
-        <h5>HomeZipCode: @Model.User.HomeZipCode</h5>
-        <h5>UserName: @Model.User.Username</h5>
-        <h5>Password: @Model.User.Password</h5>
-        <br>
-        <br>
-        <h5>RootObject</h5>
-        <h5>visibility: @Model.HomeZipRootObject.visibility</h5>
-        <h5>dt: @Model.HomeZipRootObject.dt</h5>
-        <h5>id: @Model.HomeZipRootObject.id</h5>
-        <h5>name: @Model.HomeZipRootObject.name</h5>
-        <h5>cod: @Model.HomeZipRootObject.cod</h5>
-        <br>
-        <h5>Coords</h5>
-        <h5>Latitude: @Model.HomeZipRootObject.coord.lat</h5>
-        <h5>Longitude: @Model.HomeZipRootObject.coord.lon</h5>
-        <br>
-        <h5>Weather</h5>
-        <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
-        <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
-        <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
-        <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
-        <br>
-        <h5>Main</h5>
-        <h5>temp: @Model.HomeZipRootObject.main.temp</h5>
-        <h5>pressure: @Model.HomeZipRootObject.main.pressure</h5>
-        <h5>humidity: @Model.HomeZipRootObject.main.humidity</h5>
-        <h5>temp_min: @Model.HomeZipRootObject.main.temp_min</h5>
-        <h5>temp_max: @Model.HomeZipRootObject.main.temp_max</h5>
-        <br>
-        <h5>Wind</h5>
-        <h5>speed: @Model.HomeZipRootObject.wind.speed</h5>
-        <h5>deg: @Model.HomeZipRootObject.wind.deg</h5>
-        <br>
-        <h5>Clouds</h5>
-        <h5>clouds: @Model.HomeZipRootObject.clouds.all</h5>
-        <br>
-        <h5>Sys</h5>
-        <h5>type: @Model.HomeZipRootObject.sys.type</h5>
-        <h5>id: @Model.HomeZipRootObject.sys.id</h5>
-        <h5>message: @Model.HomeZipRootObject.sys.message</h5>
-        <h5>country: @Model.HomeZipRootObject.sys.country</h5>
-        <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
-        <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
-        <br>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <h5>FirstName: @Model.User.FirstName</h5>
+            <h5>LastName: @Model.User.LastName</h5>
+            <h5>Email: @Model.User.Email</h5>
+            <h5>HomeZipCode: @Model.User.HomeZipCode</h5>
+            <h5>UserName: @Model.User.Username</h5>
+            <h5>Password: @Model.User.Password</h5>
+            <br>
+            <h5>RootObject</h5>
+            <h5>visibility: @Model.HomeZipRootObject.visibility</h5>
+            <h5>dt: @Model.HomeZipRootObject.dt</h5>
+            <h5>id: @Model.HomeZipRootObject.id</h5>
+            <h5>name: @Model.HomeZipRootObject.name</h5>
+            <h5>cod: @Model.HomeZipRootObject.cod</h5>
+        </div>
+        <div class="col-md-3">
+            <h5>Coords</h5>
+            <h5>Latitude: @Model.HomeZipRootObject.coord.lat</h5>
+            <h5>Longitude: @Model.HomeZipRootObject.coord.lon</h5>
+            <br>
+            <h5>Weather</h5>
+            <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
+            <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
+            <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
+            <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
+        </div>
+        <div class="col-md-3">
+            <h5>Main</h5>
+            <h5>temp: @Model.HomeZipRootObject.main.temp</h5>
+            <h5>pressure: @Model.HomeZipRootObject.main.pressure</h5>
+            <h5>humidity: @Model.HomeZipRootObject.main.humidity</h5>
+            <h5>temp_min: @Model.HomeZipRootObject.main.temp_min</h5>
+            <h5>temp_max: @Model.HomeZipRootObject.main.temp_max</h5>
+            <br>
+            <h5>Wind</h5>
+            <h5>speed: @Model.HomeZipRootObject.wind.speed</h5>
+            <h5>deg: @Model.HomeZipRootObject.wind.deg</h5>
+        </div>
+        <div class="col-md-3">
+            <h5>Clouds</h5>
+            <h5>clouds: @Model.HomeZipRootObject.clouds.all</h5>
+            <br>
+            <h5>Sys</h5>
+            <h5>type: @Model.HomeZipRootObject.sys.type</h5>
+            <h5>id: @Model.HomeZipRootObject.sys.id</h5>
+            <h5>message: @Model.HomeZipRootObject.sys.message</h5>
+            <h5>country: @Model.HomeZipRootObject.sys.country</h5>
+            <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
+            <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
+        </div>
+    </div>
+    <div class="col-md-12">
         <h5>Posts</h5>
+        @Html.ActionLink("New Post", "MakePost", "Landing")
+        @*<h5>Add Post</h5>
+            @using (Html.BeginForm("Post", "Landing", FormMethod.Post))
+            {
+                @Html.TextBoxFor(m => m.NewPost.BlogPost)
+                @Html.TextBoxFor(m => m.NewPost.ImageTitle)
+                @Html.TextBoxFor(m => m.NewPost.ImageDescription)
+                <label class="control-label col-md-1">Image</label>
+                <div class="col-md-6">
+                    <input type="file" id="imageUrl" name="imageUrl" />
+                </div>
+            }
+            <form action="LandingViewModel" method="put" name="PostImage" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Title</label>
+                    <div class="col-md-6">
+                        <input type="text" id="imageTitle" name="imageTitle" placeholder="Enter image title" size="30" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Description</label>
+                    <div class="col-md-6">
+                        <input type="text" id="imageDescription" name="imageDescription" placeholder="Enter image description" size="30" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Name</label>
+                    <div class="col-md-6">
+                        <input type="text" id="imageName" name="imageName" placeholder="Enter image name" size="30" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Type</label>
+                    <div class="col-md-6">
+                        <input type="text" id="imageType" name="imageType" placeholder="Enter image type (optional)" size="30" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Album</label>
+                    <div class="col-md-6">
+                        <input type="text" id="imageAlbum" name="imageAlbum" placeholder="Enter album name (optional)" size="30" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-1">Image</label>
+                    <div class="col-md-6">
+                        <input type="file" id="imageUrl" name="imageUrl" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-offset-2">
+                        <input type="submit" value="Post" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>*@
+    </div>
+    <div>
+        <h5>Current User's Posts</h5>
         @foreach (var blog in Model.Posts)
         {
 

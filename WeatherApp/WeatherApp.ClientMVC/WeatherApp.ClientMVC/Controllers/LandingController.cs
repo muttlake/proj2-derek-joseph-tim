@@ -18,9 +18,9 @@ namespace WeatherApp.ClientMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(LandingViewModel model)
+        public IActionResult MakePost()
         {
-            return View();
+            return View(new PostViewModel());
         }
     }
 }
