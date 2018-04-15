@@ -15,17 +15,12 @@ namespace WeatherApp.ClientMVC.Models
         public MakeAPostViewModel()
         {
             NewPost = new Post();
-            NewPost.BlogPost = "";
-            NewPost.ImageFile = "";
         }
 
         public MakeAPostViewModel(User user)
         {
             NewPost = new Post();
-            NewPost.BlogPost = "";
-            NewPost.ImageFile = "";
             User = user;
-            NewPost.UserID = User.UserID;
         }
 
     }
