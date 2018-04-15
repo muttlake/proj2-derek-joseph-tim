@@ -21,16 +21,5 @@ namespace WeatherApp.ClientMVC.Controllers
 
             return View(lvm);
         }
-
-        [HttpPost]
-        public IActionResult MakePost()
-        {
-<<<<<<< HEAD
-            return View(new PostViewModel());
-=======
-
-            return View();
->>>>>>> b8f78045cb257cea2281f40c02cdb76d90b0a59c
-        }
     }
 }

@@ -38,15 +38,9 @@ namespace WeatherApp.ClientMVC.Models
             }
         }
 
-<<<<<<< HEAD
-        public void MakePost()
-        {
-
-=======
         public RootObject GetCurrentWeather()
         {
             return HomeZipRootObject;
->>>>>>> b8f78045cb257cea2281f40c02cdb76d90b0a59c
         }
     }
 }
