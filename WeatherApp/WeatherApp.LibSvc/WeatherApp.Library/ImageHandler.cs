@@ -1,9 +1,16 @@
+// using file for adding images to imgur using RestSharp
 using RestSharp;
+//other using files
 
 namespace WeatherApp.Library
 {
     public class ImageHandler
     {
+        // code for adding images to S3
+
+
+        // code for adding images to imgur
+
         string token = "f0f55d13-09ad-4a83-9dcb-82150fd7d805";
         string auth = "Bearer 5f59e946914c966d89ecb5a2f64f6717fa96f682";
 
@@ -19,11 +26,12 @@ namespace WeatherApp.Library
 
         public ImageHandler()
         {
-            imgUrl = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-            imgTitle = "gif image";
-            imgDescription = "this is a gif image";
-            var imgName = "img.gif";
-            var imgType = "gif";
+            //imgUrl = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+            imgUrl = @"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+            imgTitle = "jpg image";
+            imgDescription = "this is a jpg image";
+            var imgName = "img.jpg";
+            var imgType = "jpg";
 
             PostImage();
         }
