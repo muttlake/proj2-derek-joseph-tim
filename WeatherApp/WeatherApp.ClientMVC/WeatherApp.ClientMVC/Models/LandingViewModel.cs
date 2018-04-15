@@ -13,12 +13,15 @@ namespace WeatherApp.ClientMVC.Models
 
         public RootObject HomeZipRootObject { get; set; }
 
+        public string WeatherIcon { get; set; }
+
         public LandingViewModel(User u)
         {
             User = u;
             
             var jr = new JsonHandler(User.HomeZipCode);
             HomeZipRootObject = jr.GetRootObjectFromLibSvc();
+            SetWeatherIcon();
             GetPosts();
         }
 
@@ -38,6 +41,11 @@ namespace WeatherApp.ClientMVC.Models
         public RootObject GetCurrentWeather()
         {
             return HomeZipRootObject;
+        }
+
+        public void SetWeatherIcon()
+        {
+            WeatherIcon = "http://openweathermap.org/img/w/" + HomeZipRootObject.weather[0].icon + ".png";
         }
     }
 }
