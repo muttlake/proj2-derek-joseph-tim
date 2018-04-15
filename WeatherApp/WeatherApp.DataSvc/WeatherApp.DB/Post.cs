@@ -9,8 +9,13 @@ namespace WeatherApp.DataSvc.WeatherApp.DB
         [Key]
         public int PostID {get; set; }
 
-	    public string BlogPost { get; set; }
-	    public string ImageFile { get; set; }
+    	public string BlogPost { get; set; }
+    	public string ImageFile { get; set; }
+
+	public string WeatherType { get; set; }
+	public int ZipCode { get; set; }
+	public int TempFahr { get; set; }
+	public string WeatherJson { get; set; }
 
         public Post()
         {

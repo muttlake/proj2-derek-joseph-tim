@@ -15,16 +15,40 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var user = HttpContext.Session.Get<User>("User");
 
-            return View(new MakeAPostViewModel());
+            //If user has just registered get their userID
+            if (user.UserID == 0)
+            {
+                var uh = new UserHandler();
+                foreach(var u in uh.GetAllUsersFromLibSvc())
+                {
+                    if (u.Email.Equals(user.Email))
+                    {
+                        user = u;
+                        break;
+                    }
+                }
+            }
+
+            HttpContext.Session.Set<User>("User", user);
+            var manp = new MakeAPostViewModel(user);
+
+            return View(manp);
         }
 
 
         [HttpPost]
         public ActionResult Index(MakeAPostViewModel model)
         {
+            var user = HttpContext.Session.Get<User>("User");
+            model.NewPost.UserID = user.UserID;
 
-            return View(new RegisterViewModel());
+            //Put to database here
+
+            return RedirectToAction("Index", "Landing");
+
+            //return View(new RegisterViewModel());
         }
 
     }

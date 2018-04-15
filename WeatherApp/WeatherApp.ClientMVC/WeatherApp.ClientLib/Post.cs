@@ -19,5 +19,17 @@ namespace WeatherApp.ClientLib
         [JsonProperty("userID")]
         public int UserID { get; set; }
 
+        [JsonProperty("tempFahr")]
+        public int TempFahr { get; set; }
+
+        [JsonProperty("weatherJson")]
+        public string WeatherJson { get; set; }
+
+        [JsonProperty("weatherType")]
+        public string WeatherType { get; set; }
+
+        [JsonProperty("zipCode")]
+        public int ZipCode { get; set; }
+
     }
 }
