@@ -8,6 +8,49 @@
     <h3> @ViewData["Title"] </h3>
     <h4> User Information: </h4>
 
+<<<<<<< HEAD
+    <div >
+        <!-- <div class = "rounded float-right">
+         <section>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">FirstName: @Model.User.FirstName</li>
+            <li class="list-group-item">LastName: @Model.User.LastName</li>
+            <li class="list-group-item">Email: @Model.User.Email</li>
+            <li class="list-group-item">HomeZipCode: @Model.User.HomeZipCode</li>
+            <li class="list-group-item">UserName: @Model.User.Username</li>
+        </ul>
+        </section>
+        </div> -->
+       <br>
+       
+
+    
+<div class="col-md-12"> 
+    <section>
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+   icon: @Model.HomeZipRootObject.weather[0].icon
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">temp: @Model.HomeZipRootObject.main.temp</li>
+    <li class="list-group-item">name: @Model.HomeZipRootObject.name</li>
+    <li class="list-group-item">dt: @Model.HomeZipRootObject.dt</li>
+    <li class="list-group-item">main: @Model.HomeZipRootObject.weather[0].main</li>
+    <li class="list-group-item">humidity: @Model.HomeZipRootObject.main.humidity</li>
+    <li class="list-group-item">temp_min: @Model.HomeZipRootObject.main.temp_min</li>
+    <li class="list-group-item">temp_max: @Model.HomeZipRootObject.main.temp_max</li>
+  </ul>
+  <div class="card-body">
+    <h5 class="card-title">Weather Description:</h5>
+    <p class="card-text"> @Model.HomeZipRootObject.weather[0].description</p>
+  </div>
+</div>
+</section>
+ </div>
+       
+    
+        <!-- <h5>Posts</h5> -->
+        @*@foreach (var blog in db.Posts)
+=======
     <div>
         <h5>FirstName: @Model.User.FirstName</h5>
         <h5>LastName: @Model.User.LastName</h5>
@@ -58,6 +101,7 @@
         <br>
         <h5>Posts</h5>
         @foreach (var blog in Model.Posts)
+>>>>>>> master
         {
             <h5>id: @blog.PostID</h5>
             <h5>userId: @blog.UserID</h5>
@@ -78,3 +122,10 @@
         </form>
     </div>
 </div>
+
+        <!-- <h5>Weather</h5>
+        <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
+        <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
+        <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
+        <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
+        <br> -->
