@@ -21,12 +21,5 @@ namespace WeatherApp.ClientMVC.Controllers
 
             return View(lvm);
         }
-
-        [HttpPost]
-        public IActionResult Index(LandingViewModel model)
-        {
-
-            return View();
-        }
     }
 }
