@@ -14,12 +14,18 @@ namespace WeatherApp.ClientMVC.Controllers
         public IActionResult Index()
         {
             var user = HttpContext.Session.Get<User>("User");
-            return View(new LandingViewModel(user));
+            var lvm = new LandingViewModel(user);
+
+            //Set current weather in session
+            HttpContext.Session.Set<RootObject>("CurrentWeather", lvm.GetCurrentWeather());
+
+            return View(lvm);
         }
 
         [HttpPost]
         public IActionResult Index(LandingViewModel model)
         {
+
             return View();
         }
     }

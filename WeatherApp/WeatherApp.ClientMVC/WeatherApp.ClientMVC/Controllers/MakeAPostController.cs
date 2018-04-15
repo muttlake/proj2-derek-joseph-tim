@@ -16,12 +16,30 @@ namespace WeatherApp.ClientMVC.Controllers
         public IActionResult Index()
         {
             var user = HttpContext.Session.Get<User>("User");
+            return View(new MakeAPostViewModel(user));
+        }
 
+
+        [HttpPost]
+        public ActionResult Index(MakeAPostViewModel model)
+        {
+            var user = HttpContext.Session.Get<User>("User");
+            user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
+            var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
+
+            Console.WriteLine("Make a post right now");
+
+            //Put to database here
+            return RedirectToAction("Index", "Landing");
+        }
+
+        public User GetValidUserForNewlyRegistered(User user)
+        {
             //If user has just registered get their userID
             if (user.UserID == 0)
             {
                 var uh = new UserHandler();
-                foreach(var u in uh.GetAllUsersFromLibSvc())
+                foreach (var u in uh.GetAllUsersFromLibSvc())
                 {
                     if (u.Email.Equals(user.Email))
                     {
@@ -30,25 +48,7 @@ namespace WeatherApp.ClientMVC.Controllers
                     }
                 }
             }
-
-            HttpContext.Session.Set<User>("User", user);
-            var manp = new MakeAPostViewModel(user);
-
-            return View(manp);
-        }
-
-
-        [HttpPost]
-        public ActionResult Index(MakeAPostViewModel model)
-        {
-            var user = HttpContext.Session.Get<User>("User");
-            model.NewPost.UserID = user.UserID;
-
-            //Put to database here
-
-            return RedirectToAction("Index", "Landing");
-
-            //return View(new RegisterViewModel());
+            return user;
         }
 
     }

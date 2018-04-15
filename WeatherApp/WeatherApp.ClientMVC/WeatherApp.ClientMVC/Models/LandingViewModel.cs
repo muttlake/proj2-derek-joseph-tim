@@ -34,5 +34,10 @@ namespace WeatherApp.ClientMVC.Models
                 }
             }
         }
+
+        public RootObject GetCurrentWeather()
+        {
+            return HomeZipRootObject;
+        }
     }
 }
