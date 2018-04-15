@@ -41,12 +41,11 @@ namespace WeatherApp.Library
 
         public void PrintWeatherForZip()
         {
-<<<<<<< HEAD
-            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + InputZipCode.ToString() + ",us&appid=" + _apiKey + "&units=imperial";
-=======
+
             Console.WriteLine("InputZipString {0}", FormatInputZipCode(InputZipCode));
-            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey;
->>>>>>> master
+            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey + "&units=imperial";
+            //string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey;
+
 
             HttpWebRequest apiRequest = WebRequest.Create(requestString) as HttpWebRequest;
 
