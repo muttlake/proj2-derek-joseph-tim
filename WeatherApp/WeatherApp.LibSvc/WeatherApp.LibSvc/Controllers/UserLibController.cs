@@ -37,9 +37,9 @@ namespace WeatherApp.LibSvc.Controllers
         }
 
         [HttpPost]
-        public async void ReceiveAndPassNewUserRegistration()
+        public async void RelayAddUser()
         { 
-            Console.WriteLine("\n\n\nReceiveAndPassNewUserRegistration");
+            Console.WriteLine("\n\n\nRelayAddUser");
 
 
             //Receive from ClientMVC
@@ -63,24 +63,5 @@ namespace WeatherApp.LibSvc.Controllers
 
         }
 
-        //[HttpPost]
-        //public async Task<List<User>> Post()
-        //{
-        //    int userID = 0;
-        //    if (Int32.TryParse(uid, out userID))
-        //    {
-        //        return await Task.Run(() =>
-        //        {
-        //            var uh = new UserHandler(userID);
-        //            return uh.GetUserFromDataSvc();
-        //        });
-        //    }
-        //    else
-        //        return await Task.Run(() =>
-        //        {
-        //            var uh = new UserHandler(); //Return all users by default
-        //            return uh.GetAllUsersFromDataSvc();
-        //        });
-        //}
     }
 }
