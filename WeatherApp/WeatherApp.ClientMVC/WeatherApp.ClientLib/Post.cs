@@ -31,5 +31,8 @@ namespace WeatherApp.ClientLib
         [JsonProperty("zipCode")]
         public int ZipCode { get; set; }
 
+        [JsonProperty("publishDateTime")]
+        public DateTime PublishDateTime { get; set; }
+
     }
 }
