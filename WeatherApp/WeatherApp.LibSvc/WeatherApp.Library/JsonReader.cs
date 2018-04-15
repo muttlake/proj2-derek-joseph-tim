@@ -39,24 +39,6 @@ namespace WeatherApp.Library
             return outString;
         }
 
-        public void PrintWeatherForZip()
-        {
-
-            Console.WriteLine("InputZipString {0}", FormatInputZipCode(InputZipCode));
-            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey + "&units=imperial";
-            //string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey;
-
-
-            HttpWebRequest apiRequest = WebRequest.Create(requestString) as HttpWebRequest;
-
-            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
-            {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                WeatherApiResponse = reader.ReadToEnd();
-            }
-            Console.WriteLine(WeatherApiResponse);
-        }
-
         public void MakeRootObject()
         {
             RootObject = JsonConvert.DeserializeObject<RootObject>(WeatherApiResponse);
@@ -64,9 +46,10 @@ namespace WeatherApp.Library
 
         public RootObject GetRootObjectForZipCode()
         {
+            //http://api.openweathermap.org/data/2.5/weather?zip=10001,us&units=imperial&appid=a6acab0d579d6ac71c21659ff3de726d
             //string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + InputZipCode.ToString() + ",us&appid=" + _apiKey + "&units=imperial";
             Console.WriteLine("InputZipString {0}", FormatInputZipCode(InputZipCode));
-            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&appid=" + _apiKey;
+            string requestString = "http://api.openweathermap.org/data/2.5/weather?zip=" + FormatInputZipCode(InputZipCode) + ",us&units=imperial&appid=" + _apiKey;
 
             HttpWebRequest apiRequest = WebRequest.Create(requestString) as HttpWebRequest;
 
