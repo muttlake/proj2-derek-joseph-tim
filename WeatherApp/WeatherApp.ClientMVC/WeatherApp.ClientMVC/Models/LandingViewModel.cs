@@ -21,6 +21,8 @@ namespace WeatherApp.ClientMVC.Models
 
         }
 
+        
+
 
     }
 }

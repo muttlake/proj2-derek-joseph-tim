@@ -17,55 +17,46 @@
     <h3> @ViewData["Title"] </h3>
     <h4> User Information: </h4>
 
-    <div>
-        <h5>FirstName: @Model.User.FirstName</h5>
-        <h5>LastName: @Model.User.LastName</h5>
-        <h5>Email: @Model.User.Email</h5>
-        <h5>HomeZipCode: @Model.User.HomeZipCode</h5>
-        <h5>UserName: @Model.User.Username</h5>
-        <h5>Password: @Model.User.Password</h5>
-        <br>
-        <br>
-        <h5>RootObject</h5>
-        <h5>visibility: @Model.HomeZipRootObject.visibility</h5>
-        <h5>dt: @Model.HomeZipRootObject.dt</h5>
-        <h5>id: @Model.HomeZipRootObject.id</h5>
-        <h5>name: @Model.HomeZipRootObject.name</h5>
-        <h5>cod: @Model.HomeZipRootObject.cod</h5>
-        <br>
-        <h5>Coords</h5>
-        <h5>Latitude: @Model.HomeZipRootObject.coord.lat</h5>
-        <h5>Longitude: @Model.HomeZipRootObject.coord.lon</h5>
-        <br>
-        <h5>Weather</h5>
-        <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
-        <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
-        <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
-        <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
-        <br>
-        <h5>Main</h5>
-        <h5>temp: @Model.HomeZipRootObject.main.temp</h5>
-        <h5>pressure: @Model.HomeZipRootObject.main.pressure</h5>
-        <h5>humidity: @Model.HomeZipRootObject.main.humidity</h5>
-        <h5>temp_min: @Model.HomeZipRootObject.main.temp_min</h5>
-        <h5>temp_max: @Model.HomeZipRootObject.main.temp_max</h5>
-        <br>
-        <h5>Wind</h5>
-        <h5>speed: @Model.HomeZipRootObject.wind.speed</h5>
-        <h5>deg: @Model.HomeZipRootObject.wind.deg</h5>
-        <br>
-        <h5>Clouds</h5>
-        <h5>clouds: @Model.HomeZipRootObject.clouds.all</h5>
-        <br>
-        <h5>Sys</h5>
-        <h5>type: @Model.HomeZipRootObject.sys.type</h5>
-        <h5>id: @Model.HomeZipRootObject.sys.id</h5>
-        <h5>message: @Model.HomeZipRootObject.sys.message</h5>
-        <h5>country: @Model.HomeZipRootObject.sys.country</h5>
-        <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
-        <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
-        <br>
-        <h5>Posts</h5>
+    <div >
+        <!-- <div class = "rounded float-right">
+         <section>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">FirstName: @Model.User.FirstName</li>
+            <li class="list-group-item">LastName: @Model.User.LastName</li>
+            <li class="list-group-item">Email: @Model.User.Email</li>
+            <li class="list-group-item">HomeZipCode: @Model.User.HomeZipCode</li>
+            <li class="list-group-item">UserName: @Model.User.Username</li>
+        </ul>
+        </section>
+        </div> -->
+       <br>
+       
+
+    
+<div class="col-md-12"> 
+    <section>
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+   icon: @Model.HomeZipRootObject.weather[0].icon
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">temp: @Model.HomeZipRootObject.main.temp</li>
+    <li class="list-group-item">name: @Model.HomeZipRootObject.name</li>
+    <li class="list-group-item">dt: @Model.HomeZipRootObject.dt</li>
+    <li class="list-group-item">main: @Model.HomeZipRootObject.weather[0].main</li>
+    <li class="list-group-item">humidity: @Model.HomeZipRootObject.main.humidity</li>
+    <li class="list-group-item">temp_min: @Model.HomeZipRootObject.main.temp_min</li>
+    <li class="list-group-item">temp_max: @Model.HomeZipRootObject.main.temp_max</li>
+  </ul>
+  <div class="card-body">
+    <h5 class="card-title">Weather Description:</h5>
+    <p class="card-text"> @Model.HomeZipRootObject.weather[0].description</p>
+  </div>
+</div>
+</section>
+ </div>
+       
+    
+        <!-- <h5>Posts</h5> -->
         @*@foreach (var blog in db.Posts)
         {
             @if (Model.User.UserID == blog.UserID)
@@ -80,3 +71,10 @@
         }*@
     </div>
 </div>
+
+        <!-- <h5>Weather</h5>
+        <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
+        <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
+        <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
+        <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
+        <br> -->
