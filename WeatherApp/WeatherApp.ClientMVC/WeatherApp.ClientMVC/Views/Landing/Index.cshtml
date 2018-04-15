@@ -6,8 +6,59 @@
 
 <div>
     <h3> @ViewData["Title"] </h3>
-    <h4> User Information: </h4>
 
+    <div>
+        <br>
+        <div class="col-md-12">
+            <section>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    icon: @Model.HomeZipRootObject.weather[0].icon
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">temp: @Model.HomeZipRootObject.main.temp</li>
+                        <li class="list-group-item">name: @Model.HomeZipRootObject.name</li>
+                        <li class="list-group-item">dt: @Model.HomeZipRootObject.dt</li>
+                        <li class="list-group-item">main: @Model.HomeZipRootObject.weather[0].main</li>
+                        <li class="list-group-item">humidity: @Model.HomeZipRootObject.main.humidity</li>
+                        <li class="list-group-item">temp_min: @Model.HomeZipRootObject.main.temp_min</li>
+                        <li class="list-group-item">temp_max: @Model.HomeZipRootObject.main.temp_max</li>
+                    </ul>
+                    <div class="card-body">
+                        <h5 class="card-title">Weather Description:</h5>
+                        <p class="card-text"> @Model.HomeZipRootObject.weather[0].description</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <h5>country: @Model.HomeZipRootObject.sys.country</h5>
+        <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
+        <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
+        <br>
+        <h5>Posts</h5>
+        @foreach (var blog in Model.Posts)
+        {
+             <h5>id: @blog.PostID</h5>
+             <h5>userId: @blog.UserID</h5>
+             <h5>blogPost: @blog.BlogPost</h5>
+             <h5>imageFile: @blog.ImageFile </h5>
+             <h5>Temp: @blog.TempFahr</h5>
+             <h5>WeatherJson: @blog.WeatherJson</h5>
+             <h5>WeatherType: @blog.WeatherType</h5>
+             <h5> ZipCode: @blog.ZipCode </h5>
+             <h5>PublishDateTime: @blog.PublishDateTime</h5>
+             @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
+        }
+        <br>
+        <br>
+        <form asp-controller="MakeAPost" method="get">
+            <button type="submit" class="btn btn-success">Make A New Post</button>
+        </form>
+    </div>
+</div>
+       
+    
+        <!-- <h5>Posts</h5> -->
+        @*@foreach (var blog in db.Posts)
     <div>
         <h5>FirstName: @Model.User.FirstName</h5>
         <h5>LastName: @Model.User.LastName</h5>
@@ -55,26 +106,6 @@
         <h5>country: @Model.HomeZipRootObject.sys.country</h5>
         <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
         <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
-        <br>
-        <h5>Posts</h5>
-        @foreach (var blog in Model.Posts)
-        {
-            <h5>id: @blog.PostID</h5>
-            <h5>userId: @blog.UserID</h5>
-            <h5>blogPost: @blog.BlogPost</h5>
-            <h5>imageFile: @blog.ImageFile </h5>
-            <h5>Temp: @blog.TempFahr</h5>
-            <h5>WeatherJson: @blog.WeatherJson</h5>
-            <h5>WeatherType: @blog.WeatherType</h5>
-            <h5> ZipCode: @blog.ZipCode </h5>
-            <h5>PublishDateTime: @blog.PublishDateTime</h5>
-            @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
-            <br>
-        }
-        <br>
-        <br>
-        <form asp-controller="MakeAPost" method="get">
-            <button type="submit" class="btn btn-success">Make A New Post</button>
-        </form>
-    </div>
-</div>
+        <br>*@
+
+
