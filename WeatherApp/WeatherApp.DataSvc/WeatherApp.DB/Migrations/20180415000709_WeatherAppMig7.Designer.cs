@@ -11,9 +11,10 @@ using WeatherApp.DataSvc.WeatherApp.DB;
 namespace WeatherApp.DB.Migrations
 {
     [DbContext(typeof(WeatherAppContext))]
-    partial class WeatherAppContextModelSnapshot : ModelSnapshot
+    [Migration("20180415000709_WeatherAppMig7")]
+    partial class WeatherAppMig7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +29,6 @@ namespace WeatherApp.DB.Migrations
                     b.Property<string>("BlogPost");
 
                     b.Property<string>("ImageFile");
-
-                    b.Property<DateTime>("PublishDateTime");
 
                     b.Property<int>("TempFahr");
 
