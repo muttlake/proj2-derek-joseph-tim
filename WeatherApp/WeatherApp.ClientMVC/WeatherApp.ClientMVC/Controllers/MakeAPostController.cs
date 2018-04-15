@@ -27,7 +27,10 @@ namespace WeatherApp.ClientMVC.Controllers
             user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
             var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
 
+            //Add Post
             Console.WriteLine("Make a post right now");
+            var ph = new PostHandler();
+            ph.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost);
 
             //Put to database here
             return RedirectToAction("Index", "Landing");
