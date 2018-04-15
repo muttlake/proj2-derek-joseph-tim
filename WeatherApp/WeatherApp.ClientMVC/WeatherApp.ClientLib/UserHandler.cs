@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace WeatherApp.ClientLib
@@ -59,6 +60,26 @@ namespace WeatherApp.ClientLib
             }
 
             return new User();
+        }
+
+        public async void AddUser(User user)
+        {
+            // Get the posted form values and add to list using model binding
+            List<User> postData = new List<User>() { user };
+            Console.WriteLine("Serialized object :::  {0}", JsonConvert.SerializeObject(postData));
+
+            using (var client = new HttpClient())
+            {
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
+                Console.WriteLine("StringContent for post");
+                Console.WriteLine(stringContent.ToString());
+                var uri = new Uri("http://localhost:8000/api/userlib");
+                var response = await client.PostAsync(uri, stringContent);
+                Console.WriteLine("response request message {0}", response.RequestMessage);
+                Console.WriteLine("response is successStatusCode {0}", response.IsSuccessStatusCode);
+
+            }
         }
 
 

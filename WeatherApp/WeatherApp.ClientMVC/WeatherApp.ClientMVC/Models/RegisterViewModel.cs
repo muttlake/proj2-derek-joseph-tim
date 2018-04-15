@@ -45,7 +45,7 @@ namespace WeatherApp.ClientMVC.Models
         public bool ValidateZipCode()
          {
              int testZip = 0;
-             return InputZipCode.Length == 5 && Int32.TryParse(InputZipCode, out testZip);
+             return InputZipCode.Trim().Length == 5 && Int32.TryParse(InputZipCode, out testZip);
          }
 
 
@@ -58,13 +58,11 @@ namespace WeatherApp.ClientMVC.Models
          }
       
 
-        public bool AddUser()
+        public bool CanAddUser()
         {
             if(ValidUserInput())
             {
                 usr.HomeZipCode = Convert.ToInt32(InputZipCode);
-                //EfData ef = new EfData();
-                //ef.AddUsertoDB(usr);
                 return true;
             }
            Console.WriteLine("Invalid user input.");

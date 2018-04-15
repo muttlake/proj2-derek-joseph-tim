@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,18 @@ namespace WeatherApp.LibSvc.Controllers
                     var ph = new PostHandler(); // Change this later
                     return ph.GetAllPostsFromDataSvc();
                 });
+        }
+
+        [HttpPost]
+        public void RelayAddPost()
+        {
+            var request_Body = new StreamReader(Request.Body).ReadToEnd();
+            Console.WriteLine("request_Body: {0}", request_Body);
+            var uri = new Uri("http://localhost:9000/api/post");
+
+            var rp = new RelayPost();
+            rp.RelayAddToDataSvc(uri, request_Body);
+
         }
     }
 }
