@@ -45,7 +45,7 @@ namespace WeatherApp.ClientMVC.Models
         public bool ValidateZipCode()
          {
              int testZip = 0;
-             return InputZipCode.Length == 5 && Int32.TryParse(InputZipCode, out testZip);
+             return InputZipCode.Trim().Length == 5 && Int32.TryParse(InputZipCode, out testZip);
          }
 
 

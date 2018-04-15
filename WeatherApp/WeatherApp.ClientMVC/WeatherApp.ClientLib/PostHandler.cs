@@ -26,7 +26,7 @@ namespace WeatherApp.ClientLib
         {
             var drh = new LibSvcRequestHandler();
             return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString));
-        }
+        } 
 
         public List<Post> GetAllPosts()
         {
