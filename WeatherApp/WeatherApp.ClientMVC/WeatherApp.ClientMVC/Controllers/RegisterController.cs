@@ -24,26 +24,12 @@ namespace WeatherApp.ClientMVC.Controllers
         public ActionResult Index(RegisterViewModel model)
         {
 
-            if (model.AddUser())
+            if (model.CanAddUser())
             {
                 HttpContext.Session.Set<User>("User", model.usr);
 
-                // Get the posted form values and add to list using model binding
-                List<User> postData = new List<User>() { model.usr };
-                Console.WriteLine("Serialized object :::  {0}", JsonConvert.SerializeObject(postData));
-
-                using (var client = new HttpClient())
-                {
-
-                    var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                    Console.WriteLine("StringContent for post");
-                    Console.WriteLine(stringContent.ToString());
-                    var uri = new Uri("http://localhost:8000/api/userlib");
-                    var response = client.PostAsync(uri, stringContent);
-                    Console.WriteLine("response result {0}", response.Result);
-                    Console.WriteLine("response is completed {0}", response.IsCompletedSuccessfully);
-
-                }
+                var uh = new UserHandler();
+                uh.AddUser(model.usr);
 
                 return RedirectToAction("Index", "Landing");
             }
