@@ -37,29 +37,39 @@ namespace WeatherApp.LibSvc.Controllers
         }
 
         [HttpPost]
-        public async void RelayAddUser()
-        { 
-            Console.WriteLine("\n\n\nRelayAddUser");
+        public void RelayAddUser()
+        {
 
-
-            //Receive from ClientMVC
-            Console.WriteLine("From ClientMVC's Post:\n");
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
             Console.WriteLine("request_Body: {0}", request_Body);
+            var uri = new Uri("http://localhost:9000/api/user");
 
-            //Pass to DataSvc
-            using (var client = new HttpClient())
-            {
+            var rp = new RelayPost();
+            rp.RelayAddToDataSvc(uri, request_Body);
 
-                var stringContent = new StringContent(request_Body);
-                Console.WriteLine("StringContent for post");
-                Console.WriteLine(stringContent.ToString());
-                var uri = new Uri("http://localhost:9000/api/user");
-                var response = await client.PostAsync(uri, stringContent);
-                Console.WriteLine("response result {0}", response.StatusCode);
-                Console.WriteLine("response is completed {0}", response.RequestMessage);
 
-            }
+            //Console.WriteLine("\n\n\nRelayAddUser");
+
+
+            ////Receive from ClientMVC
+            //Console.WriteLine("From ClientMVC's Post:\n");
+            //var request_Body = new StreamReader(Request.Body).ReadToEnd();
+            //Console.WriteLine("request_Body: {0}", request_Body);
+
+            ////Pass to DataSvc
+            //using (var client = new HttpClient())
+            //{
+
+            //    var stringContent = new StringContent(request_Body);
+            //    Console.WriteLine("StringContent for post");
+            //    Console.WriteLine(stringContent.ToString());
+            //    var uri = new Uri("http://localhost:9000/api/user");
+            //    var response = await client.PostAsync(uri, stringContent);
+            //    Console.WriteLine("response result {0}", response.StatusCode);
+            //    Console.WriteLine("response is completed {0}", response.RequestMessage);
+
+            //}
+
 
         }
 
