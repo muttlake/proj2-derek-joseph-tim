@@ -5,7 +5,7 @@
 
 
 <div>
-    <h3> @ViewData["Title"] </h3>
+    <h3>Current Weather and Your Posts </h3>
 
     <div>
        
@@ -40,15 +40,21 @@
                 </div>
             </section>
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
         <div class="col-md-6">
+            <form asp-controller="Feed" method="get">
+                <button type="submit" class="btn btn-success">Look at All Users' Posts</button>
+            </form>
 
             @foreach (var pww in Model.PostsWithWeather)
-        {
+    {
         @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
         <div class="card mb-3">
-        <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
+            <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"><b>@Model.User.FirstName @Model.User.LastName Posts</b></h5>
                 <p class="card-text">
@@ -69,7 +75,7 @@
         </div>
         <br>
         <br>
-        }
+}
             <br>
             <br>
             <form asp-controller="MakeAPost" method="get">
@@ -78,6 +84,10 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
        
     
        
+=======
+      
+>>>>>>> master
