@@ -11,6 +11,10 @@ namespace WeatherApp.ClientMVC.Models
         public List<Post> Posts { get; set; }
 
         public string WeatherTypeFilter { get; set; }
+        public string ZipCodeFilter { get; set; }
+
+
+        public int ZipCodeInt { get; set; }
 
         public FeedViewModel()
         {
@@ -18,13 +22,27 @@ namespace WeatherApp.ClientMVC.Models
             Posts = ph.GetAllPosts();
         }
 
-        //public void ApplyPostFilters()
-        //{
-        //    if(WeatherTypeFilter != null)
-        //    {
-        //        ApplyWeatherTypeFilter();
-        //    }
-        //}
+        public bool SetZipCode()
+        {
+            var valid = Int32.TryParse(ZipCodeFilter, out int zip);
+            if (valid)
+                ZipCodeInt = zip;
+            return valid;
+        }
+
+        public void ApplyZipCodeFilter()
+        {
+            var filteredPosts = new List<Post>();
+            foreach (var post in filteredPosts)
+            {
+                if (post.ZipCode == ZipCodeInt)
+                {
+                    filteredPosts.Add(post);
+                }
+            }
+            Posts = filteredPosts;
+        }
+
 
         public void ApplyWeatherTypeFilter()
         {
