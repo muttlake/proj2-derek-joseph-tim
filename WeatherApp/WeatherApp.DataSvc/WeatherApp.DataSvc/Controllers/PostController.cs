@@ -14,7 +14,7 @@ namespace WeatherApp.DataSvc.Controllers
     public class PostController : Controller
     {
 
-        private static WeatherAppContext context;
+        private readonly WeatherAppContext context;
 
         public PostController(WeatherAppContext db)
         {
@@ -57,6 +57,9 @@ namespace WeatherApp.DataSvc.Controllers
                 dbContext.Posts.Add(post);
                 dbContext.SaveChanges();
             }
+
+            context.Posts.Add(post);
+            context.SaveChanges();
         }
     }
 }

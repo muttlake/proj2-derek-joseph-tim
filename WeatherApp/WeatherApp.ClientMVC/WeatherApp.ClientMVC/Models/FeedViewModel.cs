@@ -22,6 +22,18 @@ namespace WeatherApp.ClientMVC.Models
             Posts = ph.GetAllPosts();
         }
 
+        public void ApplyPostFilters()
+        {
+            if (WeatherTypeFilter != null)
+            {
+                ApplyWeatherTypeFilter();
+            }
+            if (ZipCodeFilter != null && SetZipCode())
+            {
+                ApplyZipCodeFilter();
+            }
+        }
+
         public bool SetZipCode()
         {
             var valid = Int32.TryParse(ZipCodeFilter, out int zip);

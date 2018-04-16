@@ -20,15 +20,10 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpPost]
         public ActionResult Index(FeedViewModel model)
         {
-            var fvm = model;
-            if(model.WeatherTypeFilter != null)
-            {
-                fvm.ApplyWeatherTypeFilter();
-            }
-            if(model.ZipCodeFilter != null && model.SetZipCode())
-            {
-                fvm.ApplyZipCodeFilter();
-            }
+            var fvm = new FeedViewModel();
+            fvm.WeatherTypeFilter = model.WeatherTypeFilter;
+            fvm.ZipCodeFilter = model.ZipCodeFilter;
+            fvm.ApplyPostFilters();
 
             //Put to database here
             return View(fvm);

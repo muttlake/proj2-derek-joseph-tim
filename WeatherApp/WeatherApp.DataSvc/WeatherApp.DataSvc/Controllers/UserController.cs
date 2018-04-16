@@ -17,7 +17,7 @@ namespace WeatherApp.DataSvc.Controllers
     public class UserController : Controller
     {
 
-        private static WeatherAppContext context;
+        private readonly WeatherAppContext context;
 
         public UserController(WeatherAppContext db)
         {
@@ -56,22 +56,14 @@ namespace WeatherApp.DataSvc.Controllers
 
             //Add New User to Database
             var user = JsonConvert.DeserializeObject<List<User>>(request_Body)[0];
-            using (var dbContext = new WeatherAppContext())
-            {
-                dbContext.Users.Add(user);
-                dbContext.SaveChanges();
-            }
+            //using (var dbContext = new WeatherAppContext())
+            //{
+            //    dbContext.Users.Add(user);
+            //    dbContext.SaveChanges();
+            //}
+            context.Users.Add(user);
+            context.SaveChanges();
         }
-
-        // POST api/user
-        //[HttpPost]
-        //public IHttpActionResult Post(User user)
-        //{
-        //    context.Users.Add(user);
-        //    context.SaveChanges();
-        //    return Ok();
-        //}
-
 
     }
 }
