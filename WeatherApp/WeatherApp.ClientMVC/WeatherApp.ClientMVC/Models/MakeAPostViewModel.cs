@@ -7,10 +7,15 @@ using WeatherApp.ClientLib;
 
 namespace WeatherApp.ClientMVC.Models
 {
+     
     public class MakeAPostViewModel
     {
         public User User { get; set; }
         public Post NewPost { get; set; }
+
+        public RootObject ZipRootObject { get; set; }
+
+        public string WeatherIcon { get; set; }
 
         public MakeAPostViewModel()
         {
@@ -21,7 +26,22 @@ namespace WeatherApp.ClientMVC.Models
         {
             NewPost = new Post();
             User = user;
+            var pr = new JsonHandler(User.HomeZipCode);
+            ZipRootObject = pr.GetRootObjectFromLibSvc();
+             SetWeatherIcon(); 
+
         }
+
+        public RootObject GetCurrentWeather()
+        {
+            return ZipRootObject;
+        }
+
+         public void SetWeatherIcon()
+        {
+            WeatherIcon = "http://openweathermap.org/img/w/" + ZipRootObject.weather[0].icon + ".png";
+        }
+
 
     }
 }

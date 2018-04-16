@@ -40,26 +40,6 @@
                 </div>
             </section>
         </div>
-<<<<<<< HEAD
-        <h5>country: @Model.HomeZipRootObject.sys.country</h5>
-        <h5>sunrise: @Model.HomeZipRootObject.sys.sunrise</h5>
-        <h5>sunset: @Model.HomeZipRootObject.sys.sunset</h5>
-        <br>
-        <h5>Posts</h5>
-        @foreach (var blog in Model.Posts)
-    {
-        <h5>id: @blog.PostID</h5>
-        <h5>userId: @blog.UserID</h5>
-        <h5>blogPost: @blog.BlogPost</h5>
-        <h5>imageFile: @blog.ImageFile </h5>
-        <h5>Temp: @blog.TempFahr</h5>
-        <h5>WeatherJson: @blog.WeatherJson</h5>
-        <h5>WeatherType: @blog.WeatherType</h5>
-        <h5> ZipCode: @blog.ZipCode </h5>
-        <h5>PublishDateTime: @blog.PublishDateTime</h5>
-        @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
-}
-=======
 
 
         <div class="col-md-6">
@@ -100,58 +80,4 @@
 </div>
        
     
-        <!-- <h5>Posts</h5> -->
-        @*@foreach (var blog in db.Posts)
-    <div>
-        <h5>FirstName: @Model.User.FirstName</h5>
-        <h5>LastName: @Model.User.LastName</h5>
-        <h5>Email: @Model.User.Email</h5>
-        <h5>HomeZipCode: @Model.User.HomeZipCode</h5>
-        <h5>UserName: @Model.User.Username</h5>
-        <h5>Password: @Model.User.Password</h5>
-        <br>
-        <br>
-        <h5>RootObject</h5>
-        <h5>visibility: @Model.HomeZipRootObject.visibility</h5>
-        <h5>dt: @Model.HomeZipRootObject.dt</h5>
-        <h5>id: @Model.HomeZipRootObject.id</h5>
-        <h5>name: @Model.HomeZipRootObject.name</h5>
-        <h5>cod: @Model.HomeZipRootObject.cod</h5>
-        <br>
-        <h5>Coords</h5>
-        <h5>Latitude: @Model.HomeZipRootObject.coord.lat</h5>
-        <h5>Longitude: @Model.HomeZipRootObject.coord.lon</h5>
-        <br>
-        <h5>Weather</h5>
-        <h5>id: @Model.HomeZipRootObject.weather[0].id</h5>
-        <h5>main: @Model.HomeZipRootObject.weather[0].main</h5>
-        <h5>description: @Model.HomeZipRootObject.weather[0].description</h5>
-        <h5>icon: @Model.HomeZipRootObject.weather[0].icon</h5>
-        <br>
-        <h5>Main</h5>
-        <h5>temp: @Model.HomeZipRootObject.main.temp</h5>
-        <h5>pressure: @Model.HomeZipRootObject.main.pressure</h5>
-        <h5>humidity: @Model.HomeZipRootObject.main.humidity</h5>
-        <h5>temp_min: @Model.HomeZipRootObject.main.temp_min</h5>
-        <h5>temp_max: @Model.HomeZipRootObject.main.temp_max</h5>
-        <br>
-        <h5>Wind</h5>
-        <h5>speed: @Model.HomeZipRootObject.wind.speed</h5>
-        <h5>deg: @Model.HomeZipRootObject.wind.deg</h5>
->>>>>>> joseph
-        <br>
-        <br>
-        <div>
-            <form asp-controller="MakeAPost" method="get">
-                <button type="submit" class="btn btn-success">Make A New Post</button>
-            </form>
-        </div>
-
-        <div>
-            <form asp-controller="Feed" method="get">
-                <button type="submit" class="btn btn-success">Look at Feed of All Posts</button>
-            </form>
-        </div>
-
-    </div>
-</div>
+       
