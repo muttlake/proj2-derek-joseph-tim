@@ -30,8 +30,8 @@ namespace WeatherApp.Library
             imgUrl = @"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
             imgTitle = "jpg image";
             imgDescription = "this is a jpg image";
-            var imgName = "img.jpg";
-            var imgType = "jpg";
+            //var imgName = "img.jpg";
+            //var imgType = "jpg";
 
             PostImage();
         }
