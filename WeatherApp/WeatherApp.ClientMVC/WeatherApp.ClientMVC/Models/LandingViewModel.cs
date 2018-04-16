@@ -28,7 +28,7 @@ namespace WeatherApp.ClientMVC.Models
             HomeZipRootObject = jr.GetRootObjectFromLibSvc();
             SetWeatherIcon();
             GetPosts();
-            PostsWithWeather = GetPostsWithWeather();
+            GetPostsWithWeather();
         }
 
         public void GetPosts()
@@ -54,17 +54,17 @@ namespace WeatherApp.ClientMVC.Models
             WeatherIcon = "http://openweathermap.org/img/w/" + HomeZipRootObject.weather[0].icon + ".png";
         }
 
-        public List<PostWithWeather> GetPostsWithWeather()
+        public void GetPostsWithWeather()
          {
-             var postsWithWeather = new List<PostWithWeather>();
+             PostsWithWeather = new List<PostWithWeather>();
              foreach(var post in Posts)
              {
                  var p = new PostWithWeather();
                  p.Post = post;
                  p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
+                PostsWithWeather.Add(p);
 
              }
-             return postsWithWeather;
          }
     }
 }
