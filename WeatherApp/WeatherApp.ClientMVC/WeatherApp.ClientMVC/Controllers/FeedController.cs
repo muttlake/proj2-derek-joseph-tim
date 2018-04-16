@@ -20,8 +20,14 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpPost]
         public ActionResult Index(FeedViewModel model)
         {
+            var fvm = new FeedViewModel();
+            if(model.WeatherTypeFilter != null)
+            {
+                fvm.ApplyWeatherTypeFilter();
+            }
+
             //Put to database here
-            return RedirectToAction("Index", "Landing");
+            return View(fvm);
         }
     }
 }
