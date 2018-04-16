@@ -11,6 +11,9 @@ namespace WeatherApp.ClientMVC.Models
     {
         public Post Post { get; set; }
         public RootObject Weather { get; set; }
+
+        public string WeatherIconImage { get; set; }
+       
     }
     public class LandingViewModel
     {
@@ -18,7 +21,11 @@ namespace WeatherApp.ClientMVC.Models
         public List<Post> Posts { get; set; }
         public List<PostWithWeather> PostsWithWeather { get; set; }
         public RootObject HomeZipRootObject { get; set; }
+
+         public RootObject Weather { get; set; }
         public string WeatherIcon { get; set; }
+
+        
 
         public LandingViewModel(User u)
         {
@@ -54,6 +61,8 @@ namespace WeatherApp.ClientMVC.Models
             WeatherIcon = "http://openweathermap.org/img/w/" + HomeZipRootObject.weather[0].icon + ".png";
         }
 
+        
+
         public void GetPostsWithWeather()
          {
              PostsWithWeather = new List<PostWithWeather>();
@@ -62,9 +71,12 @@ namespace WeatherApp.ClientMVC.Models
                  var p = new PostWithWeather();
                  p.Post = post;
                  p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
+                 p.WeatherIconImage =  "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
                 PostsWithWeather.Add(p);
 
              }
          }
+
+         
     }
 }
