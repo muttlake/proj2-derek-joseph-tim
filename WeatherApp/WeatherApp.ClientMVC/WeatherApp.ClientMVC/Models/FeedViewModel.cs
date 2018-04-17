@@ -12,11 +12,12 @@ namespace WeatherApp.ClientMVC.Models
 
         public string WeatherTypeFilter { get; set; }
         public string ZipCodeFilter { get; set; }
+        public string TempFahrFilter { get; set; }
 
         public List<string> WeatherTypes { get; set; }
 
-
         public int ZipCodeInt { get; set; }
+        public int TempFahrInt { get; set; }
 
         public FeedViewModel()
         {
@@ -54,6 +55,12 @@ namespace WeatherApp.ClientMVC.Models
 
         public void ApplyPostFilters()
         {
+            if (TempFahrFilter != null && SetTemp())
+            {
+                ApplyTempFilter();
+            }
+            Console.WriteLine("Numer of Posts after temp filter: {0}", Posts.Count);
+
             if (WeatherTypeFilter != null && WeatherTypeFilter != "")
             {
                 ApplyWeatherTypeFilter();
@@ -77,6 +84,15 @@ namespace WeatherApp.ClientMVC.Models
             return valid;
         }
 
+        public bool SetTemp()
+        {
+            var valid = Int32.TryParse(TempFahrFilter, out int temp);
+            if (valid)
+                TempFahrInt = temp;
+            return valid;
+        }
+
+
         public void ApplyZipCodeFilter()
         {
             Console.WriteLine("Applying Zip Filer with zipcode: {0}", ZipCodeInt);
@@ -98,6 +114,20 @@ namespace WeatherApp.ClientMVC.Models
             foreach(var post in Posts)
             {
                 if(post.WeatherType.Equals(WeatherTypeFilter))
+                {
+                    filteredPosts.Add(post);
+                }
+            }
+            Posts = filteredPosts;
+        }
+
+
+        public void ApplyTempFilter()
+        {
+            var filteredPosts = new List<Post>();
+            foreach (var post in Posts)
+            {
+                if (post.TempFahr  >= (TempFahrInt - 2) && post.TempFahr <= (TempFahrInt + 2))
                 {
                     filteredPosts.Add(post);
                 }

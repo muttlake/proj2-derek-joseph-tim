@@ -13,12 +13,16 @@
         <form asp-controller="Feed" method="post">
             <p>Apply Filters</p>
             <div class="form-group">
-                <label>WeatherTypeFilter:</label>
-                <input type="text" class="form-control" name="WeatherTypeFilter" placeholder="Enter WeatherTypeFilter"><br>
+                <label>Temperature Filter:</label>
+                <input type="text" class="form-control" name="TempFahrFilter" placeholder="Temperature Filter"><br>
+            </div>
+            <div class="form-group">
+                <label>Weather Type Filter:</label>
+                <input type="text" class="form-control" name="WeatherTypeFilter" placeholder="Weather Type Filter"><br>
             </div>
             <div class="form-group">
                 <label>ZipCode Filter:</label>
-                <input type="text" class="form-control" name="ZipCodeFilter" placeholder="Enter Zip Code"><br>
+                <input type="text" class="form-control" name="ZipCodeFilter" placeholder="Zip Code"><br>
             </div>
             <button type="submit" class="btn btn-success">Apply Filters</button>
         </form>
