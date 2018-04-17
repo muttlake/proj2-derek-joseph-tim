@@ -8,7 +8,7 @@ namespace WeatherApp.ClientLib
 {
     public class LibSvcRequestHandler
     {
-        public string GetJsonResponse(string requestURL)
+        public  string GetJsonResponse(string requestURL)
         {
             HttpWebRequest apiRequest = WebRequest.Create(requestURL) as HttpWebRequest;
 

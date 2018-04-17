@@ -44,6 +44,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public void ApplyZipCodeFilter()
         {
+            Console.WriteLine("Applying Zip Filer with zipcode: {0}", ZipCodeInt);
             var filteredPosts = new List<Post>();
             foreach (var post in filteredPosts)
             {
