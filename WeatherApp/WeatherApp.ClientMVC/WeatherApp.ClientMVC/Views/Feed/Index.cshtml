@@ -20,17 +20,31 @@
         </form>
 
             <h5>Posts</h5>
-            @foreach (var blog in Model.Posts)
+            @foreach (var blog in Model.FeedWithWeather)
             {
-                <h5>id: @blog.PostID</h5>
-                <h5>userId: @blog.UserID</h5>
-                <h5>blogPost: @blog.BlogPost</h5>
-                <h5>imageFile: @blog.ImageFile </h5>
-                <h5>Temp: @blog.TempFahr</h5>
-                <h5>WeatherJson: @blog.WeatherJson</h5>
-                <h5>WeatherType: @blog.WeatherType</h5>
-                <h5> ZipCode: @blog.ZipCode </h5>
-                <h5>PublishDateTime: @blog.PublishDateTime</h5>
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="@blog.WeatherIconImage" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">
+                            <h5>id: @blog.Post.PostID</h5>
+                            <h5>userId: @blog.Post.UserID</h5>
+                            <h5>blogPost: @blog.Post.BlogPost</h5>
+                            <h5>imageFile: @blog.Post.ImageFile </h5>
+                            <h5>Temp: @blog.Post.TempFahr</h5>
+                            <h5>WeatherJson: @blog.Post.WeatherJson</h5>
+                            <h5>WeatherType: @blog.Post.WeatherType</h5>
+                            <h5> ZipCode: @blog.Post.ZipCode </h5>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                        <small class="text-muted">Last updated @blog.Post.PublishDateTime</small>
+                     </div>
+                </div>
+               </div>
+               <br>
+            
                 @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
             }
             <br>

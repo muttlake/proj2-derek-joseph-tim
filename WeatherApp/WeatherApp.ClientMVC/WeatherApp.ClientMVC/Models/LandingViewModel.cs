@@ -26,7 +26,7 @@ namespace WeatherApp.ClientMVC.Models
         public List<PostWithWeather> PostsWithWeather { get; set; }
         public RootObject HomeZipRootObject { get; set; }
 
-         public RootObject Weather { get; set; }
+        public RootObject Weather { get; set; }
         public string WeatherIcon { get; set; }
 
         
