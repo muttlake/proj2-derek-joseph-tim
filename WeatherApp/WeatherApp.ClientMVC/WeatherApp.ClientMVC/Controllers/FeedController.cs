@@ -28,10 +28,17 @@ namespace WeatherApp.ClientMVC.Controllers
         {
             Console.WriteLine("\n\n\n\nArrived to Post Index\n\n\n\n");
 
-            var fvm = new FeedViewModel();
-            fvm.WeatherTypeFilter = model.WeatherTypeFilter;
-            fvm.ZipCodeFilter = model.ZipCodeFilter;
-            fvm.ApplyPostFilters();
+            string weatherType = "";
+            string zip = "";
+            if (model.WeatherTypeFilter != null)
+                weatherType = model.WeatherTypeFilter;
+            if (model.ZipCodeFilter != null)
+                zip = model.ZipCodeFilter;
+
+            Console.WriteLine("Weather Type Filter {0}", weatherType);
+            Console.WriteLine("Zip Code Filter {0}", zip);
+
+            var fvm = new FeedViewModel(weatherType, zip);
 
             //Put to database here
             return View(fvm);
