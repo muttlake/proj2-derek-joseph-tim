@@ -26,9 +26,10 @@ namespace WeatherApp.ClientMVC.Models
             GetValidWeatherTypes();
         }
 
-        public FeedViewModel(string wtype, string zip)
+        public FeedViewModel(string temp, string wtype, string zip)
         {
             //Assign filters
+            TempFahrFilter = temp;
             WeatherTypeFilter = wtype;
             ZipCodeFilter = zip;
 
