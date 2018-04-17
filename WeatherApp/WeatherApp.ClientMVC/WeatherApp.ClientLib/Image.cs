@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
+
 namespace WeatherApp.Library
 {
   public class Image
   {
     // required
-    public string Url { get; set; }
+    public string ImageFile { get; set; }
 
     // all optional
     public string Title { get; set; }
