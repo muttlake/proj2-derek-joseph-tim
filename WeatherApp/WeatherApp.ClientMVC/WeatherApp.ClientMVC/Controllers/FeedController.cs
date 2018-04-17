@@ -15,15 +15,12 @@ namespace WeatherApp.ClientMVC.Controllers
         {
             Console.WriteLine("\n\n\n\nArrived to Get Index\n\n\n\n");
 
-            var fvm_params = HttpContext.Session.Get<FeedViewModel>("FeedViewModel");
+            //var fvm_params = HttpContext.Session.Get<FeedViewModel>("FeedViewModel");
 
-            Console.WriteLine("Zip filter is {0}", fvm_params.ZipCodeFilter);
-            var fvm = new FeedViewModel();
-            fvm.WeatherTypeFilter = fvm_params.WeatherTypeFilter;
-            fvm.ZipCodeFilter = fvm_params.ZipCodeFilter;
-            fvm.ApplyPostFilters();
+            //Console.WriteLine("Zip filter is {0}", fvm_params.ZipCodeFilter);
 
-            return View(fvm);
+
+            return View(new FeedViewModel());
         }
 
         [HttpPost]
@@ -31,10 +28,13 @@ namespace WeatherApp.ClientMVC.Controllers
         {
             Console.WriteLine("\n\n\n\nArrived to Post Index\n\n\n\n");
 
-            HttpContext.Session.Set<FeedViewModel>("FeedViewModel", model);
+            var fvm = new FeedViewModel();
+            fvm.WeatherTypeFilter = model.WeatherTypeFilter;
+            fvm.ZipCodeFilter = model.ZipCodeFilter;
+            fvm.ApplyPostFilters();
 
             //Put to database here
-            return View();
+            return View(fvm);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace WeatherApp.ClientMVC.Controllers
             if(model.IsUserValid())
             {
                 HttpContext.Session.Set<User>("User", model.GetUser());
-                HttpContext.Session.Set<FeedViewModel>("FeedViewModel", new FeedViewModel());
+                //HttpContext.Session.Set<FeedViewModel>("FeedViewModel", new FeedViewModel());
 
                 return RedirectToAction("Index", "Landing");
             } 

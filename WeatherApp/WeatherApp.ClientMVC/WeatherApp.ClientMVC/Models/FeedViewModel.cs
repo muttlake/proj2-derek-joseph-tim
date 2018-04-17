@@ -46,7 +46,7 @@ namespace WeatherApp.ClientMVC.Models
         {
             Console.WriteLine("Applying Zip Filer with zipcode: {0}", ZipCodeInt);
             var filteredPosts = new List<Post>();
-            foreach (var post in filteredPosts)
+            foreach (var post in Posts)
             {
                 if (post.ZipCode == ZipCodeInt)
                 {
@@ -60,7 +60,7 @@ namespace WeatherApp.ClientMVC.Models
         public void ApplyWeatherTypeFilter()
         {
             var filteredPosts = new List<Post>();
-            foreach(var post in filteredPosts)
+            foreach(var post in Posts)
             {
                 if(post.WeatherType.Equals(WeatherTypeFilter))
                 {
