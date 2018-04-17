@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Feed Page";
+}
+@model WeatherApp.ClientMVC.Models.FeedViewModel
+
+
+<div>
+    <h3> @ViewData["Title"] </h3>
+
+    <div>
+        <br>
+        <h2>Login Page</h2>
+        <form asp-controller="Feed" method="post">
+            <p>Apply Filters</p>
+            <div class="form-group">
+                <label>Temperature Filter:</label>
+                <input type="text" class="form-control" name="TempFahrFilter" placeholder="Temperature Filter"><br>
+            </div>
+            <div class="form-group">
+                <label>Weather Type Filter:</label>
+                <input type="text" class="form-control" name="WeatherTypeFilter" placeholder="Weather Type Filter"><br>
+            </div>
+            <div class="form-group">
+                <label>ZipCode Filter:</label>
+                <input type="text" class="form-control" name="ZipCodeFilter" placeholder="Zip Code"><br>
+            </div>
+            <button type="submit" class="btn btn-success">Apply Filters</button>
+        </form>
+
+            <h5>Posts</h5>
+            @foreach (var blog in Model.Posts)
+            {
+                <h5>id: @blog.PostID</h5>
+                <h5>userId: @blog.UserID</h5>
+                <h5>blogPost: @blog.BlogPost</h5>
+                <h5>imageFile: @blog.ImageFile </h5>
+                <h5>Temp: @blog.TempFahr</h5>
+                <h5>WeatherJson: @blog.WeatherJson</h5>
+                <h5>WeatherType: @blog.WeatherType</h5>
+                <h5> ZipCode: @blog.ZipCode </h5>
+                <h5>PublishDateTime: @blog.PublishDateTime</h5>
+                @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
+            }
+            <br>
+            <br>
+            <div>
+                <form asp-controller="Landing" method="get">
+                    <button type="submit" class="btn btn-success">Go back to your Landing page</button>
+                </form>
+            </div>
+
+    </div>
+</div>

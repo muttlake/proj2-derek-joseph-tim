@@ -14,7 +14,7 @@ namespace WeatherApp.DataSvc.Controllers
     public class PostController : Controller
     {
 
-        private static WeatherAppContext context;
+        private readonly WeatherAppContext context;
 
         public PostController(WeatherAppContext db)
         {
@@ -52,11 +52,14 @@ namespace WeatherApp.DataSvc.Controllers
 
             //Add New User to Database
             var post = JsonConvert.DeserializeObject<List<Post>>(request_Body)[0];
-            using (var dbContext = new WeatherAppContext())
-            {
-                dbContext.Posts.Add(post);
-                dbContext.SaveChanges();
-            }
+            //using (var dbContext = new WeatherAppContext())
+            //{
+            //    dbContext.Posts.Add(post);
+            //    dbContext.SaveChanges();
+            //}
+
+            context.Posts.Add(post);
+            context.SaveChanges();
         }
     }
 }

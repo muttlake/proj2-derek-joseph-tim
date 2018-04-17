@@ -24,7 +24,7 @@ namespace WeatherApp.ClientLib
         public RootObject GetRootObjectFromLibSvc()
         {
             var drh = new LibSvcRequestHandler();
-            return JsonConvert.DeserializeObject<RootObject>(drh.GetJsonResponse(_requestString));
+            return JsonConvert.DeserializeObject<RootObject>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult());
         }
     }
 }
