@@ -47,31 +47,31 @@
             </form>
 
             @foreach (var pww in Model.PostsWithWeather)
-    {
-        @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
-        <div class="card mb-3">
-            <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><b>@Model.User.FirstName @Model.User.LastName Posts</b></h5>
-                <p class="card-text">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">id: @pww.Post.PostID</li>
-                        <li class="list-group-item">userId: @pww.Post.UserID</li>
-                        <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
-                        <li class="list-group-item">imageFile: @pww.Post.ImageFile </li>
-                        <li class="list-group-item">Temp: @pww.Post.TempFahr</li>
-                        <li class="list-group-item">WeatherJson: @pww.Post.WeatherJson</li>
-                        <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
-                        <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
-                        <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
-                    </ul>
-                </p>
-                <p class="card-text"><small class="text-muted"><b>Last updated: @pww.Post.PublishDateTime</b></small></p>
-            </div>
-        </div>
-        <br>
-        <br>
-}
+            {
+                @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
+                <div class="card mb-3">
+                    <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@Model.User.FirstName @Model.User.LastName Posts</b></h5>
+                        <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">id: @pww.Post.PostID</li>
+                                <li class="list-group-item">userId: @pww.Post.UserID</li>
+                                <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
+                                <li class="list-group-item">imageFile: @pww.Post.ImageFile </li>
+                                <li class="list-group-item">Temp: @pww.Post.TempFahr</li>
+                                <li class="list-group-item">WeatherJson: @pww.Post.WeatherJson</li>
+                                <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
+                                <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
+                                <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
+                            </ul>
+                        </p>
+                        <p class="card-text"><small class="text-muted"><b>Last updated: @pww.Post.PublishDateTime</b></small></p>
+                    </div>
+                </div>
+                <br>
+                <br>
+            }
             <br>
             <br>
             <form asp-controller="MakeAPost" method="get">
