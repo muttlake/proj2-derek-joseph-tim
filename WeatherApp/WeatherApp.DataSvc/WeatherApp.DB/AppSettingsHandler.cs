@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace WeatherApp.ClientLib
+namespace WeatherApp.DB
 {
 
     public class ConnectionStrings
