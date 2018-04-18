@@ -315,3 +315,5 @@ __pycache__/
 # End of https://www.gitignore.io/api/visualstudiocode
 
 appsettings.dev.json
+.appsettings.dev.json.swp
+all_the_places_with_localhost_mentioned.txt

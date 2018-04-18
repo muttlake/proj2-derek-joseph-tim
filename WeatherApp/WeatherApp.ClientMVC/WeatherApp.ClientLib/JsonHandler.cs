@@ -10,7 +10,7 @@ namespace WeatherApp.ClientLib
     public class JsonHandler
     {
         //url of the library service for ZipWeather
-        private string _requestString = "http://localhost:8000/api/zipweather";
+        private readonly string _requestString;
 
         public int ZipCode { get; set; }
 
@@ -18,7 +18,9 @@ namespace WeatherApp.ClientLib
         public JsonHandler(int zip)
         {
             ZipCode = zip;
-            _requestString += "?zip=" + ZipCode.ToString();
+
+            var ash = new AppSettingsHandler();
+            _requestString += ash.JsonObject.LibraryPath + "/api/zipweather" + "?zip=" + ZipCode.ToString();
         }
 
         public RootObject GetRootObjectFromLibSvc()
