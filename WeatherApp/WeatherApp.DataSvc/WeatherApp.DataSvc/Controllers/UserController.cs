@@ -46,21 +46,11 @@ namespace WeatherApp.DataSvc.Controllers
         [HttpPost]
         public void ReceiveNewUserAndPutInDatabase()
         {
-            Console.WriteLine("\n\n\nReceiveNewUserAndPutInDatabase");
-
-
             //Receive from ClientMVC
-            Console.WriteLine("From LibSvc's Post:\n");
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
-            Console.WriteLine("request_Body: {0}", request_Body);
 
             //Add New User to Database
             var user = JsonConvert.DeserializeObject<List<User>>(request_Body)[0];
-            //using (var dbContext = new WeatherAppContext())
-            //{
-            //    dbContext.Users.Add(user);
-            //    dbContext.SaveChanges();
-            //}
             context.Users.Add(user);
             context.SaveChanges();
         }

@@ -41,8 +41,9 @@ namespace WeatherApp.LibSvc.Controllers
         {
 
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
-            Console.WriteLine("request_Body: {0}", request_Body);
-            var uri = new Uri("http://localhost:9000/api/user");
+
+            var ash = new AppSettingsHandler();
+            var uri = new Uri(ash.JsonObject.DatabasePath + "/api/user");
 
             var rp = new RelayPost();
             rp.RelayAddToDataSvc(uri, request_Body);
