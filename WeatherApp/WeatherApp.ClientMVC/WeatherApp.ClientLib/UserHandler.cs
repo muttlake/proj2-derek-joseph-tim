@@ -11,32 +11,34 @@ namespace WeatherApp.ClientLib
     public class UserHandler
     {
         //url of the library service for user
-        private string _requestString = "http://localhost:8000/api/userlib";
+        private readonly string _requestString;
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.LibraryPath;
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-            _requestString += "?uid=" + UserID.ToString();
+
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.LibraryPath;
         }
 
         public User GetUserFromLibSvc()
         {
             var drh = new LibSvcRequestHandler();  //Here User should be a List with only one User object
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult())[0];
+            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib?uid=" + UserID.ToString()).GetAwaiter().GetResult())[0];
         }
 
         public List<User> GetAllUsersFromLibSvc()
         {
-            _requestString = "http://localhost:8000/api/userlib";
             var drh = new LibSvcRequestHandler();  //Here should get list of all Users
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult());
+            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib").GetAwaiter().GetResult());
         }
 
         public bool ValidateUser(string email, string password)
@@ -70,7 +72,7 @@ namespace WeatherApp.ClientLib
             using (var client = new HttpClient())
             {
                 var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri("http://localhost:8000/api/userlib");
+                var uri = new Uri(_requestString + "/api/userlib");
                 var response = await client.PostAsync(uri, stringContent);
 
             }

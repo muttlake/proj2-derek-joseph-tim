@@ -36,6 +36,12 @@ namespace WeatherApp.ClientMVC.Controllers
                 }
             }
 
+            //if(model.IsUserValid())
+            //{
+            //    HttpContext.Session.Set<User>("User", model.GetUser());
+            //    return RedirectToAction("Index", "Landing");
+            //} 
+
             return View(new LoginViewModel());
         }
     }
