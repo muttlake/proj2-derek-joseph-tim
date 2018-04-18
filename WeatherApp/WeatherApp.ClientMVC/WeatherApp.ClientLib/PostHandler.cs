@@ -25,8 +25,6 @@ namespace WeatherApp.ClientLib
         public PostHandler(int id)
         {
             PostID = id;
-            //= "http://localhost:8000/api/postlib";
-
             var ash = new AppSettingsHandler();
             _requestString = ash.JsonObject.LibraryPath;
         }
@@ -35,7 +33,6 @@ namespace WeatherApp.ClientLib
         {
             var drh = new LibSvcRequestHandler();
             Console.WriteLine(_requestString + "/api/postlib/" + PostID.ToString());
-            //http://localhost:8000/api/postlib
             return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/postlib/" + PostID.ToString()).GetAwaiter().GetResult());
         } 
 

@@ -17,7 +17,6 @@ namespace WeatherApp.ClientLib
 
         public UserHandler()
         {
-            //= "http://localhost:8000/api/userlib";
             var ash = new AppSettingsHandler();
             _requestString = ash.JsonObject.LibraryPath;
         }
@@ -26,7 +25,6 @@ namespace WeatherApp.ClientLib
         {
             UserID = id;
 
-            //= "http://localhost:8000/api/userlib";
             var ash = new AppSettingsHandler();
             _requestString = ash.JsonObject.LibraryPath;
         }
@@ -74,7 +72,7 @@ namespace WeatherApp.ClientLib
             using (var client = new HttpClient())
             {
                 var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri(_requestString + "api/userlib");
+                var uri = new Uri(_requestString + "/api/userlib");
                 var response = await client.PostAsync(uri, stringContent);
 
             }
