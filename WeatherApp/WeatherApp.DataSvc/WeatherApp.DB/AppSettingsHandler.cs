@@ -4,11 +4,17 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace WeatherApp.DB
+namespace WeatherApp.ClientLib
 {
+
+    public class ConnectionStrings
+    {
+        public string DefaultConnection { get; set; }
+    }
+
     public class AppSettingsFormat
     {
-        public List<string> connectionStrings { get; set; }
+        public ConnectionStrings ConnectionStrings { get; set; }
         public string DatabasePath { get; set; }
         public string LibraryPath { get; set; }
         public string ClientPath { get; set; }
