@@ -11,6 +11,7 @@ namespace WeatherApp.DataSvc.Controllers
 {
 
     [Route("api/[controller]")]
+    [Produces("application/json")] // Means every action result will always be a json type result
     public class PostController : Controller
     {
 
