@@ -23,7 +23,11 @@ namespace WeatherApp.LibSvc.Controllers
         {
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
             Console.WriteLine("request_Body: {0}", request_Body);
-            var uri = new Uri("http://localhost:9000/api/post");
+
+            //get url from appsettings.dev.json
+            var ash = new AppSettingsHandler();
+            //var uri = new Uri("http://lh:9000/api/post");
+            var uri = new Uri(ash.JsonObject.DatabasePath + "/api/post");
 
             var rp = new RelayPost();
             rp.RelayAddToDataSvc(uri, request_Body);
