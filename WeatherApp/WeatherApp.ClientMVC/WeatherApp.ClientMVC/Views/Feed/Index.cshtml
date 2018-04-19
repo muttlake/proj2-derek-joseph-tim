@@ -17,9 +17,11 @@
                 <input type="text" class="form-control" name="TempFahrFilter" placeholder="Temperature Filter"><br>
             </div>
             <div class="form-group">
-                <label>Weather Type Filter:</label>
-                <input type="text" class="form-control" name="WeatherTypeFilter" placeholder="Weather Type Filter"><br>
+                <select class="form-control" name="WeatherTypeFilter" asp-items="Model.WeatherTypes">
+                <option selected>Weather Type Filter:</option>
+                </select><br>
             </div>
+    
             <div class="form-group">
                 <label>ZipCode Filter:</label>
                 <input type="text" class="form-control" name="ZipCodeFilter" placeholder="Zip Code"><br>
@@ -51,6 +53,7 @@
                      </div>
                 </div>
                </div>
+               <br>
                <br>
             
                 @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@

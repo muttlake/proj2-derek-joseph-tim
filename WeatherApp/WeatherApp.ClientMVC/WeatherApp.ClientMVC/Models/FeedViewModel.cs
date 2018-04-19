@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using WeatherApp.ClientLib;
+using System.Threading.Tasks;
+using System.Linq;
 using Newtonsoft.Json;
+
 namespace WeatherApp.ClientMVC.Models
 {
-    // public class FeedWithWeather
-    // {
-    //     public Post Post { get; set; }
-    //     public RootObject Feed { get; set; }
-
-    //     public string FeedWeatherIconImage { get; set; }
-       
-    // }
+    
     public class FeedViewModel
     {
-        public User User { get; set; }
         public List<Post> Posts { get; set; }
 
         public List<PostWithWeather> FeedWithWeather { get; set; }
@@ -22,6 +17,7 @@ namespace WeatherApp.ClientMVC.Models
         public string ZipCodeFilter { get; set; }
         public string TempFahrFilter { get; set; }
 
+        
         public List<string> WeatherTypes { get; set; }
 
         public int ZipCodeInt { get; set; }
@@ -35,20 +31,20 @@ namespace WeatherApp.ClientMVC.Models
         {
             var ph = new PostHandler();
             Posts = ph.GetAllPosts();
-<<<<<<< HEAD
-            
+            GetValidWeatherTypes();
+            GetPostsWithWeather();
         }
 
-          public FeedViewModel(User user)
-        {
+        //   public FeedViewModel(User user)
+        // {
            
-            User = user;
-            var pr = new JsonHandler(User.HomeZipCode);
-            FeedZipRootObject = pr.GetRootObjectFromLibSvc();
+        //     User = user;
+        //     var pr = new JsonHandler(User.HomeZipCode);
+        //     FeedZipRootObject = pr.GetRootObjectFromLibSvc();
             
-             GetPostsWithWeather();
+             
 
-        }
+        // }
 
 
         //public void ApplyPostFilters()
@@ -58,9 +54,8 @@ namespace WeatherApp.ClientMVC.Models
         //        ApplyWeatherTypeFilter();
         //    }
         //}
-=======
-            GetValidWeatherTypes();
-        }
+            
+        
 
         public FeedViewModel(string temp, string wtype, string zip)
         {
@@ -144,7 +139,6 @@ namespace WeatherApp.ClientMVC.Models
             Posts = filteredPosts;
         }
 
->>>>>>> master
 
         public void ApplyWeatherTypeFilter()
         {
@@ -160,7 +154,6 @@ namespace WeatherApp.ClientMVC.Models
         }
 
 
-<<<<<<< HEAD
 
         public RootObject GetCurrentWeather()
         {
@@ -183,7 +176,8 @@ namespace WeatherApp.ClientMVC.Models
 
              }
          }
-=======
+
+
         public void ApplyTempFilter()
         {
             var filteredPosts = new List<Post>();
@@ -196,6 +190,5 @@ namespace WeatherApp.ClientMVC.Models
             }
             Posts = filteredPosts;
         }
->>>>>>> master
     }
 }

@@ -4,16 +4,48 @@
 @model WeatherApp.ClientMVC.Models.LandingViewModel
 
 
-<div>
-    <h3>Current Weather and Your Posts </h3>
-
+<div class="container">
+    <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>
+    <h4>Your Current Weather</h4>
     <div>
-       
-        <div class="col-md-6">
-            <section>
+       <div class="row">
+  <div class="col-md-6">
+    <div class="thumbnail">
+        <center><h4 >Current Weather:</h4></center>
+        <div>
+     <p style="float: left;"><img src=@Model.WeatherIcon alt="Card image cap" width="150px";></p><br><br>
+      <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
+      <b> @Model.HomeZipRootObject.weather[0].description</b>
+      </div>
+      <br>
+      
+      <div class="caption">
+        <p>
+             
+                            City:<b> @Model.HomeZipRootObject.name</b><br><br>
+                            dt:<b> @Model.HomeZipRootObject.dt</b>
+                            <!-- Weather Category:<b> @Model.HomeZipRootObject.weather[0].main</b>
+                            Humidity:<b> @Model.HomeZipRootObject.main.humidity</b>
+                            Temp_Min:<b> @Model.HomeZipRootObject.main.temp_min</b>
+                            Temp_Max:<b> @Model.HomeZipRootObject.main.temp_max</b>
+                            Country:<b> @Model.HomeZipRootObject.sys.country</b>
+                            Sunrise:<b> @Model.HomeZipRootObject.sys.sunrise</b>
+                            Sunset:<b> @Model.HomeZipRootObject.sys.sunset</b> -->
+            
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+         <!-- <div class="row">
+            <div class="col-md-12">
                 
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src=@Model.WeatherIcon alt="Card image cap">
+                        <div class="thumbnail">
+                 <img class="card-img-top" src=@Model.WeatherIcon alt="Card image cap">
+                 <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b></br>
+                 <b> @Model.HomeZipRootObject.weather[0].main</b>
+                 </div>
                         <div class="card-body">
                             <h5 class="card-title">Weather Description:</h5>
                             <p class="card-text">
@@ -38,10 +70,11 @@
                     
                    
                 </div>
-            </section>
-        </div>
+            </div>
+        </div>  -->
 
-        <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
             <form asp-controller="Feed" method="get">
                 <button type="submit" class="btn btn-success">Look at All Users' Posts</button>
             </form>
@@ -59,8 +92,7 @@
                                 <li class="list-group-item">userId: @pww.Post.UserID</li>
                                 <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
                                 <li class="list-group-item">imageFile: @pww.Post.ImageFile </li>
-                                <li class="list-group-item">Temp: @pww.Post.TempFahr</li>
-                                <li class="list-group-item">WeatherJson: @pww.Post.WeatherJson</li>
+                               <!-- <li class="list-group-item">WeatherJson: @pww.Post.WeatherJson</li>-->
                                 <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
                                 <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
                                 <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
