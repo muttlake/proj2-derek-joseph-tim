@@ -9,32 +9,33 @@ namespace WeatherApp.Library
 {
     public class UserHandler
     {
-        private string _requestString = "http://localhost:9000/api/user";
+        private readonly string _requestString;
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.DatabasePath;
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-            _requestString += "/" + UserID.ToString();
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.DatabasePath;
         }
 
         public List<User> GetUserFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return new List<User>() { JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString)) };
+            return new List<User>() { JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString + "/api/user/" + UserID.ToString()).GetAwaiter().GetResult()) };
         }
 
         public List<User> GetAllUsersFromDataSvc()
         {
-            _requestString = "http://localhost:9000/api/user";
             var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString));
+            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/user").GetAwaiter().GetResult());
         }
     }
 }

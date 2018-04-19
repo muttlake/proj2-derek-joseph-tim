@@ -12,29 +12,35 @@ namespace WeatherApp.ClientLib
     public class PostHandler
     {
         //This is the url to the library service
-        private string _requestString = "http://localhost:8000/api/postlib";
+        private readonly string _requestString;
 
         public int PostID { get; set; }
 
-        public PostHandler() { }
+        public PostHandler()
+        {
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.LibraryPath;
+        }
 
         public PostHandler(int id)
         {
             PostID = id;
-            _requestString += "/" + PostID.ToString();
+            var ash = new AppSettingsHandler();
+            _requestString = ash.JsonObject.LibraryPath;
         }
 
         public Post GetPostFromDataSvc()
         {
             var drh = new LibSvcRequestHandler();
-            return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult());
+            Console.WriteLine(_requestString + "/api/postlib/" + PostID.ToString());
+            return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/postlib/" + PostID.ToString()).GetAwaiter().GetResult());
         } 
 
         public List<Post> GetAllPosts()
         {
             var drh = new LibSvcRequestHandler();
-            _requestString = "http://localhost:8000/api/postlib";
-            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult());
+            Console.WriteLine(_requestString + "/api/postlib");
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString + "/api/postlib").GetAwaiter().GetResult());
         }
 
         public async void AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)
@@ -54,7 +60,7 @@ namespace WeatherApp.ClientLib
             {
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri("http://localhost:8000/api/postlib");
+                var uri = new Uri(_requestString + "/api/postlib");
                 var response = await client.PostAsync(uri, stringContent);
 
             }

@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.ClientLib;
 using WeatherApp.ClientMVC.Models;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace WeatherApp.ClientMVC.Controllers
 {
@@ -21,11 +19,31 @@ namespace WeatherApp.ClientMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(MakeAPostViewModel model)
+        public ActionResult Index(MakeAPostViewModel model, IFormFile file)
         {
             var user = HttpContext.Session.Get<User>("User");
             user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
             var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
+
+            // <---save image to root folder--->
+            // check if file is selected
+            if (file == null || file.Length == 0) return Content("File not selected.");
+
+            // get path
+            string path_Root = _environment.WebRootPath;
+            string imageName = GetUniqueFileName(file.FileName);
+            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+
+            // copy file to target
+            var stream = new FileStream(path_to_Images, FileMode.Create);
+            // save filename to NewPost.ImageFile
+            System.Console.WriteLine(path_to_Images);
+            model.NewPost.ImageFile = imageName;
+            file.CopyTo(stream);
+            // <---end save image--->
+
+            // output
+            ViewData["FilePath"] = path_to_Images;
 
             //Add Post
             Console.WriteLine("Make a post right now");
@@ -54,5 +72,24 @@ namespace WeatherApp.ClientMVC.Controllers
             return user;
         }
 
+        // codes below this line are required for image saving
+        private readonly IHostingEnvironment _environment;
+
+        // Constructor
+        public MakeAPostController(IHostingEnvironment IHostingEnvironment)
+        {
+            _environment = IHostingEnvironment;
+        }
+        // generate a guid to append to file name
+        private string GetUniqueFileName(string fileName)
+        {
+            Console.WriteLine("Generating unique file name...");
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
+        }
     }
+
 }

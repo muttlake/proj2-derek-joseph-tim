@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WeatherApp.LibSvc.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")] // Means every action result will always be a json type result
     public class ValuesController : Controller
     {
         // GET api/values

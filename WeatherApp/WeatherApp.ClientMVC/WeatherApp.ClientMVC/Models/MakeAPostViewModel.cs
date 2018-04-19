@@ -12,7 +12,6 @@ namespace WeatherApp.ClientMVC.Models
     {
         public User User { get; set; }
         public Post NewPost { get; set; }
-
         public RootObject ZipRootObject { get; set; }
 
         public string WeatherIcon { get; set; }

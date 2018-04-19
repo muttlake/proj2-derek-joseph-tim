@@ -23,7 +23,6 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpPost]
         public ActionResult Index(RegisterViewModel model)
         {
-
             if (model.CanAddUser())
             {
                 HttpContext.Session.Set<User>("User", model.usr);
@@ -35,20 +34,5 @@ namespace WeatherApp.ClientMVC.Controllers
             }
             return View(new RegisterViewModel());
         }
-
-
-        // // Old Http post for Index
-        // [HttpPost]
-        //public IActionResult Index(RegisterViewModel model)
-        //{
-
-        //    if (model.AddUser())
-        //    {
-        //        HttpContext.Session.Set<User>("User", model.usr);
-        //        return RedirectToAction("Index", "Landing");
-
-        //    }
-        //    return View(new RegisterViewModel());
-        //}
     }
 }

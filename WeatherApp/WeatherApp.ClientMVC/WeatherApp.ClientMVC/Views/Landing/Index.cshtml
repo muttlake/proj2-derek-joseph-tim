@@ -13,7 +13,7 @@
     <div class="thumbnail">
         <center><h4 >Current Weather:</h4></center>
         <div>
-     <p style="float: left;"><img src=@Model.WeatherIcon alt="Card image cap" width="150px";></p><br><br>
+     <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
       <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
       <b> @Model.HomeZipRootObject.weather[0].description</b>
       </div>
@@ -50,25 +50,25 @@
                             <h5 class="card-title">Weather Description:</h5>
                             <p class="card-text">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Temperature:<b> @Model.HomeZipRootObject.main.temp</li></b>
-                            <li class="list-group-item">Weather Type:<b> @Model.HomeZipRootObject.weather[0].description</li></b>
+                                <li class="list-group-item">Temperature:<b> @Model.HomeZipRootObject.main.temp</li></b>
+                                <li class="list-group-item">Weather Type:<b> @Model.HomeZipRootObject.weather[0].description</li></b>
                             </ul>
-                            </p>
-                        </div>
-                    
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">City:<b> @Model.HomeZipRootObject.name</li></b>
-                            <li class="list-group-item">dt:<b> @Model.HomeZipRootObject.dt</li></b>
-                            <li class="list-group-item">Weather Category:<b> @Model.HomeZipRootObject.weather[0].main</li></b>
-                            <li class="list-group-item">Humidity:<b> @Model.HomeZipRootObject.main.humidity</li></b>
-                            <li class="list-group-item">Temp_Min:<b> @Model.HomeZipRootObject.main.temp_min</li></b>
-                            <li class="list-group-item">Temp_Max:<b> @Model.HomeZipRootObject.main.temp_max</li></b>
-                            <li class="list-group-item">Country:<b> @Model.HomeZipRootObject.sys.country</li></b></li>
-                            <li class="list-group-item">Sunrise:<b> @Model.HomeZipRootObject.sys.sunrise</li></b></li>
-                            <li class="list-group-item">Sunset:<b> @Model.HomeZipRootObject.sys.sunset</li></b></li>
-                        </ul>
-                    
-                   
+                        </p>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">City:<b> @Model.HomeZipRootObject.name</li></b>
+                        <li class="list-group-item">dt:<b> @Model.HomeZipRootObject.dt</li></b>
+                        <li class="list-group-item">Weather Category:<b> @Model.HomeZipRootObject.weather[0].main</li></b>
+                        <li class="list-group-item">Humidity:<b> @Model.HomeZipRootObject.main.humidity</li></b>
+                        <li class="list-group-item">Temp_Min:<b> @Model.HomeZipRootObject.main.temp_min</li></b>
+                        <li class="list-group-item">Temp_Max:<b> @Model.HomeZipRootObject.main.temp_max</li></b>
+                        <li class="list-group-item">Country:<b> @Model.HomeZipRootObject.sys.country</li></b></li>
+                        <li class="list-group-item">Sunrise:<b> @Model.HomeZipRootObject.sys.sunrise</li></b></li>
+                        <li class="list-group-item">Sunset:<b> @Model.HomeZipRootObject.sys.sunset</li></b></li>
+                    </ul>
+
+
                 </div>
             </div>
         </div>  -->
@@ -78,14 +78,18 @@
             <form asp-controller="Feed" method="get">
                 <button type="submit" class="btn btn-success">Look at All Users' Posts</button>
             </form>
+            <form asp-controller="MakeAPost" method="get">
+                <button type="submit" class="btn btn-success">Make A New Post</button>
+            </form>
 
+            <h5>All Posts by @Model.User.FirstName  @Model.User.LastName</h5>
             @foreach (var pww in Model.PostsWithWeather)
             {
                 @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
                 <div class="card mb-3">
                     <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><b>@Model.User.FirstName @Model.User.LastName Posts</b></h5>
+                        <h5 class="card-title"><b>@pww.Post.PublishDateTime Post</b></h5>
                         <p class="card-text">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">id: @pww.Post.PostID</li>
@@ -104,11 +108,7 @@
                 <br>
                 <br>
             }
-            <br>
-            <br>
-            <form asp-controller="MakeAPost" method="get">
-                <button type="submit" class="btn btn-success">Make A New Post</button>
-            </form>
+
         </div>
     </div>
 </div>
