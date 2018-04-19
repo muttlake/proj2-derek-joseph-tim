@@ -48,17 +48,17 @@ node
 
         dir ('WeatherApp/WeatherApp.DataSvc')
         {
-            bat 'dotnet publish --output "..\\Publish"'
+            bat 'dotnet publish --output ".\\bin"'
         }
 
         dir ('WeatherApp/WeatherApp.LibSvc')
         {
-            bat 'dotnet publish --output "..\\Publish"'
+            bat 'dotnet publish --output ".\\bin"'
         }
 
         dir ('WeatherApp/WeatherApp.ClientMVC')
         {
-            bat 'dotnet publish --output "..\\Publish"'
+            bat 'dotnet publish --output ".\\bin"'
         }
     }
 
