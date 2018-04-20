@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json" Version="10.0.1">
       <HintPath>..\..\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>

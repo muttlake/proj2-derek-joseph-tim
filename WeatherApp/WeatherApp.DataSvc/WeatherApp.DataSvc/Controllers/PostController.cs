@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WeatherApp.DataSvc.WeatherApp.DB;
 
 namespace WeatherApp.DataSvc.Controllers
 {
-
+    [EnableCors("allowAll")] //Enable Cross Origin Resource Sharing
     [Route("api/[controller]")]
+    [Produces("application/json")] // Means every action result will always be a json type result
     public class PostController : Controller
     {
 

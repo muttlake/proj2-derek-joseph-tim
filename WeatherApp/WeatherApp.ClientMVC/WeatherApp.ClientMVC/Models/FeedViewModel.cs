@@ -1,30 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WeatherApp.ClientLib;
+using System.Threading.Tasks;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace WeatherApp.ClientMVC.Models
 {
+    
     public class FeedViewModel
     {
         public List<Post> Posts { get; set; }
 
+        public List<PostWithWeather> FeedWithWeather { get; set; }
         public string WeatherTypeFilter { get; set; }
         public string ZipCodeFilter { get; set; }
         public string TempFahrFilter { get; set; }
 
+        
         public List<string> WeatherTypes { get; set; }
 
         public int ZipCodeInt { get; set; }
         public int TempFahrInt { get; set; }
+
+        public RootObject FeedZipRootObject { get; set; }
+
+      
 
         public FeedViewModel()
         {
             var ph = new PostHandler();
             Posts = ph.GetAllPosts();
             GetValidWeatherTypes();
+            GetPostsWithWeather();
         }
+        
 
         public FeedViewModel(string temp, string wtype, string zip)
         {
@@ -42,6 +52,7 @@ namespace WeatherApp.ClientMVC.Models
             //Apply Filters
             ApplyPostFilters();
             GetValidWeatherTypes();
+            GetPostsWithWeather();
         }
 
         public void GetValidWeatherTypes()
@@ -121,6 +132,30 @@ namespace WeatherApp.ClientMVC.Models
             }
             Posts = filteredPosts;
         }
+
+
+
+        public RootObject GetCurrentWeather()
+        {
+            return FeedZipRootObject;
+        }
+
+        
+
+
+         public void GetPostsWithWeather()
+         {
+             FeedWithWeather = new List<PostWithWeather>();
+             foreach(var post in Posts)
+             {
+                 var p = new PostWithWeather();
+                 p.Post = post;
+                 p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
+                 p.WeatherIconImage =  "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
+               FeedWithWeather.Add(p);
+
+             }
+         }
 
 
         public void ApplyTempFilter()

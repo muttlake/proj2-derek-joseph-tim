@@ -13,21 +13,12 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            Console.WriteLine("\n\n\n\nArrived to Get Index\n\n\n\n");
-
-            //var fvm_params = HttpContext.Session.Get<FeedViewModel>("FeedViewModel");
-
-            //Console.WriteLine("Zip filter is {0}", fvm_params.ZipCodeFilter);
-
-
             return View(new FeedViewModel());
         }
 
         [HttpPost]
         public ActionResult Index(FeedViewModel model)
         {
-            Console.WriteLine("\n\n\n\nArrived to Post Index\n\n\n\n");
-
             string temp = "";
             string weatherType = "";
             string zip = "";
