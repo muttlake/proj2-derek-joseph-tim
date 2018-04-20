@@ -26,7 +26,6 @@ namespace WeatherApp.LibSvc.Controllers
 
             //get url from appsettings.dev.json
             var ash = new AppSettingsHandler();
-            //var uri = new Uri("http://lh:9000/api/post");
             var uri = new Uri(ash.JsonObject.DatabasePath + "/api/post");
 
             var rp = new RelayPost();
