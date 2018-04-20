@@ -20,7 +20,7 @@ namespace WeatherApp.ClientMVC
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:7000;")
+                //.UseUrls("http://*:7000;")
                 .Build();
     }
 }
