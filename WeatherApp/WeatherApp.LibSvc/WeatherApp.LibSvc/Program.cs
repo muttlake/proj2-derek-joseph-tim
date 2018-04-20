@@ -20,7 +20,7 @@ namespace WeatherApp.LibSvc
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:8000", "http://*:80")
+                .UseUrls("http://*:8000")
                 .Build();
     }
 }
