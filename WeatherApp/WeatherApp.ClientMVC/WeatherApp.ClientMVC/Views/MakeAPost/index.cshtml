@@ -3,34 +3,49 @@
 }
 @model WeatherApp.ClientMVC.Models.MakeAPostViewModel
 
-<div>
-     <div class="col-md-6">
-        <div class="card" style="width: 18rem;">
-        <h5 class="card-title">Current Weather:</h5>
-        <img class="card-img-top" src=@Model.WeatherIcon alt="Card image cap">
-        <b> @Model.ZipRootObject.main.temp<sup>o</sup></b></br>
-        <b> @Model.ZipRootObject.weather[0].main</b>
-        <div class="card-body">
-        
-            <p class="card-text">
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">Weather Type:<b> @Model.ZipRootObject.weather[0].description</li></b>
-            </ul>
-            </p>
+<div class="container">
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Make a Post</h2>
+
+            @using (Html.BeginForm("Index", "MakeAPost", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" />
+                <input type="text" name="blogPost" />
+                <input type="submit" value="OK" />
+            
+            }
+      </div>
+   </div>
+   <br>
+   <br>
+   <br>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="class="thumbnail"">
+                <center><h4 >Current Weather:</h4></center>
+                    <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
+                    <b> @Model.ZipRootObject.main.temp<sup>o</sup></b></br>
+                    <b> @Model.ZipRootObject.weather[0].description</b>
+                <div>
+                    <br>
+                    <div class="caption">
+                        <p>
+                            City:<b> @Model.ZipRootObject.name</b><br><br>
+                            dt:<b> @Model.ZipRootObject.dt</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-
-<div class="col-md-6">
-<h2>Make a Post</h2>
-
-@using (Html.BeginForm("Index", "MakeAPost", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="file" />
-    <input type="text" name="blogPost" />
-    <input type="submit" value="OK" />
-}
+      
+   
 
 @*<form asp-controller="MakeAPost" method="post" enctype="multipart/form-data" asp-action="UploadFiles">
     <p>Create a New Post, @Model.User.FirstName @Model.User.LastName</p>

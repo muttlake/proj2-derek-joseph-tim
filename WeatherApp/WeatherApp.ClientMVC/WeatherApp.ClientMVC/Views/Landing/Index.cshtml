@@ -75,12 +75,12 @@
 
         <div class="row">
             <div class="col-md-6">
-            <form asp-controller="Feed" method="get">
+            <!-- <form asp-controller="Feed" method="get">
                 <button type="submit" class="btn btn-success">Look at All Users' Posts</button>
             </form>
             <form asp-controller="MakeAPost" method="get">
                 <button type="submit" class="btn btn-success">Make A New Post</button>
-            </form>
+            </form> -->
 
             <h5>All Posts by @Model.User.FirstName  @Model.User.LastName</h5>
             @foreach (var pww in Model.PostsWithWeather)
@@ -95,7 +95,7 @@
                                 <li class="list-group-item">id: @pww.Post.PostID</li>
                                 <li class="list-group-item">userId: @pww.Post.UserID</li>
                                 <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
-                                <li class="list-group-item">imageFile: @pww.Post.ImageFile </li>
+                                <li class="list-group-item">imageFile: <img src="~/UserFiles/Images/@pww.Post.ImageFile"></li>
                                <!-- <li class="list-group-item">WeatherJson: @pww.Post.WeatherJson</li>-->
                                 <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
                                 <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>

@@ -14,7 +14,41 @@ namespace WeatherApp.ClientMVC.Controllers
         public IActionResult Index()
         {
             var user = HttpContext.Session.Get<User>("User");
+            
             return View(new MakeAPostViewModel(user));
+        }
+
+         public IActionResult Invalid(string message)
+        {
+            ViewData["Message"] = message;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Registered()
+        {
+            bool userfound = true;
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "MakeAPost");
+                }else{
+
+                    return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                }
+            
+        
+            // return View(new MakeAPostViewModel());
+        
         }
 
 
@@ -90,6 +124,10 @@ namespace WeatherApp.ClientMVC.Controllers
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
         }
+
+
+      
+
     }
 
 }

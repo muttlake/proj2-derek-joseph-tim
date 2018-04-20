@@ -23,6 +23,35 @@ namespace WeatherApp.ClientMVC.Controllers
             return View(new FeedViewModel());
         }
 
+        public IActionResult Invalid(string message)
+        {
+            ViewData["Message"] = message;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Registered()
+        {
+            bool userfound = true;
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "Feed");
+                }else{
+
+                    return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                }
+        }
+
         [HttpPost]
         public ActionResult Index(FeedViewModel model)
         {
