@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
-    [Produces("application/json")] // Means every action result will always be a json type result
     public class DataSvcRequestHandler
     {
         public async Task<string> GetJsonResponse(string requestURL)
