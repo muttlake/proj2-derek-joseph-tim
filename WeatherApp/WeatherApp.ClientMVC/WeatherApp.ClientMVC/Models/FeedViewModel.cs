@@ -34,27 +34,6 @@ namespace WeatherApp.ClientMVC.Models
             GetValidWeatherTypes();
             GetPostsWithWeather();
         }
-
-        //   public FeedViewModel(User user)
-        // {
-           
-        //     User = user;
-        //     var pr = new JsonHandler(User.HomeZipCode);
-        //     FeedZipRootObject = pr.GetRootObjectFromLibSvc();
-            
-             
-
-        // }
-
-
-        //public void ApplyPostFilters()
-        //{
-        //    if(WeatherTypeFilter != null)
-        //    {
-        //        ApplyWeatherTypeFilter();
-        //    }
-        //}
-            
         
 
         public FeedViewModel(string temp, string wtype, string zip)
@@ -73,6 +52,7 @@ namespace WeatherApp.ClientMVC.Models
             //Apply Filters
             ApplyPostFilters();
             GetValidWeatherTypes();
+            GetPostsWithWeather();
         }
 
         public void GetValidWeatherTypes()
