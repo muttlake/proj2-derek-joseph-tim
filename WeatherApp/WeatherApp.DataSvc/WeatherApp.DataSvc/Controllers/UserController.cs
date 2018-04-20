@@ -54,6 +54,5 @@ namespace WeatherApp.DataSvc.Controllers
             context.Users.Add(user);
             context.SaveChanges();
         }
-
     }
 }
