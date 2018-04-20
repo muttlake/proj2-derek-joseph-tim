@@ -24,22 +24,48 @@ node
         }
     }
 
-    // stage ('TEST')
-    // {
-    //     dir ('PizzaStore/PizzaStore.Test/')
-    //     {
-    //         bat 'dotnet xunit -fxversion 2.0.6 -xml ../Tests/testresult.xml'
-    //     }
-    // }
+    stage ('TEST')
+    {
+        dir ('WeatherApp/WeatherApp.DataSvc/Weatherapp.DataTest/')
+        {
+            bat 'dotnet test'
+        }
+
+        dir ('WeatherApp/WeatherApp.LibSvc/Weatherapp.LibTest/')
+        {
+            bat 'dotnet test'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC/Weatherapp.ClientTest/')
+        {
+            bat 'dotnet test'
+        }
+    }
 
     stage ('ANALYZE')
     {
+
         dir ('WeatherApp/WeatherApp.DataSvc')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:dd-key-44'
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-44'
  		bat 'dotnet build'
  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
+
+        dir ('WeatherApp/WeatherApp.LibSvc')
+        {
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-44'
+ 		bat 'dotnet build'
+ 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC')
+        {
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-44'
+ 		bat 'dotnet build'
+ 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
     }
 
 
