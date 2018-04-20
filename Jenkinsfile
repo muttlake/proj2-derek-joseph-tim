@@ -47,21 +47,21 @@ node
 
         dir ('WeatherApp/WeatherApp.DataSvc')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-44'
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-80'
  		bat 'dotnet build'
  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
         dir ('WeatherApp/WeatherApp.LibSvc')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-44'
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-80'
  		bat 'dotnet build'
  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
         dir ('WeatherApp/WeatherApp.ClientMVC')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-44'
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-80'
  		bat 'dotnet build'
  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
