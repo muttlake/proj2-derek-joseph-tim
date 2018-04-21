@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
-  public class PostHandler
-  {
-    public int PostID { get; set; }
-
-    public PostHandler()
+    public class PostHandler
     {
-      var ash = new AppSettingsHandler();
-      string _requestString = ash.JsonObject.DatabasePath;
-    }
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.DatabasePath.ToString();
+        public int PostID { get; set; }
+
+        public PostHandler()
+        {
+            string _requestString = httpString;
+        }
 
         public static async Task<List<Post>> GetPostFromDataSvcAsync(int postid)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/post/" + postid.ToString());
+            var result = await client.GetAsync(httpString + "/api/post/" + postid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -37,7 +38,7 @@ namespace WeatherApp.Library
         public static async Task<List<Post>> GetAllPostsFromDataSvcAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/post");
+            var result = await client.GetAsync(httpString + "/api/post/");
 
             if (result.IsSuccessStatusCode)
             {
@@ -48,11 +49,11 @@ namespace WeatherApp.Library
 
         }
 
-    public List<Post> GetAllPostsFromDataSvc()
-    {
-      var drh = new DataSvcRequestHandler();
-      return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/post").GetAwaiter().GetResult());
-    }
+        public List<Post> GetAllPostsFromDataSvc()
+        {
+            var drh = new DataSvcRequestHandler();
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(httpString + "/api/post/").GetAwaiter().GetResult());
+        }
 
-  }
+    }
 }

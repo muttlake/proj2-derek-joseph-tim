@@ -17,7 +17,7 @@ namespace WeatherApp.LibSvc.Controllers
     {       
         [HttpGet]
         public async Task<List<User>> Get(string uid = "default")
-        {
+        {   
             Console.WriteLine("\n\n\nLibSvc userlib Get");
             int userID = 0;
             if (Int32.TryParse(uid, out userID))
@@ -40,11 +40,9 @@ namespace WeatherApp.LibSvc.Controllers
 
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
-            /**
-            commented to remove code smell - unused variable
-            var ash = new AppSettingsHandler();
-             */
-            var uri = new Uri("http://52.15.149.129/DataSvc/api/user");
+            AppSettingsHandler ash = new AppSettingsHandler();
+            var httpString = ash.JsonObject.DatabasePath.ToString();
+            var uri = new Uri(httpString + "/api/user");
 
             var rp = new RelayPost();
             await rp.RelayAddToDataSvc(uri, request_Body);

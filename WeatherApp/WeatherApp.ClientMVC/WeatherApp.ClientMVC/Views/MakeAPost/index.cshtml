@@ -1,5 +1,8 @@
 @{
     ViewData["Title"] = "Index";
+
+    System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+    dtDateTime = dtDateTime.AddSeconds(Model.ZipRootObject.dt).ToLocalTime();
 }
 @model WeatherApp.ClientMVC.Models.MakeAPostViewModel
 
@@ -36,7 +39,7 @@
                     <div class="caption">
                         <p>
                             City:<b> @Model.ZipRootObject.name</b><br><br>
-                            dt:<b> @Model.ZipRootObject.dt</b>
+                            DateTime:<b> @dtDateTime</b>
                         </p>
                     </div>
                 </div>

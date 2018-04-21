@@ -9,38 +9,33 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
-  public class UserHandler
-  {
-    public int UserID { get; set; }
-    
-    public UserHandler()
+    public class UserHandler
     {
-        private readonly string _requestString;
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.DatabasePath.ToString();
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+            var _requestString = httpString;
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+           var  _requestString = httpString;
         }
 
         public static async Task<List<User>> GetUserFromDataSvcAsync(int userid)
         {
 
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + userid.ToString());
+            var result = await client.GetAsync(httpString + "/api/user/" + userid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
-                var user =  JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+                var user = JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
                 return new List<User>() { user };
             }
             else
@@ -51,7 +46,7 @@ namespace WeatherApp.Library
         {
 
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user");
+            var result = await client.GetAsync(httpString + "/api/user/");
 
             if (result.IsSuccessStatusCode)
             {
@@ -62,42 +57,4 @@ namespace WeatherApp.Library
 
         }
     }
-
-    public UserHandler(int id)
-    {
-      UserID = id;
-      var ash = new AppSettingsHandler();
-      string _requestString = ash.JsonObject.DatabasePath;
-    }
-
-    public async Task<List<User>> GetUserFromDataSvcAsync()
-    {
-
-      var client = new HttpClient();
-      var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + UserID.ToString());
-
-      if (result.IsSuccessStatusCode)
-      {
-        var user = JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
-        return new List<User>() { user };
-      }
-      else
-        return null;
-    }
-
-    public async Task<List<User>> GetAllUsersFromDataSvcAsync()
-    {
-
-      var client = new HttpClient();
-      var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user");
-
-      if (result.IsSuccessStatusCode)
-      {
-        return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
-      }
-      else
-        return null;
-
-    }
-  }
 }

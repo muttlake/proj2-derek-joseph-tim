@@ -12,27 +12,28 @@ namespace WeatherApp.ClientLib
     public class PostHandler
     {
         //This is the url to the library service
-        private readonly string _requestString;
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.LibraryPath.ToString();
 
         public int PostID { get; set; }
 
         public PostHandler()
         {
             var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+           var  _requestString = httpString;
         }
 
         public PostHandler(int id)
         {
             PostID = id;
             var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+            var _requestString = httpString;
         }
 
         public static async Task<Post> GetPostFromDataSvcAsync(int pid)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/postlib?pid" + pid.ToString());
+            var result = await client.GetAsync(httpString + "/api/postlib?pid" + pid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -45,7 +46,7 @@ namespace WeatherApp.ClientLib
         public static async Task<List<Post>> GetAllPostsAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/postlib");
+            var result = await client.GetAsync(httpString + "/api/postlib");
 
             if (result.IsSuccessStatusCode)
             {

@@ -12,28 +12,28 @@ namespace WeatherApp.ClientLib
     public class UserHandler
     {
         //url of the library service for user
-        private readonly string _requestString;
+        //private static AppSettingsHandler ash = new AppSettingsHandler();
+        //private static readonly string httpString = ash.JsonObject.LibraryPath.ToString();
+        private static readonly string httpString = "http://localhost:"
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+            var  _requestString = httpString;
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+            var _requestString = httpString;
         }
 
         public static async Task<User> GetUserFromLibSvcAsync(int uid)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib?uid" + uid.ToString());
+            Uri uri = new Uri(httpString + "/api/userlib");
+            var result = await client.GetAsync(uri + "?uid" + uid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -46,7 +46,8 @@ namespace WeatherApp.ClientLib
         public static async Task<List<User>> GetAllUsersFromLibSvcAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+            Uri uri = new Uri(httpString + "/api/userlib");
+            var result = await client.GetAsync(uri);
 
             if (result.IsSuccessStatusCode)
             {
@@ -60,7 +61,8 @@ namespace WeatherApp.ClientLib
         public static async Task<User> ValidateUser(string email, string password)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+            Uri uri = new Uri(httpString + "/api/userlib");
+            var result = await client.GetAsync(uri);
 
 
             if (result.IsSuccessStatusCode)
@@ -94,7 +96,7 @@ namespace WeatherApp.ClientLib
         {
 
             var client = new HttpClient();
-            var url = "http://52.15.149.129/DataSvc/api/user";
+            var url = ash.JsonObject.DatabasePath.ToString() + "/api/user";
             var uri = new Uri(url);
             var data = JsonConvert.SerializeObject(user);
             var stringContent = new StringContent(data, Encoding.UTF8, "application/json");

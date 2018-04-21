@@ -12,7 +12,8 @@ namespace WeatherApp.ClientLib
     public class JsonHandler
     {
         //url of the library service for ZipWeather
-        private readonly string _requestString;
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.LibraryPath.ToString();
 
         public int ZipCode { get; set; }
 
@@ -22,13 +23,13 @@ namespace WeatherApp.ClientLib
             ZipCode = zip;
 
             var ash = new AppSettingsHandler();
-            _requestString += ash.JsonObject.LibraryPath + "/api/zipweather" + "?zip=" + ZipCode.ToString();
+            var _requestString = httpString + "/api/zipweather" + "?zip=" + ZipCode.ToString();
         }
 
         public static async Task<RootObject> GetRootObjectFromLibSvcAsync(int zip)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/zipweather?zip=" + zip.ToString());
+            var result = await client.GetAsync(httpString + "/api/zipweather?zip=" + zip.ToString());
 
             if (result.IsSuccessStatusCode)
             {
