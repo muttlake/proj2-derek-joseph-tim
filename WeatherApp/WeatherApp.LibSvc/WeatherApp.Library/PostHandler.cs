@@ -19,20 +19,6 @@ namespace WeatherApp.Library
       string _requestString = ash.JsonObject.DatabasePath;
     }
 
-<<<<<<< HEAD
-    public PostHandler(int id)
-    {
-      PostID = id;
-      var ash = new AppSettingsHandler();
-      string _requestString = ash.JsonObject.DatabasePath;
-    }
-
-    public List<Post> GetPostFromDataSvc()
-    {
-      var drh = new DataSvcRequestHandler();
-      return new List<Post>() { JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/post" + PostID.ToString()).GetAwaiter().GetResult()) };
-    }
-=======
         public static async Task<List<Post>> GetPostFromDataSvcAsync(int postid)
         {
             var client = new HttpClient();
@@ -61,7 +47,6 @@ namespace WeatherApp.Library
                 return null;
 
         }
->>>>>>> master
 
     public List<Post> GetAllPostsFromDataSvc()
     {

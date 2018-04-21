@@ -15,10 +15,6 @@ namespace WeatherApp.Library
     
     public UserHandler()
     {
-<<<<<<< HEAD
-      var ash = new AppSettingsHandler();
-      string _requestString = ash.JsonObject.DatabasePath;
-=======
         private readonly string _requestString;
 
         public int UserID { get; set; }
@@ -65,7 +61,6 @@ namespace WeatherApp.Library
                 return null;
 
         }
->>>>>>> master
     }
 
     public UserHandler(int id)
