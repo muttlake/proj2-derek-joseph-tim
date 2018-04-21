@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.ClientLib
 {
@@ -23,10 +25,18 @@ namespace WeatherApp.ClientLib
             _requestString += ash.JsonObject.LibraryPath + "/api/zipweather" + "?zip=" + ZipCode.ToString();
         }
 
-        public RootObject GetRootObjectFromLibSvc()
+        public static async Task<RootObject> GetRootObjectFromLibSvcAsync(int zip)
         {
-            var drh = new LibSvcRequestHandler();
-            return JsonConvert.DeserializeObject<RootObject>(drh.GetJsonResponse(_requestString).GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/zipweather?zip=" + zip.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RootObject>(content);
+            }
+            else
+                return null;
         }
     }
 }

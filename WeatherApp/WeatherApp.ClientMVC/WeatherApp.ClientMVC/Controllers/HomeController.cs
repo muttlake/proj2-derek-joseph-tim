@@ -17,7 +17,7 @@ namespace WeatherApp.ClientMVC.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "This Weather App was made by me.";
+            ViewData["Message"] = "This Weather App was made by us.";
 
             return View();
         }

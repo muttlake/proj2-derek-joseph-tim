@@ -18,7 +18,7 @@ namespace WeatherApp.ClientMVC.Controllers
             return View(new MakeAPostViewModel(user));
         }
 
-         public IActionResult Invalid(string message)
+        public IActionResult Invalid(string message)
         {
             ViewData["Message"] = message;
             return View();
@@ -28,27 +28,22 @@ namespace WeatherApp.ClientMVC.Controllers
         public IActionResult Registered()
         {
             bool userfound = true;
-                try
-                {
-                    var user = HttpContext.Session.Get<User>("User");
-                    var chk2= user.Email;
-                }
-                catch (System.NullReferenceException)
-                {
-                    userfound = false;
-                }
-                if (userfound)
-                {
-                    
-                    return RedirectToAction("Index", "MakeAPost");
-                }else{
+            try
+            {
+                var user = HttpContext.Session.Get<User>("User");
+                var chk2= user.Email;
+            }
+            catch (System.NullReferenceException)
+            {
+                userfound = false;
+            }
+            if (userfound)
+            {
+                return RedirectToAction("Index", "MakeAPost");
+            }else{
 
-                    return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
-                }
-            
-        
-            // return View(new MakeAPostViewModel());
-        
+                return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+            }        
         }
 
 
@@ -81,8 +76,16 @@ namespace WeatherApp.ClientMVC.Controllers
 
             //Add Post
             Console.WriteLine("Make a post right now");
-            var ph = new PostHandler();
-            ph.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost);
+            var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+
+            if(post != null)
+            {
+                Console.WriteLine("Post went through");
+            }
+            else
+            {
+                Console.WriteLine("Problem with post");
+            }
 
             //Put to database here
             return RedirectToAction("Index", "Landing");
@@ -93,8 +96,8 @@ namespace WeatherApp.ClientMVC.Controllers
             //If user has just registered get their userID
             if (user.UserID == 0)
             {
-                var uh = new UserHandler();
-                foreach (var u in uh.GetAllUsersFromLibSvc())
+                var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+                foreach (var u in users)
                 {
                     if (u.Email.Equals(user.Email))
                     {
@@ -124,10 +127,6 @@ namespace WeatherApp.ClientMVC.Controllers
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
         }
-
-
-      
-
     }
 
 }
