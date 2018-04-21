@@ -33,7 +33,11 @@ namespace WeatherApp.ClientLib
         public static async Task<Post> GetPostFromDataSvcAsync(int pid)
         {
             var client = new HttpClient();
+<<<<<<< HEAD
             var result = await client.GetAsync(httpString + "/api/postlib?pid" + pid.ToString());
+=======
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib?pid" + pid.ToString());
+>>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {
@@ -46,7 +50,11 @@ namespace WeatherApp.ClientLib
         public static async Task<List<Post>> GetAllPostsAsync()
         {
             var client = new HttpClient();
+<<<<<<< HEAD
             var result = await client.GetAsync(httpString + "/api/postlib");
+=======
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib");
+>>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {
@@ -65,7 +73,7 @@ namespace WeatherApp.ClientLib
             var post = new Post(blogPost, imageFile, user.UserID, ct, cwj, cwd, user.HomeZipCode);
 
             var client = new HttpClient();
-            var url = "http://52.15.149.129/DataSvc/api/post";
+            var url = "http://18.188.13.94/DataSvc/api/post";
             var uri = new Uri(url);
             var data = JsonConvert.SerializeObject(post);
             var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
@@ -85,7 +93,7 @@ namespace WeatherApp.ClientLib
         //{
 
         //    var client = new HttpClient();
-        //    var url = "http://52.15.149.129/DataSvc/api/user";
+        //    var url = "http://18.188.13.94/DataSvc/api/user";
         //    var uri = new Uri(url);
         //    var data = JsonConvert.SerializeObject(user);
         //    var stringContent = new StringContent(data, Encoding.UTF8, "application/json");

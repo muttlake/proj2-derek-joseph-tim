@@ -25,10 +25,15 @@ namespace WeatherApp.LibSvc.Controllers
             Console.WriteLine("request_Body: {0}", request_Body);
 
             //get url from appsettings.dev.json
+<<<<<<< HEAD
             AppSettingsHandler ash = new AppSettingsHandler();
             var httpString = ash.JsonObject.DatabasePath.ToString();
 
             var uri = new Uri(httpString + "/api/post");
+=======
+            var ash = new AppSettingsHandler();
+            var uri = new Uri("http://18.188.13.94/DataSvc/api/post");
+>>>>>>> master
 
             var rp = new RelayPost();
             await rp.RelayAddToDataSvc(uri, request_Body);

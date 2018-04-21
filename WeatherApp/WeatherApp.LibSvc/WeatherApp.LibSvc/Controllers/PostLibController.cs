@@ -38,9 +38,14 @@ namespace WeatherApp.LibSvc.Controllers
         {
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
+<<<<<<< HEAD
             AppSettingsHandler ash = new AppSettingsHandler();
             var httpString = ash.JsonObject.DatabasePath.ToString();
             var uri = new Uri(httpString + "/api/post");
+=======
+            var ash = new AppSettingsHandler();
+            var uri = new Uri("http://18.188.13.94/DataSvc/api/post");
+>>>>>>> master
 
             var rp = new RelayPost();
             await rp.RelayAddToDataSvc(uri, request_Body);
