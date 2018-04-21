@@ -51,7 +51,7 @@ namespace WeatherApp.ClientMVC.Controllers
         public ActionResult Index(MakeAPostViewModel model, IFormFile file)
         {
             var user = HttpContext.Session.Get<User>("User");
-            //user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
+            user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
             var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
 
             // <---save image to root folder--->
@@ -93,23 +93,23 @@ namespace WeatherApp.ClientMVC.Controllers
             return RedirectToAction("Index", "Landing");
         }
 
-        //public User GetValidUserForNewlyRegistered(User user)
-        //{
-        //    //If user has just registered get their userID
-        //    if (user.UserID == 0)
-        //    {
-        //        var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
-        //        foreach (var u in users)
-        //        {
-        //            if (u.Email.Equals(user.Email))
-        //            {
-        //                user = u;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return user;
-        //}
+        public User GetValidUserForNewlyRegistered(User user)
+        {
+            //If user has just registered get their userID
+            if (user.UserID == 0)
+            {
+                var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+                foreach (var u in users)
+                {
+                    if (u.Email.Equals(user.Email))
+                    {
+                        user = u;
+                        break;
+                    }
+                }
+            }
+            return user;
+        }
 
         // codes below this line are required for image saving
         private readonly IHostingEnvironment _environment;
