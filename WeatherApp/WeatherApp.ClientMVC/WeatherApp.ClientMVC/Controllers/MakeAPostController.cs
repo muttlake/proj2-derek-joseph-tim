@@ -51,7 +51,7 @@ namespace WeatherApp.ClientMVC.Controllers
         public ActionResult Index(MakeAPostViewModel model, IFormFile file)
         {
             var user = HttpContext.Session.Get<User>("User");
-            user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
+            //user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
             var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
 
             // <---save image to root folder--->
@@ -59,26 +59,28 @@ namespace WeatherApp.ClientMVC.Controllers
             if (file == null || file.Length == 0) return Content("File not selected.");
 
             // get path
-            string path_Root = _environment.WebRootPath;
-            string imageName = GetUniqueFileName(file.FileName);
-            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            //string path_Root = _environment.WebRootPath;
+            //string imageName = GetUniqueFileName(file.FileName);
+            //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
 
             // copy file to target
-            var stream = new FileStream(path_to_Images, FileMode.Create);
-            // save filename to NewPost.ImageFile
-            System.Console.WriteLine(path_to_Images);
-            model.NewPost.ImageFile = imageName;
-            file.CopyTo(stream);
+            //var stream = new FileStream(path_to_Images, FileMode.Create);
+            //// save filename to NewPost.ImageFile
+            //System.Console.WriteLine(path_to_Images);
+            //model.NewPost.ImageFile = imageName;
+            //file.CopyTo(stream);
             // <---end save image--->
 
             // output
-            ViewData["FilePath"] = path_to_Images;
+            //ViewData["FilePath"] = path_to_Images;
+            ViewData["FilePath"] = "faker";
 
             //Add Post
             Console.WriteLine("Make a post right now");
-            var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+            //var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+            var post = PostHandler.AddPost(user, currentWeather, "fakimage", "fakeblogpost").GetAwaiter().GetResult();
 
-            if(post != null)
+            if (post != null)
             {
                 Console.WriteLine("Post went through");
             }
@@ -91,23 +93,23 @@ namespace WeatherApp.ClientMVC.Controllers
             return RedirectToAction("Index", "Landing");
         }
 
-        public User GetValidUserForNewlyRegistered(User user)
-        {
-            //If user has just registered get their userID
-            if (user.UserID == 0)
-            {
-                var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
-                foreach (var u in users)
-                {
-                    if (u.Email.Equals(user.Email))
-                    {
-                        user = u;
-                        break;
-                    }
-                }
-            }
-            return user;
-        }
+        //public User GetValidUserForNewlyRegistered(User user)
+        //{
+        //    //If user has just registered get their userID
+        //    if (user.UserID == 0)
+        //    {
+        //        var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+        //        foreach (var u in users)
+        //        {
+        //            if (u.Email.Equals(user.Email))
+        //            {
+        //                user = u;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return user;
+        //}
 
         // codes below this line are required for image saving
         private readonly IHostingEnvironment _environment;
