@@ -57,14 +57,26 @@ namespace WeatherApp.ClientLib
 
         }
 
-        public static bool ValidateUser(string email, string password)
+        public static async Task<User> ValidateUser(string email, string password)
         {
-            var users = GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
-            foreach (var user in users)
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+
+
+            if (result.IsSuccessStatusCode)
             {
-                if (user.Email.Equals(email) && user.Password.Equals(password))
-                    return true;
+                var users = JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+                foreach(var user in users)
+                {
+                    if(user.Email == email && user.Password == password)
+                    {
+                        return user;
+                    }
+                }
             }
+
+            return null;
+        }
 
             return false;
         }

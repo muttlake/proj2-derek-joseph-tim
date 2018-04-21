@@ -25,9 +25,10 @@ namespace WeatherApp.ClientMVC.Controllers
             }
             else
             {
-                if (UserHandler.ValidateUser(model.Email, model.Password))
+                var user = UserHandler.ValidateUser(model.Email, model.Password).GetAwaiter().GetResult();
+                if (user != null)
                 {
-                    HttpContext.Session.Set<User>("User", model.GetUser());                    
+                    HttpContext.Session.Set<User>("User", user);                    
                     return RedirectToAction("Index", "Landing");
                 }
             }
