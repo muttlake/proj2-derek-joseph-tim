@@ -44,15 +44,17 @@ namespace WeatherApp.DataSvc.Controllers
         }
 
         [HttpPost]
-        public void ReceiveNewUserAndPutInDatabase()
+        public async Task<IActionResult> ReceiveNewUserAndPutInDatabase([FromBody] User user)
         {
-            //Receive from ClientMVC
-            var request_Body = new StreamReader(Request.Body).ReadToEnd();
+            if (user == null)
+            {
+                return await Task.Run(() => BadRequest());
+            }
 
-            //Add New User to Database
-            var user = JsonConvert.DeserializeObject<List<User>>(request_Body)[0];
             context.Users.Add(user);
             context.SaveChanges();
+
+            return Ok();
         }
     }
 }
