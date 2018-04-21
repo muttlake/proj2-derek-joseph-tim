@@ -23,15 +23,13 @@ namespace WeatherApp.LibSvc.Controllers
             {
                 return await Task.Run(() =>
                 {
-                    var ph = new PostHandler(postID);
-                    return ph.GetPostFromDataSvc();
+                    return PostHandler.GetPostFromDataSvcAsync(postID);
                 });
             }
             else
                 return await Task.Run(() =>
                 {
-                    var ph = new PostHandler(); // Change this later
-                    return ph.GetAllPostsFromDataSvc();
+                    return PostHandler.GetAllPostsFromDataSvcAsync();
                 });
         }
 

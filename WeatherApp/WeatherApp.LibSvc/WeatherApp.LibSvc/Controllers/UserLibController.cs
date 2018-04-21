@@ -15,15 +15,6 @@ namespace WeatherApp.LibSvc.Controllers
     [Route("api/[controller]")]
     public class UserLibController : Controller
     {       
-        
-        // [HttpGet]
-
-        //public async Task<List<Stats>> GetStatsAsync()
-
-        // {
-        //     return await StatsHelper.GetStats();
-
-        // }
         [HttpGet]
         public async Task<List<User>> Get(string uid = "default")
         {
