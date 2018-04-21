@@ -36,14 +36,15 @@ namespace WeatherApp.ClientMVC.Models
             User = u;
             HomeZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(u.HomeZipCode).GetAwaiter().GetResult();
             SetWeatherIcon();
-            //GetPosts();
-            //GetPostsWithWeather();
+            GetPosts();
+            GetPostsWithWeather();
         }
 
         public void GetPosts()
         {
             Posts = new List<Post>();
-            foreach (var post in PostHandler.GetAllPostsAsync().GetAwaiter().GetResult())
+            var currentPosts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
+            foreach (var post in currentPosts)
             {
                 if (post.UserID == User.UserID)
                 {
