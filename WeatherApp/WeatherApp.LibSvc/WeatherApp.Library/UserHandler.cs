@@ -28,11 +28,11 @@ namespace WeatherApp.Library
             _requestString = ash.JsonObject.DatabasePath;
         }
 
-        public async Task<List<User>> GetUserFromDataSvcAsync()
+        public static async Task<List<User>> GetUserFromDataSvcAsync(int userid)
         {
 
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + UserID.ToString());
+            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + userid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -43,7 +43,7 @@ namespace WeatherApp.Library
                 return null;
         }
 
-        public async Task<List<User>> GetAllUsersFromDataSvcAsync()
+        public static async Task<List<User>> GetAllUsersFromDataSvcAsync()
         {
 
             var client = new HttpClient();

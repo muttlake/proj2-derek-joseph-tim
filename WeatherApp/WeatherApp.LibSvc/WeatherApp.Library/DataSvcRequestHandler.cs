@@ -27,5 +27,34 @@ namespace WeatherApp.Library
             return jsonResponse;
         }
 
+
+       // public static async Task<List<Team>> GetAllTeams()
+
+       // {
+
+       //     var client = new HttpClient();
+
+       //     var result = await client.GetAsync("http://18.219.103.23/data/data/team"); if (result.IsSuccessStatusCode)
+
+       //     {
+
+       //         return JsonConvert.DeserializeObject<List<Team>>(await result.Content.ReadAsStringAsync());
+
+       //     }
+
+       //     else return null;
+
+       // }
+
+
+       // [HttpGet]
+
+       //public async Task<List<Stats>> GetStatsAsync()
+
+       // {
+       //     return await StatsHelper.GetStats();
+
+       // }
+
     }
 }
