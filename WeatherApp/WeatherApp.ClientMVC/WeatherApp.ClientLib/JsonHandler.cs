@@ -32,7 +32,8 @@ namespace WeatherApp.ClientLib
 
             if (result.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<RootObject>(await result.Content.ReadAsStringAsync());
+                var content = await result.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RootObject>(content);
             }
             else
                 return null;

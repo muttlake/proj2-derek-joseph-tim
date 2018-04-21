@@ -8,30 +8,27 @@
     <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>
     <h4>Your Current Weather</h4>
     <div>
-       @*<div class="row">
-  <div class="col-md-6">
-    <div class="thumbnail">
-        <center><h4 >Current Weather:</h4></center>
-        <div>
-     <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
-      <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
-      <b> @Model.HomeZipRootObject.weather[0].description</b>
-      </div>
-      <br>
-      
-      <div class="caption">
-        <p>
-             
-                            City:<b> @Model.HomeZipRootObject.name</b><br><br>
-                            dt:<b> @Model.HomeZipRootObject.dt</b>
-            
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+       <div class="row">
+          <div class="col-md-6">
+            <div class="thumbnail">
+                <center><h4 >Current Weather:</h4></center>
+                <div>
+                    <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
+                    <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
+                    <b> @Model.HomeZipRootObject.weather[0].description</b>
+                </div>
+              <br>
+              <div class="caption">
+                <p> 
+                    City:<b> @Model.HomeZipRootObject.name</b><br><br>
+                    dt:<b> @Model.HomeZipRootObject.dt</b>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="row">
+        @*<div class="row">
             <div class="col-md-6">
 
             <h5>All Posts by @Model.User.FirstName  @Model.User.LastName</h5>
