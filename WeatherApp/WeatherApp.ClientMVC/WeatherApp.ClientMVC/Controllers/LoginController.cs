@@ -25,7 +25,7 @@ namespace WeatherApp.ClientMVC.Controllers
             }
             else
             {
-                if (model.IsUserValid())
+                if (UserHandler.ValidateUser(model.Email, model.Password))
                 {
                     HttpContext.Session.Set<User>("User", model.GetUser());                    
                     return RedirectToAction("Index", "Landing");

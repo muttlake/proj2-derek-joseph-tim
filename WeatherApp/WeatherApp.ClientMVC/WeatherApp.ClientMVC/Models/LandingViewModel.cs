@@ -34,10 +34,10 @@ namespace WeatherApp.ClientMVC.Models
         public LandingViewModel(User u)
         {
             User = u;
-            HomeZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(u.HomeZipCode).GetAwaiter().GetResult();
-            SetWeatherIcon();
-            GetPosts();
-            GetPostsWithWeather();
+            //HomeZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(u.HomeZipCode).GetAwaiter().GetResult();
+            //SetWeatherIcon();
+            //GetPosts();
+            //GetPostsWithWeather();
         }
 
         public void GetPosts()
