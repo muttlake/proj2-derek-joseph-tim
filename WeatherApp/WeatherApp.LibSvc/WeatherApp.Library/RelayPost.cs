@@ -20,9 +20,8 @@ namespace WeatherApp.Library
             using (var client = new HttpClient())
             {
                 var stringContent = new StringContent(requestBody);
-                var response = await client.PostAsync(uri, stringContent);
+                await client.PostAsync(uri, stringContent);
             }
-
         }
     }
 }

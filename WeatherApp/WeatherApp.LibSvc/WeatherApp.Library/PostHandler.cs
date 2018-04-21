@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace WeatherApp.Library
 {
     public class PostHandler
-    {;
+    {
         private static readonly string httpString;
         public int PostID { get; set; }
 
