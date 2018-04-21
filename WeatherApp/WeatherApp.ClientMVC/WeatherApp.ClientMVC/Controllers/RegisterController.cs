@@ -27,10 +27,15 @@ namespace WeatherApp.ClientMVC.Controllers
             {
                 HttpContext.Session.Set<User>("User", model.usr);
 
-                var uh = new UserHandler();
-                uh.AddUser(model.usr);
-
-                return RedirectToAction("Index", "Landing");
+                var user = UserHandler.AddUser(model.usr).GetAwaiter().GetResult();
+                if( user != null)
+                {
+                    return RedirectToAction("Index", "Landing");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add User");
+                }
             }
             return View(new RegisterViewModel());
         }
