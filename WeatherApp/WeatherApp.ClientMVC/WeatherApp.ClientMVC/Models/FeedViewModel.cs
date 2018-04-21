@@ -29,8 +29,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public FeedViewModel()
         {
-            var ph = new PostHandler();
-            Posts = ph.GetAllPosts();
+            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
             GetValidWeatherTypes();
             GetPostsWithWeather();
         }
@@ -44,8 +43,7 @@ namespace WeatherApp.ClientMVC.Models
             ZipCodeFilter = zip;
 
             //Get all posts
-            var ph = new PostHandler();
-            Posts = ph.GetAllPosts();
+            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
 
             Console.WriteLine("Numer of Posts initially: {0}", Posts.Count);
 

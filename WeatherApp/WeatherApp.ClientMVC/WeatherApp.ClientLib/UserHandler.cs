@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.ClientLib
 {
@@ -29,21 +30,36 @@ namespace WeatherApp.ClientLib
             _requestString = ash.JsonObject.LibraryPath;
         }
 
-        public User GetUserFromLibSvc()
+        public static async Task<User> GetUserFromLibSvcAsync(int uid)
         {
-            var drh = new LibSvcRequestHandler();  //Here User should be a List with only one User object
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib?uid=" + UserID.ToString()).GetAwaiter().GetResult())[0];
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib?uid" + uid.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
         }
 
-        public List<User> GetAllUsersFromLibSvc()
+        public static async Task<List<User>> GetAllUsersFromLibSvcAsync()
         {
-            var drh = new LibSvcRequestHandler();  //Here should get list of all Users
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib").GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
         }
 
         public bool ValidateUser(string email, string password)
         {
-            foreach(var user in GetAllUsersFromLibSvc())
+            foreach(var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
             {
                 if (user.Email.Equals(email) && user.Password.Equals(password))
                     return true;
@@ -55,7 +71,7 @@ namespace WeatherApp.ClientLib
 
         public User GetCurrentUser(string email)
         {
-            foreach (var user in GetAllUsersFromLibSvc())
+            foreach (var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
             {
                 if (user.Email.Equals(email))
                     return user;

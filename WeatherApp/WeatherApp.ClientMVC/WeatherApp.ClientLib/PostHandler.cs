@@ -29,18 +29,30 @@ namespace WeatherApp.ClientLib
             _requestString = ash.JsonObject.LibraryPath;
         }
 
-        public Post GetPostFromDataSvc()
+        public static async Task<Post> GetPostFromDataSvcAsync(int pid)
         {
-            var drh = new LibSvcRequestHandler();
-            Console.WriteLine(_requestString + "/api/postlib/" + PostID.ToString());
-            return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/postlib/" + PostID.ToString()).GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/postlib?pid" + pid.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<Post>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
         } 
 
-        public List<Post> GetAllPosts()
+        public static async Task<List<Post>> GetAllPostsAsync()
         {
-            var drh = new LibSvcRequestHandler();
-            Console.WriteLine(_requestString + "/api/postlib");
-            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString + "/api/postlib").GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/postlib");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<Post>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
         }
 
         public async void AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)

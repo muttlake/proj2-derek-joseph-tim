@@ -44,11 +44,7 @@ namespace WeatherApp.ClientMVC.Controllers
                 }else{
 
                     return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
-                }
-            
-        
-            // return View(new MakeAPostViewModel());
-        
+                }        
         }
 
 
@@ -93,8 +89,7 @@ namespace WeatherApp.ClientMVC.Controllers
             //If user has just registered get their userID
             if (user.UserID == 0)
             {
-                var uh = new UserHandler();
-                foreach (var u in uh.GetAllUsersFromLibSvc())
+                foreach (var u in UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
                 {
                     if (u.Email.Equals(user.Email))
                     {
@@ -124,10 +119,6 @@ namespace WeatherApp.ClientMVC.Controllers
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
         }
-
-
-      
-
     }
 
 }

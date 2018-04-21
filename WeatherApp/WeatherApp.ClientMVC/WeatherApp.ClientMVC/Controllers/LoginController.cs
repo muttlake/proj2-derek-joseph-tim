@@ -25,25 +25,13 @@ namespace WeatherApp.ClientMVC.Controllers
             }
             else
             {
-//                Console.WriteLine(model.Email);
-//                Console.WriteLine(model.Password);
                 if (model.IsUserValid())
                 {
-                    HttpContext.Session.Set<User>("User", model.GetUser());
-                    
-                    //HttpContext.Session.Set<FeedViewModel>("FeedViewModel", new FeedViewModel());
-                    
+                    HttpContext.Session.Set<User>("User", model.GetUser());                    
                     return RedirectToAction("Index", "Landing");
                 }
             }
 
-            //if(model.IsUserValid())
-            //{
-            //    HttpContext.Session.Set<User>("User", model.GetUser());
-            //    return RedirectToAction("Index", "Landing");
-            //} 
-
-            //return View(new LoginViewModel());
             return RedirectToAction("Index", "Home");
 
         }
