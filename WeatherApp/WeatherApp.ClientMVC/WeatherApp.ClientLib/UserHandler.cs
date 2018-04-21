@@ -78,9 +78,6 @@ namespace WeatherApp.ClientLib
             return null;
         }
 
-            return false;
-        }
-
         //public static async Task<User> SignIn(string email)
         //{
         //    if (email == null || email == string.Empty)
