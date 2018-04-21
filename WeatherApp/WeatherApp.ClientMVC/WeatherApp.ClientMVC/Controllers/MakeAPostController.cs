@@ -84,8 +84,8 @@ namespace WeatherApp.ClientMVC.Controllers
 
             //Add Post
             Console.WriteLine("Make a post right now");
-            //var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
-            var post = PostHandler.AddPost(user, currentWeather, "fakimage", "fakeblogpost").GetAwaiter().GetResult();
+            var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+            //var post = PostHandler.AddPost(user, currentWeather, "fakimage", "fakeblogpost").GetAwaiter().GetResult();
 
             if (post != null)
             {
