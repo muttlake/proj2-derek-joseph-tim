@@ -32,7 +32,7 @@ namespace WeatherApp.Library
         {
 
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + userid.ToString());
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/user/" + userid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -47,7 +47,7 @@ namespace WeatherApp.Library
         {
 
             var client = new HttpClient();
-            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user");
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/user");
 
             if (result.IsSuccessStatusCode)
             {
