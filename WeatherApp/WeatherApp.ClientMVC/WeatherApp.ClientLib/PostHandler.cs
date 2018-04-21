@@ -33,11 +33,7 @@ namespace WeatherApp.ClientLib
         public static async Task<Post> GetPostFromDataSvcAsync(int pid)
         {
             var client = new HttpClient();
-<<<<<<< HEAD
-            var result = await client.GetAsync(httpString + "/api/postlib?pid" + pid.ToString());
-=======
             var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib?pid" + pid.ToString());
->>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {
@@ -50,11 +46,7 @@ namespace WeatherApp.ClientLib
         public static async Task<List<Post>> GetAllPostsAsync()
         {
             var client = new HttpClient();
-<<<<<<< HEAD
-            var result = await client.GetAsync(httpString + "/api/postlib");
-=======
             var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib");
->>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {

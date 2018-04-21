@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 namespace WeatherApp.Library
 {
     public class PostHandler
-    {
-        private static AppSettingsHandler ash = new AppSettingsHandler();
-        private static readonly string httpString = ash.JsonObject.DatabasePath.ToString();
+    {;
+        private static readonly string httpString;
         public int PostID { get; set; }
 
         public PostHandler()
@@ -23,11 +22,7 @@ namespace WeatherApp.Library
         public static async Task<List<Post>> GetPostFromDataSvcAsync(int postid)
         {
             var client = new HttpClient();
-<<<<<<< HEAD
-            var result = await client.GetAsync(httpString + "/api/post/" + postid.ToString());
-=======
             var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post/" + postid.ToString());
->>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {
@@ -42,11 +37,7 @@ namespace WeatherApp.Library
         public static async Task<List<Post>> GetAllPostsFromDataSvcAsync()
         {
             var client = new HttpClient();
-<<<<<<< HEAD
-            var result = await client.GetAsync(httpString + "/api/post/");
-=======
             var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post");
->>>>>>> master
 
             if (result.IsSuccessStatusCode)
             {
