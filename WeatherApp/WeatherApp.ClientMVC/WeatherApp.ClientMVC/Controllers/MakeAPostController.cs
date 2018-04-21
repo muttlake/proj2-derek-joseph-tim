@@ -64,12 +64,13 @@ namespace WeatherApp.ClientMVC.Controllers
             string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
             //Good up to here
 
+            Console.WriteLine("File Stream is failing?");
             // copy file to target
-            var stream = new FileStream(path_to_Images, FileMode.Create);
-            // save filename to NewPost.ImageFile
-            System.Console.WriteLine(path_to_Images);
-            model.NewPost.ImageFile = imageName;
-            file.CopyTo(stream);
+            //var stream = new FileStream(path_to_Images, FileMode.Create);
+            //// save filename to NewPost.ImageFile
+            //System.Console.WriteLine(path_to_Images);
+            //model.NewPost.ImageFile = imageName;
+            //file.CopyTo(stream);
             // <---end save image--->
 
             //Good past here
