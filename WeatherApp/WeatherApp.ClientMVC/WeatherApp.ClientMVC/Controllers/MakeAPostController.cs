@@ -61,9 +61,17 @@ namespace WeatherApp.ClientMVC.Controllers
             // get path
             string path_Root = _environment.WebRootPath;
             string imageName = GetUniqueFileName(file.FileName);
-            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            //C:\inetpub\wwwroot\WeatherApp\wwwroot\UserFiles\Images
+            //string path_to_Images = "C:\\inetpub\\wwwroot\\WeatherApp\\wwwroot\\UserFiles\\Images\\" + imageName;
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path_to_Images = currentDirectory + "\\wwwroot\\UserFiles\\Images\\" + imageName;
 
-            // copy file to target
+            Console.WriteLine(path_to_Images);
+            //Good up to here
+
+            Console.WriteLine("File Stream is failing?");
+            //copy file to target
             var stream = new FileStream(path_to_Images, FileMode.Create);
             // save filename to NewPost.ImageFile
             System.Console.WriteLine(path_to_Images);
@@ -71,14 +79,16 @@ namespace WeatherApp.ClientMVC.Controllers
             file.CopyTo(stream);
             // <---end save image--->
 
-            // output
-            ViewData["FilePath"] = path_to_Images;
+            //Good past here
+            //ViewData["FilePath"] = path_to_Images;
+            ViewData["FilePath"] = "faker";
 
             //Add Post
             Console.WriteLine("Make a post right now");
             var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+            //var post = PostHandler.AddPost(user, currentWeather, "fakimage", "fakeblogpost").GetAwaiter().GetResult();
 
-            if(post != null)
+            if (post != null)
             {
                 Console.WriteLine("Post went through");
             }
