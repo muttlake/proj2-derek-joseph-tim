@@ -29,8 +29,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public FeedViewModel()
         {
-            var ph = new PostHandler();
-            Posts = ph.GetAllPosts();
+            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
             GetValidWeatherTypes();
             GetPostsWithWeather();
         }
@@ -44,8 +43,7 @@ namespace WeatherApp.ClientMVC.Models
             ZipCodeFilter = zip;
 
             //Get all posts
-            var ph = new PostHandler();
-            Posts = ph.GetAllPosts();
+            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
 
             Console.WriteLine("Numer of Posts initially: {0}", Posts.Count);
 
@@ -61,7 +59,9 @@ namespace WeatherApp.ClientMVC.Models
             foreach(var post in Posts)
             {
                 if (!WeatherTypes.Contains(post.WeatherType))
+                {
                     WeatherTypes.Add(post.WeatherType);
+                }
             }
         }
 
@@ -152,7 +152,7 @@ namespace WeatherApp.ClientMVC.Models
                  p.Post = post;
                  p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
                  p.WeatherIconImage =  "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
-               FeedWithWeather.Add(p);
+                 FeedWithWeather.Add(p);
 
              }
          }

@@ -11,7 +11,6 @@ namespace WeatherApp.Library
     {
         public async Task<string> GetJsonResponse(string requestURL)
         {
-
             HttpWebRequest apiRequest = WebRequest.Create(requestURL) as HttpWebRequest;
 
             string jsonResponse = "";

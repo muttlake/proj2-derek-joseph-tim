@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.ClientLib
 {
@@ -29,33 +30,79 @@ namespace WeatherApp.ClientLib
             _requestString = ash.JsonObject.LibraryPath;
         }
 
-        public User GetUserFromLibSvc()
+        public static async Task<User> GetUserFromLibSvcAsync(int uid)
         {
-            var drh = new LibSvcRequestHandler();  //Here User should be a List with only one User object
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib?uid=" + UserID.ToString()).GetAwaiter().GetResult())[0];
-        }
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib?uid" + uid.ToString());
 
-        public List<User> GetAllUsersFromLibSvc()
-        {
-            var drh = new LibSvcRequestHandler();  //Here should get list of all Users
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib").GetAwaiter().GetResult());
-        }
-
-        public bool ValidateUser(string email, string password)
-        {
-            foreach(var user in GetAllUsersFromLibSvc())
+            if (result.IsSuccessStatusCode)
             {
-                if (user.Email.Equals(email) && user.Password.Equals(password))
-                    return true;
+                return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+        }
+
+        public static async Task<List<User>> GetAllUsersFromLibSvcAsync()
+        {
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
+        }
+
+        public static async Task<User> ValidateUser(string email, string password)
+        {
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/LibSvc/api/userlib");
+
+
+            if (result.IsSuccessStatusCode)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+                var users = JsonConvert.DeserializeObject<List<User>>(content);
+                foreach(var user in users)
+                {
+                    if(user.Email == email && user.Password == password)
+                    {
+                        return user;
+                    }
+                }
             }
 
-            return false;
+            return null;
         }
+
+        //public static async Task<User> SignIn(string email)
+        //{
+        //    if (email == null || email == string.Empty)
+        //    {
+        //        return null;
+        //    }
+        //    var client = new HttpClient();
+        //    var url = "http://13.59.35.94/chatbotdata/api/data/" + email;
+        //    var result = await client.GetAsync(new Uri(url));
+
+        //    if (result.IsSuccessStatusCode)
+        //    {
+        //        var content = await result.Content.ReadAsStringAsync();
+        //        var user = JsonConvert.DeserializeObject<User>(content);
+        //        return user;
+        //    }
+
+        //    return null;
+        //}
 
 
         public User GetCurrentUser(string email)
         {
-            foreach (var user in GetAllUsersFromLibSvc())
+            foreach (var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
             {
                 if (user.Email.Equals(email))
                     return user;

@@ -5,59 +5,56 @@
 
 
 <div class="container">
-  <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>
-  <h4>Your Current Weather</h4>
-  <div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="thumbnail">
-          <center><h4>Current Weather:</h4></center>
-        <div>
-          <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
-          <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
-          <b> @Model.HomeZipRootObject.weather[0].description</b>
-        </div>
-        <br>
-      
-        <div class="caption">
-          <p>
-             
-            City:<b> @Model.HomeZipRootObject.name</b><br><br>
-            dt:<b> @Model.HomeZipRootObject.dt</b>
-            <!-- Weather Category:<b> @Model.HomeZipRootObject.weather[0].main</b>
-            Humidity:<b> @Model.HomeZipRootObject.main.humidity</b>
-            Temp_Min:<b> @Model.HomeZipRootObject.main.temp_min</b>
-            Temp_Max:<b> @Model.HomeZipRootObject.main.temp_max</b>
-            Country:<b> @Model.HomeZipRootObject.sys.country</b>
-            Sunrise:<b> @Model.HomeZipRootObject.sys.sunrise</b>
-            Sunset:<b> @Model.HomeZipRootObject.sys.sunset</b> -->
-            
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <h5>All Posts by @Model.User.FirstName  @Model.User.LastName</h5>
-      @foreach (var pww in Model.PostsWithWeather)
-      {
-        <div class="card mb-3">
-            <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><b>@pww.Post.PublishDateTime Post</b></h5>
-                <p class="card-text">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">id: @pww.Post.PostID</li>
-                        <li class="list-group-item">userId: @pww.Post.UserID</li>
-                        <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
-                        <li class="list-group-item">imageFile: <a href="~/UserFiles/Images/@pww.Post.ImageFile"><img src="~/UserFiles/Images/@pww.Post.ImageFile" height="200px" width="200px"></a></li>
-                        <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
-                        <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
-                        <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
-                    </ul>
+    <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>
+    <h4>Your Current Weather</h4>
+    <div>
+       <div class="row">
+          <div class="col-md-6">
+            <div class="thumbnail">
+                <center><h4 >Current Weather:</h4></center>
+                <div>
+                    <p style="float: left;"><img src=@Model.WeatherIcon alt="Weather Icon" width="150px";></p><br><br>
+                    <b> @Model.HomeZipRootObject.main.temp<sup>o</sup></b><br>
+                    <b> @Model.HomeZipRootObject.weather[0].description</b>
+                </div>
+              <br>
+              <div class="caption">
+                <p> 
+                    City:<b> @Model.HomeZipRootObject.name</b><br><br>
+                    dt:<b> @Model.HomeZipRootObject.dt</b>
                 </p>
-                <p class="card-text"><small class="text-muted"><b>Last updated: @pww.Post.PublishDateTime</b></small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+            <h5>All Posts by @Model.User.FirstName  @Model.User.LastName</h5>
+            @foreach (var pww in Model.PostsWithWeather)
+            {
+                <div class="card mb-3">
+                    <img class="card-img-top" src=@pww.WeatherIconImage alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@pww.Post.PublishDateTime Post</b></h5>
+                        <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">id: @pww.Post.PostID</li>
+                                <li class="list-group-item">userId: @pww.Post.UserID</li>
+                                <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
+                                <li class="list-group-item">imageFile: <a href="~/UserFiles/Images/@pww.Post.ImageFile"><img src="~/UserFiles/Images/@pww.Post.ImageFile" height="200px" width="200px"></a></li>
+                                <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
+                                <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
+                                <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
+                            </ul>
+                        </p>
+                        <p class="card-text"><small class="text-muted"><b>Last updated: @pww.Post.PublishDateTime</b></small></p>
+                    </div>
+                </div>
+                <br>
+                <br>
+            }
             </div>
         </div>
         <br>
