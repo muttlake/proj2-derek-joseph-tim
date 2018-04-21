@@ -63,21 +63,41 @@ namespace WeatherApp.ClientLib
             var cwd = currentWeather.weather[0].description;
             var post = new Post(blogPost, imageFile, user.UserID, ct, cwj, cwd, user.HomeZipCode);
 
-
-            List<Post> postData = new List<Post>() { post };
-            var data = JsonConvert.SerializeObject(postData);
-            var stringContent = new StringContent(data);
-
-            var uri = new Uri("http://52.15.149.129/LibSvc/api/postlib");
             var client = new HttpClient();
+            var url = "http://52.15.149.129/DataSvc/api/post";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(post);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+
             var result = await client.PostAsync(uri, stringContent);
 
             if (result.IsSuccessStatusCode)
             {
+                Console.WriteLine("result: {0}", result.StatusCode);
                 return post;
             }
 
             return null;
         }
+
+        //public static async Task<User> AddUser(User user)
+        //{
+
+        //    var client = new HttpClient();
+        //    var url = "http://52.15.149.129/DataSvc/api/user";
+        //    var uri = new Uri(url);
+        //    var data = JsonConvert.SerializeObject(user);
+        //    var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+
+        //    var result = await client.PostAsync(uri, stringContent);
+
+        //    if (result.IsSuccessStatusCode)
+        //    {
+        //        Console.WriteLine("result: {0}", result.StatusCode);
+        //        return user;
+        //    }
+
+        //    return null;
+        //}
     }
 }
