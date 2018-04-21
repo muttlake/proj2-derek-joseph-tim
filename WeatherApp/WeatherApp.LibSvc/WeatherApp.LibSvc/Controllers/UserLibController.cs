@@ -25,14 +25,14 @@ namespace WeatherApp.LibSvc.Controllers
                 return await Task.Run(() =>
                 {
                     var uh = new UserHandler(userID);
-                    return uh.GetUserFromDataSvc();
+                    return uh.GetUserFromDataSvcAsync();
                 });
             }
             else
                 return await Task.Run(() =>
                 {
                     var uh = new UserHandler(); //Return all users by default
-                    return uh.GetAllUsersFromDataSvc();
+                    return uh.GetAllUsersFromDataSvcAsync();
                 });
         }
 
@@ -43,7 +43,7 @@ namespace WeatherApp.LibSvc.Controllers
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
             var ash = new AppSettingsHandler();
-            var uri = new Uri(ash.JsonObject.DatabasePath + "/api/user");
+            var uri = new Uri("http://52.15.149.129/DataSvc/api/user");
 
             var rp = new RelayPost();
             rp.RelayAddToDataSvc(uri, request_Body);

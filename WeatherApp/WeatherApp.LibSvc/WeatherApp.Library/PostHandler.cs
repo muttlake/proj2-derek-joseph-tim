@@ -30,13 +30,13 @@ namespace WeatherApp.Library
         public List<Post> GetPostFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return new List<Post>() { JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/post/" + PostID.ToString()).GetAwaiter().GetResult()) };
+            return new List<Post>() { JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/post" + PostID.ToString()).GetAwaiter().GetResult()) };
         }
 
         public List<Post> GetAllPostsFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString + "/api/post").GetAwaiter().GetResult());
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/post").GetAwaiter().GetResult());
         }
 
     }
