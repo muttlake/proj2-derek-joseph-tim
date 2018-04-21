@@ -59,9 +59,9 @@ namespace WeatherApp.ClientMVC.Controllers
             if (file == null || file.Length == 0) return Content("File not selected.");
 
             // get path
-            //string path_Root = _environment.WebRootPath;
-            //string imageName = GetUniqueFileName(file.FileName);
-            //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            string path_Root = _environment.WebRootPath;
+            string imageName = GetUniqueFileName(file.FileName);
+            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
 
             // copy file to target
             //var stream = new FileStream(path_to_Images, FileMode.Create);
