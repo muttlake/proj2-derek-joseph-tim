@@ -44,7 +44,7 @@ namespace WeatherApp.DataSvc.Controllers
         [HttpPost]
         public async Task<IActionResult> ReceiveNewPostAndPutInDatabase([FromBody] Post post)
         {
-            if (user == null)
+            if (post == null)
             {
                 return await Task.Run(() => BadRequest());
             }
