@@ -24,23 +24,49 @@ node
         }
     }
 
-    // stage ('TEST')
-    // {
-    //     dir ('PizzaStore/PizzaStore.Test/')
-    //     {
-    //         bat 'dotnet xunit -fxversion 2.0.6 -xml ../Tests/testresult.xml'
-    //     }
-    // }
+    stage ('TEST')
+    {
+        dir ('WeatherApp/WeatherApp.DataSvc/Weatherapp.DataTest/')
+        {
+            bat 'dotnet test'
+        }
 
-    // stage ('ANALYZE')
-    // {
-    //     dir ('WeatherApp/')
-    //     {
-    //  		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:dd-key-2'
-	// 	bat 'dotnet build'
-	// 	bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
-    //     }
-    // }
+        dir ('WeatherApp/WeatherApp.LibSvc/Weatherapp.LibTest/')
+        {
+            bat 'dotnet test'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC/Weatherapp.ClientTest/')
+        {
+            bat 'dotnet test'
+        }
+    }
+
+    stage ('ANALYZE')
+    {
+
+        dir ('WeatherApp/WeatherApp.DataSvc')
+        {
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-80'
+ 		bat 'dotnet build'
+ 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
+        dir ('WeatherApp/WeatherApp.LibSvc')
+        {
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-80'
+ 		bat 'dotnet build'
+ 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
+        dir ('WeatherApp/WeatherApp.ClientMVC')
+        {
+     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-80'
+ 		bat 'dotnet build'
+ 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
+    }
 
 
     stage ('PACKAGE')
@@ -67,12 +93,12 @@ node
 
         dir ('WeatherApp/WeatherApp.DataSvc/')
         {
-            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.DataSvc\\WeatherApp.DataSvc\\bin" -dest:iisApp="Default Web Site:9000", -enableRule:AppOffline'
+            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.DataSvc\\WeatherApp.DataSvc\\bin" -dest:iisApp="Default Web Site/DataSvc", -enableRule:AppOffline'
         }
 
         dir ('WeatherApp/WeatherApp.LibSvc/')
         {
-            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.LibSvc\\WeatherApp.LibSvc\\bin" -dest:iisApp="Default Web Site:8000", -enableRule:AppOffline'
+            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.LibSvc\\WeatherApp.LibSvc\\bin" -dest:iisApp="Default Web Site/LibSvc", -enableRule:AppOffline'
         }
 
         dir ('WeatherApp/WeatherApp.ClientMVC/')

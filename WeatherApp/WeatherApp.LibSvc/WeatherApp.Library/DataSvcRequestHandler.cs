@@ -11,14 +11,17 @@ namespace WeatherApp.Library
     {
         public async Task<string> GetJsonResponse(string requestURL)
         {
+
             HttpWebRequest apiRequest = WebRequest.Create(requestURL) as HttpWebRequest;
 
             string jsonResponse = "";
-            using (HttpWebResponse response = await apiRequest.GetResponseAsync() as HttpWebResponse)
-            {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                jsonResponse = reader.ReadToEnd();
-            }
+
+            HttpWebResponse response;
+            response = await apiRequest.GetResponseAsync() as HttpWebResponse;
+
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            jsonResponse = reader.ReadToEnd();
+
             Console.WriteLine(jsonResponse);
 
             return jsonResponse;
