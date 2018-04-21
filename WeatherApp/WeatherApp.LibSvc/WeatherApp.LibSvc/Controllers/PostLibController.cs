@@ -40,7 +40,10 @@ namespace WeatherApp.LibSvc.Controllers
         {
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
+            /**
+            commented to remove code smell - unused variable
             var ash = new AppSettingsHandler();
+             */
             var uri = new Uri("http://52.15.149.129/DataSvc/api/post");
 
             var rp = new RelayPost();
