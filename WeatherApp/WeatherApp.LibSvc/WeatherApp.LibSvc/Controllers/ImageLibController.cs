@@ -19,7 +19,7 @@ namespace WeatherApp.LibSvc.Controllers
         }
 
         [HttpPost]
-        public void AddImage()
+        public async Task AddImageAsync()
         {
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
             Console.WriteLine("request_Body: {0}", request_Body);
@@ -32,7 +32,7 @@ namespace WeatherApp.LibSvc.Controllers
             var uri = new Uri("http://52.15.149.129/DataSvc/api/post");
 
             var rp = new RelayPost();
-            rp.RelayAddToDataSvc(uri, request_Body);
+            await rp.RelayAddToDataSvc(uri, request_Body);
         }
     }
 }

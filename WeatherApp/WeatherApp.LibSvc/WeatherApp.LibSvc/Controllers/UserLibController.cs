@@ -37,7 +37,7 @@ namespace WeatherApp.LibSvc.Controllers
         }
 
         [HttpPost]
-        public void RelayAddUser()
+        public async Task RelayAddUserAsync()
         {
 
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
@@ -49,7 +49,7 @@ namespace WeatherApp.LibSvc.Controllers
             var uri = new Uri("http://52.15.149.129/DataSvc/api/user");
 
             var rp = new RelayPost();
-            rp.RelayAddToDataSvc(uri, request_Body);
+            await rp.RelayAddToDataSvc(uri, request_Body);
         }
 
     }
