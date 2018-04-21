@@ -65,7 +65,8 @@ namespace WeatherApp.ClientLib
 
             if (result.IsSuccessStatusCode)
             {
-                var users = JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+                var content = await result.Content.ReadAsStringAsync();
+                var users = JsonConvert.DeserializeObject<List<User>>(content);
                 foreach(var user in users)
                 {
                     if(user.Email == email && user.Password == password)

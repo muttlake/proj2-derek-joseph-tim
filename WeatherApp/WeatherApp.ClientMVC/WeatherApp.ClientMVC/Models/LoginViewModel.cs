@@ -17,11 +17,6 @@ namespace WeatherApp.ClientMVC.Models
             Password = "";
         }
 
-        //public bool IsUserValid()
-        //{
-        //    return UserHandler.ValidateUser(Email, Password);
-        //}
-
         public User GetUser()
         {
             var uh = new UserHandler();

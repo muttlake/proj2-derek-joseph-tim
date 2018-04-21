@@ -19,25 +19,13 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpPost]
         public IActionResult Index(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                var user = UserHandler.ValidateUser(model.Email, model.Password).GetAwaiter().GetResult();
-                if (user != null)
-                {
-                    HttpContext.Session.Set<User>("User", user);                    
-                    return RedirectToAction("Index", "Landing");
-                }
-            }
-
-            return RedirectToAction("Index", "Home");
-
+           var user = UserHandler.ValidateUser(model.Email, model.Password).GetAwaiter().GetResult();
+           if (user != null)
+           {
+                HttpContext.Session.Set<User>("User", user);                    
+                return RedirectToAction("Index", "Landing");
+           }
+           return RedirectToAction("Index", "Home");
         }
-
-
-      
     }
 }
