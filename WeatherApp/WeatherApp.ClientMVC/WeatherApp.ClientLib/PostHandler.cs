@@ -55,27 +55,29 @@ namespace WeatherApp.ClientLib
                 return null;
         }
 
-        public async void AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)
+        public static async Task<Post> AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)
         {
 
             var ct = Convert.ToInt32(currentWeather.main.temp);
             var cwj = JsonConvert.SerializeObject(currentWeather);
             var cwd = currentWeather.weather[0].description;
-
-
             var post = new Post(blogPost, imageFile, user.UserID, ct, cwj, cwd, user.HomeZipCode);
 
-            // Get the posted form values and add to list using model binding
+
             List<Post> postData = new List<Post>() { post };
+            var data = JsonConvert.SerializeObject(postData);
+            var stringContent = new StringContent(data);
 
-            using (var client = new HttpClient())
+            var uri = new Uri("http://52.15.149.129/LibSvc/api/postlib");
+            var client = new HttpClient();
+            var result = await client.PostAsync(uri, stringContent);
+
+            if (result.IsSuccessStatusCode)
             {
-
-                var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri(_requestString + "/api/postlib");
-                var response = await client.PostAsync(uri, stringContent);
-
+                return post;
             }
+
+            return null;
         }
     }
 }
