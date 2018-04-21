@@ -79,27 +79,6 @@ namespace WeatherApp.ClientLib
             return null;
         }
 
-        //public static async Task<User> SignIn(string email)
-        //{
-        //    if (email == null || email == string.Empty)
-        //    {
-        //        return null;
-        //    }
-        //    var client = new HttpClient();
-        //    var url = "http://13.59.35.94/chatbotdata/api/data/" + email;
-        //    var result = await client.GetAsync(new Uri(url));
-
-        //    if (result.IsSuccessStatusCode)
-        //    {
-        //        var content = await result.Content.ReadAsStringAsync();
-        //        var user = JsonConvert.DeserializeObject<User>(content);
-        //        return user;
-        //    }
-
-        //    return null;
-        //}
-
-
         public User GetCurrentUser(string email)
         {
             foreach (var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
@@ -111,20 +90,24 @@ namespace WeatherApp.ClientLib
             return new User();
         }
 
-        public async void AddUser(User user)
+        public static async Task<User> AddUser(User user)
         {
-            // Get the posted form values and add to list using model binding
-            List<User> postData = new List<User>() { user };
 
-            using (var client = new HttpClient())
+            var client = new HttpClient();
+            var url = "http://52.15.149.129/DataSvc/api/user";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(user);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+
+            var result = await client.PostAsync(uri, stringContent);
+
+            if (result.IsSuccessStatusCode)
             {
-                var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri(_requestString + "/api/userlib");
-                var response = await client.PostAsync(uri, stringContent);
-
+                Console.WriteLine("result: {0}", result.StatusCode);
+                return user;
             }
+
+            return null;
         }
-
-
     }
 }
