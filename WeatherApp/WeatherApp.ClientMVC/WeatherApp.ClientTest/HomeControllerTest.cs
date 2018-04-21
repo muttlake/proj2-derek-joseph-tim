@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using WeatherApp.ClientMVC.Controllers;
+using WeatherApp.ClientMVC.Models;
 using Xunit;
 
 namespace WeatherApp.ClientTest
 {
-    
     public class HomeControllerTest
     {
         [Fact]
@@ -38,12 +38,12 @@ namespace WeatherApp.ClientTest
             HomeController controller = new HomeController();
             // Act
             var result = controller.Login() as RedirectToActionResult;
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Assert
             Assert.NotNull(result);
             Assert.False(result.Permanent);
-            Assert.Equal("Index", result.ViewName);
-            //Assert.Equal("Index", result.RouteValues["action"]);
-            //Assert.Equal("Login", result.RouteValues["controller"]);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
         }
 
         [Fact]
@@ -51,8 +51,9 @@ namespace WeatherApp.ClientTest
         {
             // Assemble
             HomeController controller = new HomeController();
+            ErrorViewModel evm = new ErrorViewModel();
             // Act
-            RedirectToPageResult result = controller.Error() as RedirectToPageResult;
+            ViewResult result = controller.Error() as ViewResult;
             // Assert
             Assert.NotNull(result);
         }
