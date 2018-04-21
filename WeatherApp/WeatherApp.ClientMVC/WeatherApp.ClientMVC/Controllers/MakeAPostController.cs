@@ -61,7 +61,10 @@ namespace WeatherApp.ClientMVC.Controllers
             // get path
             string path_Root = _environment.WebRootPath;
             string imageName = GetUniqueFileName(file.FileName);
-            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            //C:\inetpub\wwwroot\WeatherApp\wwwroot\UserFiles\Images
+            string path_to_Images = "C:\\inetpub\\wwwroot\\WeatherApp\\wwwroot\\UserFiles\\Images\\" + imageName;
+
             Console.WriteLine(path_to_Images);
             //Good up to here
 
