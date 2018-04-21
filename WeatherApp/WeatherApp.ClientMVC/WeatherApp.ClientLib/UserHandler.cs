@@ -57,15 +57,36 @@ namespace WeatherApp.ClientLib
 
         }
 
-        public bool ValidateUser(string email, string password)
+        public static bool ValidateUser(string email, string password)
         {
-            foreach(var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
+            var users = GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+            foreach (var user in users)
             {
                 if (user.Email.Equals(email) && user.Password.Equals(password))
                     return true;
             }
 
             return false;
+        }
+
+        public static async Task<User> SignIn(string email)
+        {
+            if (email == null || email == string.Empty)
+            {
+                return null;
+            }
+            var client = new HttpClient();
+            var url = "http://13.59.35.94/chatbotdata/api/data/" + email;
+            var result = await client.GetAsync(new Uri(url));
+
+            if (result.IsSuccessStatusCode)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+                var user = JsonConvert.DeserializeObject<User>(content);
+                return user;
+            }
+
+            return null;
         }
 
 
