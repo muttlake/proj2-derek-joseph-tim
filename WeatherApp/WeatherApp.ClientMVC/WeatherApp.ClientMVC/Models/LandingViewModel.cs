@@ -35,7 +35,7 @@ namespace WeatherApp.ClientMVC.Models
         {
             User = u;
             HomeZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(u.HomeZipCode).GetAwaiter().GetResult();
-            //SetWeatherIcon();
+            SetWeatherIcon();
             //GetPosts();
             //GetPostsWithWeather();
         }
