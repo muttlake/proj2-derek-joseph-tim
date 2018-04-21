@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
@@ -26,16 +28,34 @@ namespace WeatherApp.Library
             _requestString = ash.JsonObject.DatabasePath;
         }
 
-        public List<User> GetUserFromDataSvc()
+        public async Task<List<User>> GetUserFromDataSvcAsync()
         {
-            var drh = new DataSvcRequestHandler();
-            return new List<User>() { JsonConvert.DeserializeObject<User>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/user/" + UserID.ToString()).GetAwaiter().GetResult()) };
+
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user/" + UserID.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                var user =  JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+                return new List<User>() { user };
+            }
+            else
+                return null;
         }
 
-        public List<User> GetAllUsersFromDataSvc()
+        public async Task<List<User>> GetAllUsersFromDataSvcAsync()
         {
-            var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse("http://52.15.149.129/DataSvc/api/user").GetAwaiter().GetResult());
+
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://52.15.149.129/DataSvc/api/user");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
         }
     }
 }

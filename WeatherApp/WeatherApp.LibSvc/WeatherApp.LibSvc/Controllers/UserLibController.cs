@@ -25,14 +25,14 @@ namespace WeatherApp.LibSvc.Controllers
                 return await Task.Run(() =>
                 {
                     var uh = new UserHandler(userID);
-                    return uh.GetUserFromDataSvc();
+                    return uh.GetUserFromDataSvcAsync();
                 });
             }
             else
                 return await Task.Run(() =>
                 {
                     var uh = new UserHandler(); //Return all users by default
-                    return uh.GetAllUsersFromDataSvc();
+                    return uh.GetAllUsersFromDataSvcAsync();
                 });
         }
 
