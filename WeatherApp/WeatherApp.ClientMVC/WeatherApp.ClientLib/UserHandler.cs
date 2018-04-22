@@ -11,19 +11,17 @@ namespace WeatherApp.ClientLib
 {
     public class UserHandler
     {
-        private static readonly string httpString;
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-            var  _requestString = httpString;
+            // empty method
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-            var _requestString = httpString;
         }
 
         public static async Task<User> GetUserFromLibSvcAsync(int uid)

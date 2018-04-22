@@ -19,13 +19,12 @@ namespace WeatherApp.ClientLib
 
         public PostHandler()
         {
-           var  _requestString = httpString;
+            // empty method
         }
 
         public PostHandler(int id)
         {
             PostID = id;
-            var _requestString = httpString;
         }
 
         public static async Task<Post> GetPostFromDataSvcAsync(int pid)

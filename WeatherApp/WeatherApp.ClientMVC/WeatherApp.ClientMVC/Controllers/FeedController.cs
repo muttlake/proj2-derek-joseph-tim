@@ -29,7 +29,6 @@ namespace WeatherApp.ClientMVC.Controllers
                 try
                 {
                     var user = HttpContext.Session.Get<User>("User");
-                    var chk2= user.Email;
                 }
                 catch (System.NullReferenceException)
                 {

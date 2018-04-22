@@ -21,7 +21,6 @@ namespace WeatherApp.ClientLib
         public JsonHandler(int zip)
         {
             ZipCode = zip;
-            var _requestString = httpString + "/api/zipweather" + "?zip=" + ZipCode.ToString();
         }
 
         public static async Task<RootObject> GetRootObjectFromLibSvcAsync(int zip)

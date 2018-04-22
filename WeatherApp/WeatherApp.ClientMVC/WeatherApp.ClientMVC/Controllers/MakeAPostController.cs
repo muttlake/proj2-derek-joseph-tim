@@ -31,7 +31,6 @@ namespace WeatherApp.ClientMVC.Controllers
             try
             {
                 var user = HttpContext.Session.Get<User>("User");
-                var chk2= user.Email;
             }
             catch (System.NullReferenceException)
             {
@@ -59,9 +58,7 @@ namespace WeatherApp.ClientMVC.Controllers
             if (file == null || file.Length == 0) return Content("File not selected.");
 
             // get path
-            string path_Root = _environment.WebRootPath;
             string imageName = GetUniqueFileName(file.FileName);
-            //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
             string currentDirectory = Directory.GetCurrentDirectory();
             string path_to_Images = currentDirectory + "\\wwwroot\\UserFiles\\Images\\" + imageName;
 
