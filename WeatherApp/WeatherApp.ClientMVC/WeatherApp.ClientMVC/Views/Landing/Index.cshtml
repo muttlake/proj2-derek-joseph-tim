@@ -5,7 +5,7 @@
     dtDateTime = dtDateTime.AddSeconds(Model.HomeZipRootObject.dt).ToLocalTime();
 
     //string imageLoc = "C:/inetpub/wwwroot/WeatherApp/wwwroot/UserFiles/Images";
-    string imageLoc = "UserFiles/Images/";
+    string imageLoc = "~/UserFiles/Images";
 }
 @model WeatherApp.ClientMVC.Models.LandingViewModel
 
@@ -45,7 +45,7 @@
                             @*<li class="list-group-item">id: @pww.Post.PostID</li>*@
                             @*<li class="list-group-item">userId: @pww.Post.UserID</li>*@
                             <li class="list-group-item">blogPost: @pww.Post.BlogPost</li>
-                            <li class="list-group-item">imageFile: <a href="~/UserFiles/Images/@pww.Post.ImageFile"><img src="~/UserFiles/Images/@pww.Post.ImageFile" height="150px" width="150px"></a></li>
+                            <li class="list-group-item">imageFile: <a href="@imageLoc/@pww.Post.ImageFile"><img src="@imageLoc/@pww.Post.ImageFile" height="150px" width="150px"></a></li>
                             <li class="list-group-item">WeatherType: @pww.Post.WeatherType</li>
                             <li class="list-group-item"> ZipCode: @pww.Post.ZipCode </li>
                             <li class="list-group-item"> Description: @pww.Weather.weather[0].main </li>
