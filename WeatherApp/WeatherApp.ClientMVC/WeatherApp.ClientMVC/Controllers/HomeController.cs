@@ -17,7 +17,7 @@ namespace WeatherApp.ClientMVC.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "This Weather App was made by me.";
+            ViewData["Message"] = "Weather App is a way to enable users to share the current weather at their location. Users can make a blog post and add images to that post to share with other users.";
 
             return View();
         }
@@ -26,6 +26,16 @@ namespace WeatherApp.ClientMVC.Controllers
         {
             return RedirectToAction("Index", "Login");
         }
+
+
+    public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+                
+            return RedirectToAction("Index", "Home");
+               
+        }
+
 
         public IActionResult Error()
         {
