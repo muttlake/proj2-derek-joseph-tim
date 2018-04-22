@@ -62,8 +62,6 @@ namespace WeatherApp.ClientMVC.Controllers
             string path_Root = _environment.WebRootPath;
             string imageName = GetUniqueFileName(file.FileName);
             //string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
-            //C:\inetpub\wwwroot\WeatherApp\wwwroot\UserFiles\Images
-            //string path_to_Images = "C:\\inetpub\\wwwroot\\WeatherApp\\wwwroot\\UserFiles\\Images\\" + imageName;
             string currentDirectory = Directory.GetCurrentDirectory();
             string path_to_Images = currentDirectory + "\\wwwroot\\UserFiles\\Images\\" + imageName;
 
@@ -80,13 +78,11 @@ namespace WeatherApp.ClientMVC.Controllers
             // <---end save image--->
 
             //Good past here
-            //ViewData["FilePath"] = path_to_Images;
             ViewData["FilePath"] = "faker";
 
             //Add Post
             Console.WriteLine("Make a post right now");
             var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
-            //var post = PostHandler.AddPost(user, currentWeather, "fakimage", "fakeblogpost").GetAwaiter().GetResult();
 
             if (post != null)
             {

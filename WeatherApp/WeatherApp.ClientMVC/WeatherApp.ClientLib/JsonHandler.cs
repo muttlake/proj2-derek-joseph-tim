@@ -21,8 +21,6 @@ namespace WeatherApp.ClientLib
         public JsonHandler(int zip)
         {
             ZipCode = zip;
-
-            var ash = new AppSettingsHandler();
             var _requestString = httpString + "/api/zipweather" + "?zip=" + ZipCode.ToString();
         }
 

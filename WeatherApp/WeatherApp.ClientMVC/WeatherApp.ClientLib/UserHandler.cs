@@ -11,9 +11,6 @@ namespace WeatherApp.ClientLib
 {
     public class UserHandler
     {
-        //url of the library service for user
-        //private static AppSettingsHandler ash = new AppSettingsHandler();
-        //private static readonly string httpString = ash.JsonObject.LibraryPath.ToString();
         private static readonly string httpString;
 
         public int UserID { get; set; }

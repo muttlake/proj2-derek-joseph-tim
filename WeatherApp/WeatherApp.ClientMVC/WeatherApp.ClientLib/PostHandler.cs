@@ -19,14 +19,12 @@ namespace WeatherApp.ClientLib
 
         public PostHandler()
         {
-            var ash = new AppSettingsHandler();
            var  _requestString = httpString;
         }
 
         public PostHandler(int id)
         {
             PostID = id;
-            var ash = new AppSettingsHandler();
             var _requestString = httpString;
         }
 
@@ -81,24 +79,26 @@ namespace WeatherApp.ClientLib
             return null;
         }
 
-        //public static async Task<User> AddUser(User user)
-        //{
+        /**
+        public static async Task<User> AddUser(User user)
+        {
 
-        //    var client = new HttpClient();
-        //    var url = "http://18.188.13.94/DataSvc/api/user";
-        //    var uri = new Uri(url);
-        //    var data = JsonConvert.SerializeObject(user);
-        //    var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            var url = "http://18.188.13.94/DataSvc/api/user";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(user);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
 
-        //    var result = await client.PostAsync(uri, stringContent);
+            var result = await client.PostAsync(uri, stringContent);
 
-        //    if (result.IsSuccessStatusCode)
-        //    {
-        //        Console.WriteLine("result: {0}", result.StatusCode);
-        //        return user;
-        //    }
+            if (result.IsSuccessStatusCode)
+            {
+                Console.WriteLine("result: {0}", result.StatusCode);
+                return user;
+            }
 
-        //    return null;
-        //}
+            return null;
+        }
+        */
     }
 }
