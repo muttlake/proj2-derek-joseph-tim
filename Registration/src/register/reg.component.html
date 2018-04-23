@@ -1,0 +1,72 @@
+<div class="container" >
+    <h2>Create Account</h2><br><br>
+    
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+     
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>First name:</label>
+          <input type="text" class="form-control" placeholder="Enter Firstname" [(ngModel)]="user.firstName" name="FirstName" required><br>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Last name:</label>
+          <input type="text" class="form-control" placeholder="Enter Lastname" [(ngModel)]="user.lastName" name="LastName" required><br>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="text" class="form-control" placeholder="Enter Email" [(ngModel)]="user.email" name="Email" required><br>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Home Zip Code:</label>
+          <input type="text" class="form-control" placeholder="Enter ZipCode" [(ngModel)]="user.homezipcode" name="InputZipCode" required><br>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Username:</label>
+          <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="user.username" name="UserName" required><br>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Password:</label>
+          <input type="password" class="form-control" placeholder="Enter Password" [(ngModel)]="user.password" name="Password" required><br>
+        </div>
+     </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-success">Login</button>
+      </div>
+    </div>
+    </form>
+    
+    </div>
