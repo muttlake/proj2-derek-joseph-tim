@@ -41,7 +41,7 @@ namespace WeatherApp.ClientMVC.Controllers
                 if (userfound)
                 {
                     
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Index", "Landing");
                 }else{
 
                     return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
@@ -70,6 +70,31 @@ namespace WeatherApp.ClientMVC.Controllers
                 {
                     
                     return RedirectToAction("Index", "MakeAPost");
+                }
+                else{
+
+                        return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                    }        
+        }
+
+        // Check if user is logged in if so then cont. New Post page. 
+        [HttpGet]
+        public IActionResult Registered2()
+        {
+            bool userfound = true;
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "Feed");
                 }
                 else{
 
