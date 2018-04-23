@@ -3,39 +3,58 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
     public class UserHandler
     {
-        private readonly string _requestString;
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.DatabasePath.ToString();
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+            var _requestString = httpString;
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+           var  _requestString = httpString;
         }
 
-        public List<User> GetUserFromDataSvc()
+        public static async Task<List<User>> GetUserFromDataSvcAsync(int userid)
         {
-            var drh = new DataSvcRequestHandler();
-            return new List<User>() { JsonConvert.DeserializeObject<User>(drh.GetJsonResponse(_requestString + "/api/user/" + UserID.ToString()).GetAwaiter().GetResult()) };
+
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/user/" + userid.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                var user = JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+                return new List<User>() { user };
+            }
+            else
+                return null;
         }
 
-        public List<User> GetAllUsersFromDataSvc()
+        public static async Task<List<User>> GetAllUsersFromDataSvcAsync()
         {
-            var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/user").GetAwaiter().GetResult());
+
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/user");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
         }
     }
 }

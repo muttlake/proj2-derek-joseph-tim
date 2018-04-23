@@ -8,6 +8,11 @@
     <h3> @ViewData["Title"] </h3>
 
     <div>
+        <form asp-controller="Landing" method="get">
+            <button type="submit" class="btn btn-success">Go back to your Landing page</button>
+        </form>
+    </div>
+    <div>
         <br>
         <h2>Login Page</h2>
         <form asp-controller="Feed" method="post">
@@ -21,7 +26,7 @@
                 <label>Weather Type Filter:</label>
                 <input type="text" class="form-control" name="WeatherTypeFilter" placeholder="Weather Type Filter"><br>
             </div>
-    
+
             <div class="form-group">
                 <label>ZipCode Filter:</label>
                 <input type="text" class="form-control" name="ZipCodeFilter" placeholder="Zip Code"><br>
@@ -29,42 +34,34 @@
             <button type="submit" class="btn btn-success">Apply Filters</button>
         </form>
 
-            <h5>Posts</h5>
-            @foreach (var blog in Model.FeedWithWeather)
-            {
-                <div class="card-deck">
-                    <div class="card">
-                        <img class="card-img-top" src="@blog.WeatherIconImage" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                            <h5>id: @blog.Post.PostID</h5>
-                            <h5>userId: @blog.Post.UserID</h5>
-                            <h5>blogPost: @blog.Post.BlogPost</h5>
-                            <h5>imageFile: @blog.Post.ImageFile </h5>
-                            <h5>Temp: @blog.Post.TempFahr</h5>
-                            <h5>WeatherJson: @blog.Post.WeatherJson</h5>
-                            <h5>WeatherType: @blog.Post.WeatherType</h5>
-                            <h5> ZipCode: @blog.Post.ZipCode </h5>
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                        <small class="text-muted">Last updated @blog.Post.PublishDateTime</small>
-                     </div>
+        <h5>Posts</h5>
+        @foreach (var blog in Model.FeedWithWeather)
+        {
+            @*<div class="col-md-4" style="border: 1px solid #808080">*@
+            <div class="col-md-4">
+                <div class="row">
+                    <p style="float:left">
+                        <img style="float: left" src=@blog.WeatherIconImage alt="Card image cap" />
+                        <h5 class="card-title"><b>@blog.Post.PublishDateTime Post</b></h5>
+                    </p><br />
                 </div>
-               </div>
-               <br>
-               <br>
-            
-                @*<img src="http://p2.images.s3.amazonaws.com/bbqchicken-pizza.jpg" alt="bbq chicken pizza" width="200" height="200" />*@
-            }
-            <br>
-            <br>
-            <div>
-                <form asp-controller="Landing" method="get">
-                    <button type="submit" class="btn btn-success">Go back to your Landing page</button>
-                </form>
+                <div class="row">
+                    <div style="float: left; margin: 1px 25px 1px 1px">
+                        <p style="float: left"><a href="~/UserFiles/Images/@blog.Post.ImageFile"><img src="~/UserFiles/Images/@blog.Post.ImageFile" height="100px" width="100px" /></a></p>
+                    </div>
+                    <div>
+                        <b>@blog.Post.TempFahr°</b>
+                        <b> @blog.Post.WeatherType</b><br />
+                        <p>Zip: <b>@blog.Post.ZipCode </b></p>
+                        <p>Blog Post: <b>@blog.Post.BlogPost</b></p><br />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <small class="text-muted">Last updated:<b> @blog.Post.PublishDateTime</b></small>
+                </div>
             </div>
+        }
 
     </div>
 </div>

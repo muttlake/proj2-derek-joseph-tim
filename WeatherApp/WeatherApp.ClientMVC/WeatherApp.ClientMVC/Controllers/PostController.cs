@@ -19,7 +19,7 @@ namespace WeatherApp.ClientMVC.Controllers
         [HttpPut]
         public void PutNewPost()
         {
-
+            throw new NotSupportedException();
         }
     }
 }

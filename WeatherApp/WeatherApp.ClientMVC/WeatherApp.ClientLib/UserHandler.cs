@@ -5,57 +5,77 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.ClientLib
 {
     public class UserHandler
     {
-        //url of the library service for user
-        private readonly string _requestString;
 
         public int UserID { get; set; }
 
         public UserHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+            // empty method
         }
 
         public UserHandler(int id)
         {
             UserID = id;
-
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
         }
 
-        public User GetUserFromLibSvc()
+        public static async Task<User> GetUserFromLibSvcAsync(int uid)
         {
-            var drh = new LibSvcRequestHandler();  //Here User should be a List with only one User object
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib?uid=" + UserID.ToString()).GetAwaiter().GetResult())[0];
-        }
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib?uid" + uid.ToString());
 
-        public List<User> GetAllUsersFromLibSvc()
-        {
-            var drh = new LibSvcRequestHandler();  //Here should get list of all Users
-            return JsonConvert.DeserializeObject<List<User>>(drh.GetJsonResponse(_requestString + "/api/userlib").GetAwaiter().GetResult());
-        }
-
-        public bool ValidateUser(string email, string password)
-        {
-            foreach(var user in GetAllUsersFromLibSvc())
+            if (result.IsSuccessStatusCode)
             {
-                if (user.Email.Equals(email) && user.Password.Equals(password))
-                    return true;
+                return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+        }
+
+        public static async Task<List<User>> GetAllUsersFromLibSvcAsync()
+        {
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<User>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
+        }
+
+        public static async Task<User> ValidateUser(string email, string password)
+        {
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib");
+
+
+            if (result.IsSuccessStatusCode)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+                var users = JsonConvert.DeserializeObject<List<User>>(content);
+                foreach(var user in users)
+                {
+                    if(user.Email == email && user.Password == password)
+                    {
+                        return user;
+                    }
+                }
             }
 
-            return false;
+            return null;
         }
-
 
         public User GetCurrentUser(string email)
         {
-            foreach (var user in GetAllUsersFromLibSvc())
+            foreach (var user in GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult())
             {
                 if (user.Email.Equals(email))
                     return user;
@@ -64,20 +84,24 @@ namespace WeatherApp.ClientLib
             return new User();
         }
 
-        public async void AddUser(User user)
+        public static async Task<User> AddUser(User user)
         {
-            // Get the posted form values and add to list using model binding
-            List<User> postData = new List<User>() { user };
 
-            using (var client = new HttpClient())
+            var client = new HttpClient();
+            var url = "http://18.188.13.94/DataSvc/api/user";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(user);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+
+            var result = await client.PostAsync(uri, stringContent);
+
+            if (result.IsSuccessStatusCode)
             {
-                var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri(_requestString + "/api/userlib");
-                var response = await client.PostAsync(uri, stringContent);
-
+                Console.WriteLine("result: {0}", result.StatusCode);
+                return user;
             }
+
+            return null;
         }
-
-
     }
 }

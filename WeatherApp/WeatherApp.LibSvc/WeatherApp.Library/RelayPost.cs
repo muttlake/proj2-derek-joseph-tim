@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
@@ -12,17 +13,15 @@ namespace WeatherApp.Library
         {
 
         }
-
-
-        public async void RelayAddToDataSvc(Uri uri, string requestBody)
+        
+        public async Task RelayAddToDataSvc(Uri uri, string requestBody)
         {
             //Pass to DataSvc
             using (var client = new HttpClient())
             {
                 var stringContent = new StringContent(requestBody);
-                var response = await client.PostAsync(uri, stringContent);
+                await client.PostAsync(uri, stringContent);
             }
-
         }
     }
 }

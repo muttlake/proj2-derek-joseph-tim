@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace WeatherApp.LibSvc
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -20,7 +20,7 @@ namespace WeatherApp.LibSvc
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:8000")
+                .UseUrls("http://localhost:8000")
                 .Build();
     }
 }

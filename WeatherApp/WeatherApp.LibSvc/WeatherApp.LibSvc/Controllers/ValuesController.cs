@@ -28,18 +28,21 @@ namespace WeatherApp.LibSvc.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+          // not currently implemented
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+          // not currently implemented
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+          // not currently implemented
         }
     }
 }

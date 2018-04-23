@@ -3,40 +3,55 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WeatherApp.Library
 {
     public class PostHandler
     {
-        //This is the url to the data service
-        private readonly string _requestString;
-
+        private static readonly string httpString;
         public int PostID { get; set; }
 
         public PostHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+            string _requestString = httpString;
         }
 
-        public PostHandler(int id)
+        public static async Task<List<Post>> GetPostFromDataSvcAsync(int postid)
         {
-            PostID = id;
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.DatabasePath;
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post/" + postid.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                var post = JsonConvert.DeserializeObject<Post>(await result.Content.ReadAsStringAsync());
+                return new List<Post>() { post };
+            }
+            else
+                return null;
+
         }
 
-        public List<Post> GetPostFromDataSvc()
+        public static async Task<List<Post>> GetAllPostsFromDataSvcAsync()
         {
-            var drh = new DataSvcRequestHandler();
-            return new List<Post>() { JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/post/" + PostID.ToString()).GetAwaiter().GetResult()) };
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<Post>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
+
         }
 
         public List<Post> GetAllPostsFromDataSvc()
         {
             var drh = new DataSvcRequestHandler();
-            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString + "/api/post").GetAwaiter().GetResult());
+            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(httpString + "/api/post/").GetAwaiter().GetResult());
         }
 
     }

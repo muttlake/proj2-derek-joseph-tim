@@ -23,28 +23,26 @@ namespace WeatherApp.LibSvc.Controllers
             {
                 return await Task.Run(() =>
                 {
-                    var ph = new PostHandler(postID);
-                    return ph.GetPostFromDataSvc();
+                    return PostHandler.GetPostFromDataSvcAsync(postID);
                 });
             }
             else
                 return await Task.Run(() =>
                 {
-                    var ph = new PostHandler(); // Change this later
-                    return ph.GetAllPostsFromDataSvc();
+                    return PostHandler.GetAllPostsFromDataSvcAsync();
                 });
         }
 
         [HttpPost]
-        public void RelayAddPost()
+        public async Task RelayAddPostAsync()
         {
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
             var ash = new AppSettingsHandler();
-            var uri = new Uri(ash.JsonObject.DatabasePath + "/api/post");
+            var uri = new Uri("http://18.188.13.94/DataSvc/api/post");
 
             var rp = new RelayPost();
-            rp.RelayAddToDataSvc(uri, request_Body);
+            await rp.RelayAddToDataSvc(uri, request_Body);
 
         }
     }

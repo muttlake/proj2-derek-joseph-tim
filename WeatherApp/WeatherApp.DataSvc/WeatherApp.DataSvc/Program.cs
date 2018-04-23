@@ -20,8 +20,7 @@ namespace WeatherApp.DataSvc
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:9000;http://localhost:9000")
-		//"http://*:5000;http://localhost:5001;https://hostname:5002"
+                .UseUrls("http://localhost:9000")
                 .Build();
     }
 }

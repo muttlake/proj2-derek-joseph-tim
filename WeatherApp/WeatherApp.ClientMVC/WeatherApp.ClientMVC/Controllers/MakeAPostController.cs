@@ -18,7 +18,7 @@ namespace WeatherApp.ClientMVC.Controllers
             return View(new MakeAPostViewModel(user));
         }
 
-         public IActionResult Invalid(string message)
+        public IActionResult Invalid(string message)
         {
             ViewData["Message"] = message;
             return View();
@@ -70,14 +70,11 @@ namespace WeatherApp.ClientMVC.Controllers
                 {
                     
                     return RedirectToAction("Index", "MakeAPost");
-                }else{
-
-                    return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
                 }
-            
-        
-            // return View(new MakeAPostViewModel());
-        
+                else{
+
+                        return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                    }        
         }
 
 
@@ -85,7 +82,7 @@ namespace WeatherApp.ClientMVC.Controllers
         public ActionResult Index(MakeAPostViewModel model, IFormFile file)
         {
             var user = HttpContext.Session.Get<User>("User");
-            user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
+            // user = GetValidUserForNewlyRegistered(user); //Get user with userID for newly registered users
             var currentWeather = HttpContext.Session.Get<RootObject>("CurrentWeather");
 
             // <---save image to root folder--->
@@ -93,25 +90,39 @@ namespace WeatherApp.ClientMVC.Controllers
             if (file == null || file.Length == 0) return Content("File not selected.");
 
             // get path
-            string path_Root = _environment.WebRootPath;
             string imageName = GetUniqueFileName(file.FileName);
-            string path_to_Images = path_Root + "\\UserFiles\\Images\\" + imageName;
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path_to_Images = currentDirectory + "\\wwwroot\\UserFiles\\Images\\" + imageName;
 
-            // copy file to target
-            var stream = new FileStream(path_to_Images, FileMode.Create);
-            // save filename to NewPost.ImageFile
-            System.Console.WriteLine(path_to_Images);
-            model.NewPost.ImageFile = imageName;
-            file.CopyTo(stream);
-            // <---end save image--->
+            Console.WriteLine(path_to_Images);
+            //Good up to here
 
-            // output
-            ViewData["FilePath"] = path_to_Images;
+            Console.WriteLine("File Stream is failing?");
+            //copy file to target
+            using (var stream = new FileStream(path_to_Images, FileMode.Create))
+            {
+                // save filename to NewPost.ImageFile
+                Console.WriteLine(path_to_Images);
+                model.NewPost.ImageFile = imageName;
+                file.CopyTo(stream);
+                // <---end save image--->
+            }
+
+            //Good past here
+            ViewData["FilePath"] = "faker";
 
             //Add Post
             Console.WriteLine("Make a post right now");
-            var ph = new PostHandler();
-            ph.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost);
+            var post = PostHandler.AddPost(user, currentWeather, model.NewPost.ImageFile, model.NewPost.BlogPost).GetAwaiter().GetResult();
+
+            if (post != null)
+            {
+                Console.WriteLine("Post went through");
+            }
+            else
+            {
+                Console.WriteLine("Problem with post");
+            }
 
             //Put to database here
             return RedirectToAction("Index", "Landing");
@@ -122,8 +133,8 @@ namespace WeatherApp.ClientMVC.Controllers
             //If user has just registered get their userID
             if (user.UserID == 0)
             {
-                var uh = new UserHandler();
-                foreach (var u in uh.GetAllUsersFromLibSvc())
+                var users = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+                foreach (var u in users)
                 {
                     if (u.Email.Equals(user.Email))
                     {
@@ -153,10 +164,6 @@ namespace WeatherApp.ClientMVC.Controllers
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
         }
-
-
-      
-
     }
 
 }

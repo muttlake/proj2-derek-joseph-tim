@@ -70,5 +70,11 @@ namespace WeatherApp.ClientMVC.Models
            
         }
 
+        public int GetNewUserID()
+        {
+            var allUsers = UserHandler.GetAllUsersFromLibSvcAsync().GetAwaiter().GetResult();
+            return allUsers.Last().UserID;
+        }
+
     }
 }

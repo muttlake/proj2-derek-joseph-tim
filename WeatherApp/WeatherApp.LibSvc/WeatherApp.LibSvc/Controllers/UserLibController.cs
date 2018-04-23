@@ -14,39 +14,37 @@ namespace WeatherApp.LibSvc.Controllers
     [Produces("application/json")] // Means every action result will always be a json type result
     [Route("api/[controller]")]
     public class UserLibController : Controller
-    {
+    {       
         [HttpGet]
         public async Task<List<User>> Get(string uid = "default")
-        {
+        {   
             Console.WriteLine("\n\n\nLibSvc userlib Get");
             int userID = 0;
             if (Int32.TryParse(uid, out userID))
             {
                 return await Task.Run(() =>
                 {
-                    var uh = new UserHandler(userID);
-                    return uh.GetUserFromDataSvc();
+                    return UserHandler.GetUserFromDataSvcAsync(userID);
                 });
             }
             else
                 return await Task.Run(() =>
                 {
-                    var uh = new UserHandler(); //Return all users by default
-                    return uh.GetAllUsersFromDataSvc();
+                    return UserHandler.GetAllUsersFromDataSvcAsync();
                 });
         }
 
         [HttpPost]
-        public void RelayAddUser()
+        public async Task RelayAddUserAsync()
         {
 
             var request_Body = new StreamReader(Request.Body).ReadToEnd();
 
             var ash = new AppSettingsHandler();
-            var uri = new Uri(ash.JsonObject.DatabasePath + "/api/user");
+            var uri = new Uri("http://18.188.13.94/DataSvc/api/user");
 
             var rp = new RelayPost();
-            rp.RelayAddToDataSvc(uri, request_Body);
+            await rp.RelayAddToDataSvc(uri, request_Body);
         }
 
     }

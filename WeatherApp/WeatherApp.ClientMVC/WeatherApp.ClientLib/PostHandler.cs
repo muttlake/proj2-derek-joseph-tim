@@ -12,58 +12,92 @@ namespace WeatherApp.ClientLib
     public class PostHandler
     {
         //This is the url to the library service
-        private readonly string _requestString;
+        private static AppSettingsHandler ash = new AppSettingsHandler();
+        private static readonly string httpString = ash.JsonObject.LibraryPath.ToString();
 
         public int PostID { get; set; }
 
         public PostHandler()
         {
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
+            // empty method
         }
 
         public PostHandler(int id)
         {
             PostID = id;
-            var ash = new AppSettingsHandler();
-            _requestString = ash.JsonObject.LibraryPath;
         }
 
-        public Post GetPostFromDataSvc()
+        public static async Task<Post> GetPostFromDataSvcAsync(int pid)
         {
-            var drh = new LibSvcRequestHandler();
-            Console.WriteLine(_requestString + "/api/postlib/" + PostID.ToString());
-            return JsonConvert.DeserializeObject<Post>(drh.GetJsonResponse(_requestString + "/api/postlib/" + PostID.ToString()).GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib?pid" + pid.ToString());
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<Post>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
         } 
 
-        public List<Post> GetAllPosts()
+        public static async Task<List<Post>> GetAllPostsAsync()
         {
-            var drh = new LibSvcRequestHandler();
-            Console.WriteLine(_requestString + "/api/postlib");
-            return JsonConvert.DeserializeObject<List<Post>>(drh.GetJsonResponse(_requestString + "/api/postlib").GetAwaiter().GetResult());
+            var client = new HttpClient();
+            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/postlib");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<Post>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+                return null;
         }
 
-        public async void AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)
+        public static async Task<Post> AddPost(User user, RootObject currentWeather, string imageFile, string blogPost)
         {
 
             var ct = Convert.ToInt32(currentWeather.main.temp);
             var cwj = JsonConvert.SerializeObject(currentWeather);
             var cwd = currentWeather.weather[0].description;
-
-
             var post = new Post(blogPost, imageFile, user.UserID, ct, cwj, cwd, user.HomeZipCode);
 
-            // Get the posted form values and add to list using model binding
-            List<Post> postData = new List<Post>() { post };
+            var client = new HttpClient();
+            var url = "http://18.188.13.94/DataSvc/api/post";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(post);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
 
-            using (var client = new HttpClient())
+            var result = await client.PostAsync(uri, stringContent);
+
+            if (result.IsSuccessStatusCode)
             {
-
-                var stringContent = new StringContent(JsonConvert.SerializeObject(postData));
-                var uri = new Uri(_requestString + "/api/postlib");
-                var response = await client.PostAsync(uri, stringContent);
-
+                Console.WriteLine("result: {0}", result.StatusCode);
+                return post;
             }
+
+            return null;
         }
+
+        /**
+        public static async Task<User> AddUser(User user)
+        {
+
+            var client = new HttpClient();
+            var url = "http://18.188.13.94/DataSvc/api/user";
+            var uri = new Uri(url);
+            var data = JsonConvert.SerializeObject(user);
+            var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
+
+            var result = await client.PostAsync(uri, stringContent);
+
+            if (result.IsSuccessStatusCode)
+            {
+                Console.WriteLine("result: {0}", result.StatusCode);
+                return user;
+            }
+
+            return null;
+        }
+        */
     }
 }

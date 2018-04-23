@@ -11,36 +11,33 @@ namespace WeatherApp.Library
 
         // code for adding images to imgur
 
-        string token = "f0f55d13-09ad-4a83-9dcb-82150fd7d805";
-        string auth = "Bearer 5f59e946914c966d89ecb5a2f64f6717fa96f682";
+        readonly string token = "f00e8ac6-10fa-4529-9105-bcac32c2cb17";
+        readonly string auth = "Bearer 5f59e946914c966d89ecb5a2f64f6717fa96f682";
 
         // session variables
-        string imgUrl;
+        readonly string imgUrl;
         // name of the file shown in imgur
-        string imgTitle;
+        readonly string imgTitle;
         // description of file in imgur
-        string imgDescription;
-        // gile name
-        string imgName;
-        string imgType;
+        readonly string imgDescription;
+        // file name
+        readonly string imgName;
+        readonly string imgType;
 
         public ImageHandler()
         {
-            //imgUrl = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
             imgUrl = @"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-            imgTitle = "jpg image";
-            imgDescription = "this is a jpg image";
-            //var imgName = "img.jpg";
-            //var imgType = "jpg";
-
+            
+            var imgName = "img.jpg";
+            var imgType = "jpg";
+            
+            
             PostImage();
         }
 
-        public ImageHandler(string url, string title, string desc, string name, string type)
+        public ImageHandler(string url, string name, string type)
         {
             imgUrl = url;
-            imgTitle = title;
-            imgDescription = desc;
             imgName = name;
             imgType = type;
 
@@ -64,19 +61,7 @@ namespace WeatherApp.Library
                 "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n" +
                 "Content-Disposition: form-data; name=\"title\"\r\n\r\n" +
 
-                imgTitle + "\r\n" +
-                "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n" +
-                "Content-Disposition: form-data; name=\"description\"\r\n\r\n" +
-
-                imgDescription + "\r\n" +
-                "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n" +
-                "Content-Disposition: form-data; name=\"name\"\r\n\r\n" +
-
                 imgName + "\r\n" +
-                "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n" +
-                "Content-Disposition: form-data; name=\"type\"\r\n\r\n" +
-
-                imgType + "\r\n" +
                 "------WebKitFormBoundary7MA4YWxkTrZu0gW--", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
         }

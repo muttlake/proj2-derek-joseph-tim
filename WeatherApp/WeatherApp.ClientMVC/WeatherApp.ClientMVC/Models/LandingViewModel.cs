@@ -21,8 +21,6 @@ namespace WeatherApp.ClientMVC.Models
         public Post Post { get; set; }
         public List<Post> Posts { get; set; }
 
-        //public NewPost NewPost { get; set; }
-
         public List<PostWithWeather> PostsWithWeather { get; set; }
         public RootObject HomeZipRootObject { get; set; }
 
@@ -34,9 +32,7 @@ namespace WeatherApp.ClientMVC.Models
         public LandingViewModel(User u)
         {
             User = u;
-            
-            var jr = new JsonHandler(User.HomeZipCode);
-            HomeZipRootObject = jr.GetRootObjectFromLibSvc();
+            HomeZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(u.HomeZipCode).GetAwaiter().GetResult();
             SetWeatherIcon();
             GetPosts();
             GetPostsWithWeather();
@@ -44,9 +40,9 @@ namespace WeatherApp.ClientMVC.Models
 
         public void GetPosts()
         {
-            var ph = new PostHandler();
             Posts = new List<Post>();
-            foreach (var post in ph.GetAllPosts())
+            var currentPosts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
+            foreach (var post in currentPosts)
             {
                 if (post.UserID == User.UserID)
                 {
@@ -65,22 +61,20 @@ namespace WeatherApp.ClientMVC.Models
             WeatherIcon = "http://openweathermap.org/img/w/" + HomeZipRootObject.weather[0].icon + ".png";
         }
 
-        
+
 
         public void GetPostsWithWeather()
-         {
-             PostsWithWeather = new List<PostWithWeather>();
-             foreach(var post in Posts)
-             {
-                 var p = new PostWithWeather();
-                 p.Post = post;
-                 p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
-                 p.WeatherIconImage =  "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
+        {
+            PostsWithWeather = new List<PostWithWeather>();
+            foreach (var post in Posts)
+            {
+                var p = new PostWithWeather();
+                p.Post = post;
+                p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
+                p.WeatherIconImage = "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
                 PostsWithWeather.Add(p);
 
-             }
-         }
-
-         
+            }
+        }
     }
 }

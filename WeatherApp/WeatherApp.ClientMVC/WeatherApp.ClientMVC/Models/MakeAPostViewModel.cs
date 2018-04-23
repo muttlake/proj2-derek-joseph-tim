@@ -25,9 +25,8 @@ namespace WeatherApp.ClientMVC.Models
         {
             NewPost = new Post();
             User = user;
-            var pr = new JsonHandler(User.HomeZipCode);
-            ZipRootObject = pr.GetRootObjectFromLibSvc();
-             SetWeatherIcon(); 
+            ZipRootObject = JsonHandler.GetRootObjectFromLibSvcAsync(user.HomeZipCode).GetAwaiter().GetResult();
+            SetWeatherIcon(); 
 
         }
 

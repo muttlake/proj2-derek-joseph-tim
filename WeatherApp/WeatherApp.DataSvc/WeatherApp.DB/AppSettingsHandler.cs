@@ -22,7 +22,7 @@ namespace WeatherApp.DB
 
     public class AppSettingsHandler
     {
-        private string _jsonPath = "../../appsettings.dev.json";
+        private string _jsonPath = "../appsettings.dev.json";
 
         public AppSettingsFormat JsonObject { get; set; }
 
