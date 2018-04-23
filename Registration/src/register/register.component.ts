@@ -3,8 +3,6 @@ import { User } from './user';
 import { UserService } from "../api/userservice";
 import {NgForm} from '@angular/forms';
 
-
-
 @Component({
     selector: 'reg',
     templateUrl: 'reg.component.html',
@@ -20,9 +18,7 @@ user = new User();
 constructor(client: UserService){
     
     this.client = client;
-};
-
-
+  };
 
   onSubmit(f: NgForm) { 
       this.submitted = true;
@@ -30,8 +26,6 @@ constructor(client: UserService){
     //   document.location.href = '18.188.13.94/WeatherApp';
     document.location.href = 'http://18.188.13.94/WeatherApp';
  }
-
-  
 }
 
 
