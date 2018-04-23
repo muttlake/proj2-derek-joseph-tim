@@ -10,8 +10,8 @@ select * from [dbo].Users;
 select * from [dbo].Posts;
 
 
---delete
---from [dbo].Posts
+delete
+from [dbo].Posts
 --where PostID = 190;
 
 --delete
