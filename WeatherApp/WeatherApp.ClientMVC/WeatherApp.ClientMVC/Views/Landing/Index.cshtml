@@ -22,7 +22,7 @@
                 <div class="caption">
                     <p>
                         City:<b> @Model.HomeZipRootObject.name</b><br><br>
-                        DateTime:<b> @dtDateTime</b>
+                        Last Weather Update:<b> @dtDateTime</b>
                     </p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="row">
                     <p style="float:left">
                         <img style="float: left" src=@pww.WeatherIconImage alt="Card image cap" />
-                        <h5 class="card-title"><b>@pww.Post.PublishDateTime Post</b></h5>
+                        <h5 class="card-title"><b>@pww.Post.PublishDateTime.ToLocalTime() Post</b></h5>
                     </p><br />
                 </div>
                 <div class="row">
