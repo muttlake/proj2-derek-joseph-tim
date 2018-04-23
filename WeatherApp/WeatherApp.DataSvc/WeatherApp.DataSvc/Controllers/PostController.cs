@@ -54,6 +54,5 @@ namespace WeatherApp.DataSvc.Controllers
 
             return Ok();
         }
-
     }
 }
