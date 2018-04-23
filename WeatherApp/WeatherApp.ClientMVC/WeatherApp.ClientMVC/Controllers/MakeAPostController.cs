@@ -24,25 +24,82 @@ namespace WeatherApp.ClientMVC.Controllers
             return View();
         }
 
+         // Check if user is logged in if so then cont. Home/Landing page. 
         [HttpGet]
         public IActionResult Registered()
         {
             bool userfound = true;
-            try
-            {
-                var user = HttpContext.Session.Get<User>("User");
-            }
-            catch (System.NullReferenceException)
-            {
-                userfound = false;
-            }
-            if (userfound)
-            {
-                return RedirectToAction("Index", "MakeAPost");
-            }else{
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "Landing");
+                }else{
 
-                return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
-            }        
+                    return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                }
+            
+        
+            // return View(new MakeAPostViewModel());
+        
+        }
+
+        // Check if user is logged in if so then cont. New Post page. 
+        [HttpGet]
+        public IActionResult Registered1()
+        {
+            bool userfound = true;
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "MakeAPost");
+                }
+                else{
+
+                        return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                    }        
+        }
+
+        // Check if user is logged in if so then cont. New Post page. 
+        [HttpGet]
+        public IActionResult Registered2()
+        {
+            bool userfound = true;
+                try
+                {
+                    var user = HttpContext.Session.Get<User>("User");
+                    var chk2= user.Email;
+                }
+                catch (System.NullReferenceException)
+                {
+                    userfound = false;
+                }
+                if (userfound)
+                {
+                    
+                    return RedirectToAction("Index", "Feed");
+                }
+                else{
+
+                        return RedirectToAction(nameof(Invalid),new{ message = "Please log in"});
+                    }        
         }
 
 
