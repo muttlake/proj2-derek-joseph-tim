@@ -103,7 +103,7 @@ node
 
         dir ('WeatherApp/WeatherApp.ClientMVC/')
         {
-            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.ClientMVC\\WeatherApp.ClientMVC\\bin" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline -skip:objectName=filePath,absolutePath="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.ClientMVC\\WeatherApp.ClientMVC\\wwwroot\\UserFiles\\Images\\.*"'
+            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.ClientMVC\\WeatherApp.ClientMVC\\bin" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline -enableRule:DoNotDeleteRule'
         }
     }
 
