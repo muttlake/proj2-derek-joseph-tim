@@ -22,7 +22,7 @@ namespace WeatherApp.Library
         public static async Task<List<Post>> GetPostFromDataSvcAsync(int postid)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.28.250/DataSvc/api/post/" + postid.ToString());
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post/" + postid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -37,7 +37,7 @@ namespace WeatherApp.Library
         public static async Task<List<Post>> GetAllPostsFromDataSvcAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.28.250/DataSvc/api/post");
+            var result = await client.GetAsync("http://18.188.13.94/DataSvc/api/post");
 
             if (result.IsSuccessStatusCode)
             {
