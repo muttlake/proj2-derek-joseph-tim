@@ -27,7 +27,7 @@ namespace WeatherApp.ClientLib
         public static async Task<User> GetUserFromLibSvcAsync(int uid)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib?uid" + uid.ToString());
+            var result = await client.GetAsync("http://18.188.28.250/LibSvc/api/userlib?uid" + uid.ToString());
 
             if (result.IsSuccessStatusCode)
             {
@@ -40,7 +40,7 @@ namespace WeatherApp.ClientLib
         public static async Task<List<User>> GetAllUsersFromLibSvcAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib");
+            var result = await client.GetAsync("http://18.188.28.250/LibSvc/api/userlib");
 
             if (result.IsSuccessStatusCode)
             {
@@ -54,7 +54,7 @@ namespace WeatherApp.ClientLib
         public static async Task<User> ValidateUser(string email, string password)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/userlib");
+            var result = await client.GetAsync("http://18.188.28.250/LibSvc/api/userlib");
 
 
             if (result.IsSuccessStatusCode)
@@ -88,7 +88,7 @@ namespace WeatherApp.ClientLib
         {
 
             var client = new HttpClient();
-            var url = "http://18.188.13.94/DataSvc/api/user";
+            var url = "http://18.188.28.250/DataSvc/api/user";
             var uri = new Uri(url);
             var data = JsonConvert.SerializeObject(user);
             var stringContent = new StringContent(data, Encoding.UTF8, "application/json");

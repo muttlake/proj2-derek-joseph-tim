@@ -1,0 +1,8 @@
+cat WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/JsonHandler.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/JsonHandler.cs
+cat WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/PostHandler.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/PostHandler.cs
+cat WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/UserHandler.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.ClientMVC/WeatherApp.ClientLib/UserHandler.cs
+cat WeatherApp/WeatherApp.LibSvc/WeatherApp.Library/PostHandler.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.LibSvc/WeatherApp.Library/PostHandler.cs
+cat WeatherApp/WeatherApp.LibSvc/WeatherApp.Library/UserHandler.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.LibSvc/WeatherApp.Library/UserHandler.cs
+cat WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/ImageLibController.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/ImageLibController.cs
+cat WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/PostLibController.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/PostLibController.cs
+cat WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/UserLibController.cs | sed 's/18\.188\.13\.94/18\.188\.28\.250/' > a.1; mv a.1 WeatherApp/WeatherApp.LibSvc/WeatherApp.LibSvc/Controllers/UserLibController.cs

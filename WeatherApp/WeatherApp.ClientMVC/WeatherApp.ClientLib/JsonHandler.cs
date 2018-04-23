@@ -26,7 +26,7 @@ namespace WeatherApp.ClientLib
         public static async Task<RootObject> GetRootObjectFromLibSvcAsync(int zip)
         {
             var client = new HttpClient();
-            var result = await client.GetAsync("http://18.188.13.94/LibSvc/api/zipweather?zip=" + zip.ToString());
+            var result = await client.GetAsync("http://18.188.28.250/LibSvc/api/zipweather?zip=" + zip.ToString());
 
             if (result.IsSuccessStatusCode)
             {
