@@ -43,7 +43,7 @@
                 <div class="row">
                     <p style="float:left">
                         <img style="float: left" src=@blog.WeatherIconImage alt="Card image cap" />
-                        <h5 class="card-title"><b>@blog.Post.PublishDateTime Post</b></h5>
+                        <h5 class="card-title"><b>@blog.Post.PublishDateTime.ToLocalTime() Post</b></h5>
                     </p><br />
                 </div>
                 <div class="row">

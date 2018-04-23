@@ -317,3 +317,6 @@ __pycache__/
 appsettings.dev.json
 .appsettings.dev.json.swp
 all_the_places_with_localhost_mentioned.txt
+
+# ignore images
+*/UserFiles/Images/*

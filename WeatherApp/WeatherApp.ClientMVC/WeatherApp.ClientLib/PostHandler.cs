@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +38,7 @@ namespace WeatherApp.ClientLib
             }
             else
                 return null;
-        } 
+        }
 
         public static async Task<List<Post>> GetAllPostsAsync()
         {

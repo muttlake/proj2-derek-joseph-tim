@@ -6,7 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp.ClientMVC", "Wea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp.ClientLib", "WeatherApp.ClientLib\WeatherApp.ClientLib.csproj", "{26CF597F-2D98-4582-BAD5-522EB025D7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.ClientTest", "WeatherApp.ClientTest\WeatherApp.ClientTest.csproj", "{0C7D122E-06AF-4242-9386-0CD3B199ABEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApp.ClientTest", "WeatherApp.ClientTest\WeatherApp.ClientTest.csproj", "{0C7D122E-06AF-4242-9386-0CD3B199ABEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{002E5CF7-0EE2-4639-BC04-4117E123330D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,18 @@ Global
 		{0C7D122E-06AF-4242-9386-0CD3B199ABEA}.Release|x64.Build.0 = Release|Any CPU
 		{0C7D122E-06AF-4242-9386-0CD3B199ABEA}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C7D122E-06AF-4242-9386-0CD3B199ABEA}.Release|x86.Build.0 = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|x64.Build.0 = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Debug|x86.Build.0 = Debug|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|x64.ActiveCfg = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|x64.Build.0 = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|x86.ActiveCfg = Release|Any CPU
+		{002E5CF7-0EE2-4639-BC04-4117E123330D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
