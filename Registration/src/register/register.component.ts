@@ -28,7 +28,7 @@ constructor(client: UserService){
       this.submitted = true;
       this.client.create(this.user).subscribe((err)=>console.log(err));
     //   document.location.href = '18.188.13.94/WeatherApp';
-    document.location.href = 'http://18.188.13.94/WeatherApp';
+     document.location.href = 'http://18.188.13.94/WeatherApp';
  }
 
   

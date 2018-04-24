@@ -24,7 +24,7 @@ httpOptions = {
     }
  
     create(user: User): Observable<any>  {
-        return this.client.post('http://52.15.149.129/datasvc/api/user', user, this.httpOptions);
+        return this.client.post('http://18.188.13.94/DataSvc/api/user', user, this.httpOptions);
         // .pipe(
         //     catchError(this.handleError('addUser', user))
         //   );
