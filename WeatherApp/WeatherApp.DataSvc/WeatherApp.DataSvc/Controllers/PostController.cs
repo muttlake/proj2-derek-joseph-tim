@@ -26,7 +26,7 @@ namespace WeatherApp.DataSvc.Controllers
         [HttpGet]
         public async Task<IEnumerable<Post>> Get()
         {
-            return await Task.Run(() => { return context.Posts.ToList(); });
+            return await Task.Run(() => { return context.Posts.ToList().OrderByDescending(p => p.PostID); });
         }
 
         [HttpGet("{id}")] // here must put in /<idvalue> to get user
