@@ -23,10 +23,10 @@ node
             bat 'dotnet build'
         }
 
-        dir ('Registration')
-        {
-            bat 'dotnet build'
-        }
+        //dir ('Registration')
+        //{
+        //   bat 'dotnet build'
+        //}
     }
 
     stage ('TEST')
@@ -46,10 +46,10 @@ node
             bat 'dotnet test'
         }
 
-        dir ('Registration')
-        {
-            bat 'dotnet test'
-        }
+        //dir ('Registration')
+        //{
+        //    bat 'dotnet test'
+        //}
     }
 
     stage ('ANALYZE')
@@ -76,12 +76,12 @@ node
             bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
-        dir ('Registration')
-        {
-            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_angular-key-80'
-            bat 'dotnet build'
-            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
-        }
+        //dir ('Registration')
+        //{
+        //    bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_angular-key-80'
+        //    bat 'dotnet build'
+        //    bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        //}
 
     }
 
@@ -104,10 +104,10 @@ node
             bat 'dotnet publish --output ".\\bin"'
         }
 
-        dir ('Registration')
-        {
-            bat 'dotnet publish --output ".\\bin"'
-        }
+        //dir ('Registration')
+        //{
+        //    bat 'dotnet publish --output ".\\bin"'
+        //}
     }
 
     stage ('DEPLOY')
@@ -128,10 +128,35 @@ node
             bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.ClientMVC\\WeatherApp.ClientMVC\\bin" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline -enableRule:DoNotDeleteRule'
         }
 
-        dir ('Registration')
-        {
-            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\Registration\\bin" -dest:iisApp="Default Web Site/Registration", -enableRule:AppOffline'
-        }
+        //dir ('Registration')
+        //{
+        //    bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\Registration\\bin" -dest:iisApp="Default Web Site/Registration", -enableRule:AppOffline'
+        //}
     }
+
+    stage ('NPM.Install')
+    {
+
+      dir ('Registration')
+
+      {
+
+          bat 'npm install'
+
+      }
+    }
+
+     stage ('ANG_BUILD') 
+     {
+
+      dir ('Registration')
+
+      {
+
+          bat 'ng build --base-href "/dist/"'
+
+      }
+
+     }
 
 }
