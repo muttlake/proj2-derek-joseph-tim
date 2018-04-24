@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Feed Page";
 }
-@model WeatherApp.ClientMVC.Models.FeedViewModel
+<link href="~/css/modal.css" rel="stylesheet" type="text/css" />
 
+@model WeatherApp.ClientMVC.Models.FeedViewModel
 
 <div>
     <h3> @ViewData["Title"] </h3>
@@ -47,7 +48,12 @@
                 </div>
                 <div class="row">
                     <div style="float: left; margin: 1px 25px 1px 1px">
-                        <p style="float: left"><a href="~/UserFiles/Images/@blog.Post.ImageFile"><img src="~/UserFiles/Images/@blog.Post.ImageFile" height="100px" width="100px" /></a></p>
+                        <p style="float: left"><a href="~/UserFiles/Images/@blog.Post.ImageFile"><img id="myImg" src="~/UserFiles/Images/@blog.Post.ImageFile" height="100px" width="100px" /></a></p>
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="~/UserFiles/Images/@blog.Post.ImageFile">
+                            <div id="@blog.Post.BlogPost"></div>
+                        </div>
                     </div>
                     <div>
                         <b>@blog.Post.TempFahr°</b>
@@ -62,6 +68,27 @@
                 </div>
             </div>
         }
+        <script>
+            // Get the modal
+            var modal = document.getElementById('myModal');
 
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById('myImg');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        </script>
     </div>
 </div>

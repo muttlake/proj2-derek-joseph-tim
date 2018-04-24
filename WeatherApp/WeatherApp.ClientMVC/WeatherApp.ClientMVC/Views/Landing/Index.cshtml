@@ -4,8 +4,9 @@
     System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
     dtDateTime = dtDateTime.AddSeconds(Model.HomeZipRootObject.dt).ToLocalTime();
 }
-@model WeatherApp.ClientMVC.Models.LandingViewModel
+<link href="~/css/modal.css" rel="stylesheet" type="text/css" />
 
+@model WeatherApp.ClientMVC.Models.LandingViewModel
 
 <div class="container">
     <h3>Welcome @Model.User.FirstName @Model.User.LastName</h3>

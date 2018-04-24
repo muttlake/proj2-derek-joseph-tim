@@ -22,6 +22,11 @@ node
         {
             bat 'dotnet build'
         }
+
+        dir ('Registration')
+        {
+            bat 'dotnet build'
+        }
     }
 
     stage ('TEST')
@@ -40,6 +45,11 @@ node
         {
             bat 'dotnet test'
         }
+
+        dir ('Registration')
+        {
+            bat 'dotnet test'
+        }
     }
 
     stage ('ANALYZE')
@@ -47,23 +57,30 @@ node
 
         dir ('WeatherApp/WeatherApp.DataSvc')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-80'
- 		bat 'dotnet build'
- 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_datasvc-key-80'
+            bat 'dotnet build'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
         dir ('WeatherApp/WeatherApp.LibSvc')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-80'
- 		bat 'dotnet build'
- 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_libsvc-key-80'
+            bat 'dotnet build'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
         dir ('WeatherApp/WeatherApp.ClientMVC')
         {
-     		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-80'
- 		bat 'dotnet build'
- 		bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_clientmvc-key-80'
+            bat 'dotnet build'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
+        }
+
+        dir ('Registration')
+        {
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll begin /k:weatherapp_angular-key-80'
+            bat 'dotnet build'
+            bat 'dotnet c:\\tools\\sonarqube\\sonarscanner.msbuild.dll end'
         }
 
     }
@@ -86,6 +103,11 @@ node
         {
             bat 'dotnet publish --output ".\\bin"'
         }
+
+        dir ('Registration')
+        {
+            bat 'dotnet publish --output ".\\bin"'
+        }
     }
 
     stage ('DEPLOY')
@@ -104,6 +126,11 @@ node
         dir ('WeatherApp/WeatherApp.ClientMVC/')
         {
             bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\WeatherApp\\WeatherApp.ClientMVC\\WeatherApp.ClientMVC\\bin" -dest:iisApp="Default Web Site/WeatherApp", -enableRule:AppOffline -enableRule:DoNotDeleteRule'
+        }
+
+        dir ('Registration')
+        {
+            bat 'msdeploy -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\devops-demo\\Registration\\bin" -dest:iisApp="Default Web Site/Registration", -enableRule:AppOffline'
         }
     }
 
