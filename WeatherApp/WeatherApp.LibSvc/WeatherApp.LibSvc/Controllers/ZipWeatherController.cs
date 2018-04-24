@@ -22,16 +22,12 @@ namespace WeatherApp.LibSvc.Controllers
             if(Int32.TryParse(zip, out zipCode))
             {
                 return await Task.Run(() => {
-                    var jr = new JsonReader();
-                    jr.InputZipCode = zipCode;
-                    return jr.GetRootObjectForZipCode();
+                    return JsonReader.GetRootObjectForZipCodeAsync(zipCode);
                 });
             }
             else
                 return await Task.Run(() => {
-                    var jr = new JsonReader();
-                    jr.InputZipCode = 75762;
-                    return jr.GetRootObjectForZipCode();
+                    return JsonReader.GetRootObjectForZipCodeAsync(75762);
                 });
         }
 
