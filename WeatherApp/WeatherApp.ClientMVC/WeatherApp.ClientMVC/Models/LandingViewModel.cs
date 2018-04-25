@@ -15,6 +15,7 @@ namespace WeatherApp.ClientMVC.Models
         public string WeatherIconImage { get; set; }
        
     }
+
     public class LandingViewModel
     {
         public User User { get; set; }

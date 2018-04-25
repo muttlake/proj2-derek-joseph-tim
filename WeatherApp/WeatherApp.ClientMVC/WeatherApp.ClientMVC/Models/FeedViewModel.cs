@@ -7,12 +7,20 @@ using Newtonsoft.Json;
 
 namespace WeatherApp.ClientMVC.Models
 {
-    
+    public class PostWithUserWeather
+    {
+        public PostWithUser Post { get; set; }
+        public RootObject Weather { get; set; }
+
+        public string WeatherIconImage { get; set; }
+
+    }
+
     public class FeedViewModel
     {
-        public List<Post> Posts { get; set; }
+        public List<PostWithUser> Posts { get; set; }
 
-        public List<PostWithWeather> FeedWithWeather { get; set; }
+        public List<PostWithUserWeather> FeedWithWeather { get; set; }
         public string WeatherTypeFilter { get; set; }
         public string ZipCodeFilter { get; set; }
         public string TempFahrFilter { get; set; }
@@ -29,7 +37,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public FeedViewModel()
         {
-            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
+            Posts = PostHandler.GetAllPostsWithUserAsync().GetAwaiter().GetResult();
             GetValidWeatherTypes();
             GetPostsWithWeather();
         }
@@ -43,7 +51,7 @@ namespace WeatherApp.ClientMVC.Models
             ZipCodeFilter = zip;
 
             //Get all posts
-            Posts = PostHandler.GetAllPostsAsync().GetAwaiter().GetResult();
+            Posts = PostHandler.GetAllPostsWithUserAsync().GetAwaiter().GetResult();
 
             Console.WriteLine("Numer of Posts initially: {0}", Posts.Count);
 
@@ -108,7 +116,7 @@ namespace WeatherApp.ClientMVC.Models
         public void ApplyZipCodeFilter()
         {
             Console.WriteLine("Applying Zip Filer with zipcode: {0}", ZipCodeInt);
-            var filteredPosts = new List<Post>();
+            var filteredPosts = new List<PostWithUser>();
             foreach (var post in Posts)
             {
                 if (post.ZipCode == ZipCodeInt)
@@ -122,7 +130,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public void ApplyWeatherTypeFilter()
         {
-            var filteredPosts = new List<Post>();
+            var filteredPosts = new List<PostWithUser>();
             foreach(var post in Posts)
             {
                 if(post.WeatherType.Equals(WeatherTypeFilter))
@@ -145,10 +153,10 @@ namespace WeatherApp.ClientMVC.Models
 
          public void GetPostsWithWeather()
          {
-             FeedWithWeather = new List<PostWithWeather>();
+             FeedWithWeather = new List<PostWithUserWeather>();
              foreach(var post in Posts)
              {
-                 var p = new PostWithWeather();
+                 var p = new PostWithUserWeather();
                  p.Post = post;
                  p.Weather = JsonConvert.DeserializeObject<RootObject>(post.WeatherJson);
                  p.WeatherIconImage =  "http://openweathermap.org/img/w/" + p.Weather.weather[0].icon + ".png";
@@ -160,7 +168,7 @@ namespace WeatherApp.ClientMVC.Models
 
         public void ApplyTempFilter()
         {
-            var filteredPosts = new List<Post>();
+            var filteredPosts = new List<PostWithUser>();
             foreach (var post in Posts)
             {
                 if (post.TempFahr  >= (TempFahrInt - 2) && post.TempFahr <= (TempFahrInt + 2))
