@@ -78,6 +78,8 @@ namespace WeatherApp.DataSvc.Controllers
                                     select new
                                     {
                                         p.PostID,
+                                        p.BlogPost,
+                                        p.ImageFile,
                                         p.WeatherType,
                                         p.ZipCode,
                                         p.TempFahr,
@@ -95,7 +97,7 @@ namespace WeatherApp.DataSvc.Controllers
                     {
                         if(item.PostID == postID)
                         {
-                            var matching_pwu = new PostWithUser(item.PostID, item.WeatherType, item.ZipCode,
+                            var matching_pwu = new PostWithUser(item.PostID, item.BlogPost, item.ImageFile, item.WeatherType, item.ZipCode,
                                                        item.TempFahr, item.WeatherJson, item.PublishDateTime,
                                                        item.UserID, item.FirstName, item.LastName,
                                                        item.Username);
