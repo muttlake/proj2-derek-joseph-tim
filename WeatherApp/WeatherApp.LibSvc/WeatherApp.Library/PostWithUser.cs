@@ -18,9 +18,6 @@ namespace WeatherApp.Library
         [JsonProperty("imageFile")]
         public string ImageFile { get; set; }
 
-        [JsonProperty("userID")]
-        public int UserID { get; set; }
-
         [JsonProperty("tempFahr")]
         public int TempFahr { get; set; }
 
@@ -35,6 +32,9 @@ namespace WeatherApp.Library
 
         [JsonProperty("publishDateTime")]
         public DateTime PublishDateTime { get; set; }
+
+        [JsonProperty("userID")]
+        public int UserID { get; set; }
 
         [JsonProperty("firstName")]
 	    public string FirstName { get; set; }
