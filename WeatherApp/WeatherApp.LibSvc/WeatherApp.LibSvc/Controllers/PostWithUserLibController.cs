@@ -16,34 +16,22 @@ namespace WeatherApp.LibSvc.Controllers
     public class PostWithUserLibController : Controller
     {
         [HttpGet]
-        public async Task<List<Post>> Get(string pid = "default")
+        public async Task<List<PostWithUser>> Get(string pid = "default")
         {
             int postID = 1;
             if (Int32.TryParse(pid, out postID))
             {
                 return await Task.Run(() =>
                 {
-                    return PostHandler.GetPostFromDataSvcAsync(postID);
+                    return PostHandler.GetPostsWithUserFromDataSvcAsync(postID);
                 });
             }
             else
                 return await Task.Run(() =>
                 {
-                    return PostHandler.GetAllPostsFromDataSvcAsync();
+                    return PostHandler.GetAllPostsWithUserFromDataSvcAsync();
                 });
         }
 
-        [HttpPost]
-        public async Task RelayAddPostAsync()
-        {
-            var request_Body = new StreamReader(Request.Body).ReadToEnd();
-
-            var ash = new AppSettingsHandler();
-            var uri = new Uri("http://18.188.13.94/DataSvc/api/post");
-
-            var rp = new RelayPost();
-            await rp.RelayAddToDataSvc(uri, request_Body);
-
-        }
     }
 }
